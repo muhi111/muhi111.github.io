@@ -4,7 +4,7 @@ import Content from './Content';
 
 function Layout() {
   return (
-    <Router>
+    <Router basename='/portfolio'>
       <div className="flex">
         <Sidebar />
         <main className="flex-1">
