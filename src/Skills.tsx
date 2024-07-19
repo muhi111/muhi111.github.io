@@ -1,31 +1,35 @@
 import React from 'react';
-import { FaJs, FaPython, FaReact, FaHtml5, FaNodeJs, FaGitAlt, FaDocker, FaStar, FaStarHalfAlt } from 'react-icons/fa';
-import { SiCplusplus, SiTensorflow } from 'react-icons/si';
+import {FaPython, FaReact, FaHtml5, FaNodeJs, FaGitAlt, FaDocker, FaStar, FaStarHalfAlt, FaLinux, FaJs } from 'react-icons/fa';
+import { FaGolang } from "react-icons/fa6";
+import { SiC, SiTypescript, SiMysql } from 'react-icons/si';
 import { AiOutlineStar } from 'react-icons/ai';
 
 const skillsData = [
   {
     category: 'Programming Languages',
     skills: [
-      { name: 'JavaScript', level: 4, icon: FaJs },
+      { name: 'C', level: 4.5, icon: SiC },
+      { name: 'Go', level: 4, icon: FaGolang },
       { name: 'Python', level: 3.5, icon: FaPython },
-      { name: 'C++', level: 3, icon: SiCplusplus },
+      { name: 'JavaScript', level: 3.5, icon: FaJs },
     ],
   },
   {
     category: 'Web Technologies',
     skills: [
-      { name: 'React', level: 4, icon: FaReact },
       { name: 'HTML/CSS', level: 4.5, icon: FaHtml5 },
+      { name: 'React', level: 4, icon: FaReact },
       { name: 'Node.js', level: 3.5, icon: FaNodeJs },
+      { name: 'TypeScript', level: 3.5, icon: SiTypescript },
     ],
   },
   {
     category: 'Other',
     skills: [
-      { name: 'Git', level: 3.5, icon: FaGitAlt },
-      { name: 'Docker', level: 2.5, icon: FaDocker },
-      { name: 'Machine Learning', level: 2, icon: SiTensorflow },
+      { name: 'Linux', level: 4.5, icon: FaLinux },
+      { name: 'Git', level: 4, icon: FaGitAlt },
+      { name: 'Docker', level: 3.5, icon: FaDocker },
+      { name: 'SQL', level: 3.5, icon: SiMysql },
     ],
   },
 ];
