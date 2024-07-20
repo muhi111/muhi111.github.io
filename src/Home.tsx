@@ -4,7 +4,11 @@ function Home() {
       <div className="w-full max-w-4xl">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="p-8">
-            <h1 className="text-4xl font-bold mb-6 text-gray-800">Hello!👋 I'm muhi111</h1>
+            <h1 className="text-4xl font-bold mb-6 text-gray-800">
+              <span className="inline-block animate-typing overflow-hidden whitespace-nowrap">
+                Hello!👋 I'm muhi111
+              </span>
+            </h1>
             <div className="mb-6">
               <p className="text-xl mb-4 text-gray-700">
                 A passionate student at Tokyo Institute of Technology, majoring in Information and Communications Engineering. Also, I'm a student at 42 Tokyo.
