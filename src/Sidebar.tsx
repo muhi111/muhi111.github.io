@@ -9,12 +9,17 @@ function Sidebar() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const newIsMobile = window.innerWidth < 768;
+      setIsMobile(newIsMobile);
+      if (!newIsMobile && !isOpen) {
+        setIsOpen(true);
+      }
     };
 
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isOpen]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -58,7 +63,6 @@ function Sidebar() {
       </div>
       <div className="mt-auto">
         <a
-        
           href="https://github.com/muhi111"
           target="_blank"
           rel="noopener noreferrer"
@@ -72,7 +76,7 @@ function Sidebar() {
 
   return (
     <>
-      {!isOpen && (
+      {(!isOpen || isMobile) && (
         <button
           onClick={toggleSidebar}
           className="fixed top-4 left-4 z-20 text-white bg-gray-800 p-2 rounded hover:bg-gray-700 transition duration-200"
