@@ -6,7 +6,9 @@ function Home() {
           <div className="p-8">
             <h1 className="text-4xl font-bold mb-6 text-gray-800">
               <span className="inline-block animate-typing overflow-hidden whitespace-nowrap">
-                Hello!👋 I'm muhi111
+                Hello!
+                <span className="inline-block animate-wave origin-bottom">👋</span>
+                 I'm muhi111
               </span>
             </h1>
             <div className="mb-6">

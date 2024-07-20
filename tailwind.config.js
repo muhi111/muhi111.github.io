@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       animation: {
-        typing: 'typing 2s steps(30), blink .3s step-end infinite alternate',
+        typing: 'typing 2s steps(20), blink .7s step-end infinite alternate',
+        wave: 'wave 1.5s 1',
       },
       keyframes: {
         typing: {
@@ -16,7 +17,17 @@ export default {
         },
         blink: {
           '50%': { borderColor: 'transparent' }
-        }
+        },
+        wave: {
+          '0%': { transform: 'rotate(0deg)' },
+          '10%': { transform: 'rotate(14deg)' },
+          '20%': { transform: 'rotate(-8deg)' },
+          '30%': { transform: 'rotate(14deg)' },
+          '40%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(10deg)' },
+          '60%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(0deg)' },
+        },
       },
     },
   },
