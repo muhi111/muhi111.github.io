@@ -26,7 +26,6 @@ const worksData = [
     githubLink: 'https://github.com/yourusername/project3',
     liveLink: null,
   },
-  // Add more projects as needed
 ];
 
 interface WorkDetailsProps {
@@ -73,12 +72,21 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
 }
 
 function WorkCard({ work, onClick }: { work: typeof worksData[0]; onClick: () => void }) {
+  const maxDescriptionLength = 100;
+
+  const truncateDescription = (description: string) => {
+    if (description.length <= maxDescriptionLength) {
+      return description;
+    }
+    return description.slice(0, maxDescriptionLength) + '...';
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer" onClick={onClick}>
       <img src={work.image} alt={work.title} className="w-full h-48 object-cover" />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2 text-gray-800">{work.title}</h3>
-        <p className="text-gray-600 mb-4">{work.description}</p>
+        <p className="text-gray-600 mb-4">{truncateDescription(work.description)}</p>
         <div className="flex flex-wrap mb-4">
           {work.tags.map((tag, index) => (
             <span key={index} className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
