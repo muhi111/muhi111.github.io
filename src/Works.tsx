@@ -1,4 +1,5 @@
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 
 const worksData = [
   {
@@ -28,9 +29,52 @@ const worksData = [
   // Add more projects as needed
 ];
 
-function WorkCard({ work }: { work: typeof worksData[0] }) {
+interface WorkDetailsProps {
+  work: typeof worksData[0];
+  onClose: () => void;
+}
+
+function WorkDetails({ work, onClose }: WorkDetailsProps) {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-2xl font-semibold text-gray-800">{work.title}</h3>
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+              <FaTimes size={24} />
+            </button>
+          </div>
+          <img src={work.image} alt={work.title} className="w-full h-64 object-cover mb-4 rounded" />
+          <p className="text-gray-600 mb-4">{work.description}</p>
+          <div className="flex flex-wrap mb-4">
+            {work.tags.map((tag, index) => (
+              <span key={index} className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="flex justify-between">
+            <a href={work.githubLink} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600">
+              <FaGithub className="inline mr-2" />
+              GitHub
+            </a>
+            {work.liveLink && (
+              <a href={work.liveLink} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600">
+                <FaExternalLinkAlt className="inline mr-2" />
+                Live Demo
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WorkCard({ work, onClick }: { work: typeof worksData[0]; onClick: () => void }) {
+  return (
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer" onClick={onClick}>
       <img src={work.image} alt={work.title} className="w-full h-48 object-cover" />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2 text-gray-800">{work.title}</h3>
@@ -42,34 +86,27 @@ function WorkCard({ work }: { work: typeof worksData[0] }) {
             </span>
           ))}
         </div>
-        <div className="flex justify-between">
-          <a href={work.githubLink} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600">
-            <FaGithub className="inline mr-2" />
-            GitHub
-          </a>
-          {work.liveLink && (
-            <a href={work.liveLink} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600">
-              <FaExternalLinkAlt className="inline mr-2" />
-              Live Demo
-            </a>
-          )}
-        </div>
       </div>
     </div>
   );
 }
 
 function Works() {
+  const [selectedWork, setSelectedWork] = useState<typeof worksData[0] | null>(null);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 py-10">
       <div className="w-full max-w-6xl">
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">My Works - this page is preparing</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">My Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {worksData.map((work, index) => (
-            <WorkCard key={index} work={work} />
+            <WorkCard key={index} work={work} onClick={() => setSelectedWork(work)} />
           ))}
         </div>
       </div>
+      {selectedWork && (
+        <WorkDetails work={selectedWork} onClose={() => setSelectedWork(null)} />
+      )}
     </div>
   );
 }
