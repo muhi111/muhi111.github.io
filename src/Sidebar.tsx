@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaGithub, FaBars } from 'react-icons/fa';
 
 function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
 
@@ -11,15 +11,14 @@ function Sidebar() {
     const handleResize = () => {
       const newIsMobile = window.innerWidth < 768;
       setIsMobile(newIsMobile);
-      if (!newIsMobile && !isOpen) {
-        setIsOpen(true);
+      if (newIsMobile) {
+        setIsOpen(false);
       }
     };
-
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isOpen]);
+  }, []);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -34,13 +33,7 @@ function Sidebar() {
 
   const sidebarContent = (
     <>
-      <div>
-        <button
-          onClick={toggleSidebar}
-          className="text-white mb-6 hover:bg-gray-700 p-2 rounded transition duration-200"
-        >
-          <FaBars size={24} />
-        </button>
+      <div className="mt-14">
         <nav>
           <ul className="space-y-2">
             <li>
@@ -76,14 +69,14 @@ function Sidebar() {
 
   return (
     <>
-      {(!isOpen || isMobile) && (
-        <button
-          onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-20 text-white bg-gray-800 p-2 rounded hover:bg-gray-700 transition duration-200"
-        >
-          <FaBars size={24} />
-        </button>
-      )}
+      <button
+        onClick={toggleSidebar}
+        className={`fixed top-4 left-4 z-20 text-white bg-gray-800 p-2 rounded hover:bg-gray-700 transition duration-200 ${
+          isOpen && !isMobile ? 'left-68' : 'left-4'
+        }`}
+      >
+        <FaBars size={24} />
+      </button>
       <div
         className={`bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
