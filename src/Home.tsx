@@ -1,14 +1,38 @@
+import { useEffect, useState } from 'react';
+import 'tailwindcss/tailwind.css';
+
 function Home({ isSidebarOpen }: { isSidebarOpen: boolean }) {
+  const [text, setText] = useState('');
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const fullText = "Hello! 👋 I'm muhi111";
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setText(fullText.slice(0, index));
+      index++;
+      if (index > fullText.length) clearInterval(interval);
+    }, 150);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCursorVisible(false);
+    }, 4500); // 0.75s * 6 = 4.5s
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <div className={`flex items-center ${isSidebarOpen ? 'justify-center' : 'justify-center'} min-h-screen bg-gray-100 py-10`}>
       <div className={`w-full ${isSidebarOpen ? 'max-w-5xl' : 'max-w-6xl'} px-4`}>
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="p-8">
             <h1 className="text-4xl font-bold mb-6 text-gray-800">
-              <span className="inline-block animate-typing overflow-hidden whitespace-nowrap">
-                Hello!
-                <span className="inline-block animate-wave origin-bottom">👋</span>
-                 I'm muhi111
+              <span className={`inline-block ${cursorVisible ? 'border-r-2 border-black animate-blink' : ''} overflow-hidden whitespace-nowrap animate-typing`}>
+                {text}
               </span>
             </h1>
             <div className="mb-6">
