@@ -1,7 +1,7 @@
-function Home() {
+function Home({ isSidebarOpen }: { isSidebarOpen: boolean }) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 py-10">
-      <div className="w-full max-w-4xl">
+    <div className={`flex items-center ${isSidebarOpen ? 'justify-center' : 'justify-center'} min-h-screen bg-gray-100 py-10`}>
+      <div className={`w-full ${isSidebarOpen ? 'max-w-5xl' : 'max-w-6xl'} px-4`}>
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="p-8">
             <h1 className="text-4xl font-bold mb-6 text-gray-800">
