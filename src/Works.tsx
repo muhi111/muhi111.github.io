@@ -3,28 +3,47 @@ import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 
 const worksData = [
   {
-    title: "Project 1",
-    description: "A web application built with React and Node.js",
+    title: "es writer",
+    description: `経歴を入力するとESを自動で書いてくれるツール。
+                  フロントエンドの大部分とバックエンドの一部を担当。
+                  Progateハッカソン powered by AWS エムスリー株式会社賞`,
     image: "https://via.placeholder.com/300x200",
-    tags: ["React", "Node.js", "MongoDB"],
-    githubLink: "https://github.com/yourusername/project1",
-    liveLink: "https://project1.com",
+    tags: [
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "Vite",
+      "Go",
+      "PostgreSQL",
+      "Docker",
+      "Terraform",
+      "Amazon Bedrock",
+      "Amazon Cognito",
+      "Amazon EC2",
+      "Amazon RDS",
+    ],
+    githubLink: "https://github.com/yamamoto99/es-writer",
+    liveLink: "",
   },
   {
-    title: "Project 2",
-    description: "An iOS app developed using Swift",
+    title: "ConoHa Control Panel",
+    description: `ConoHaのAPIを使ってConoHaのサーバー作成をよりシンプルにより簡単にするツール。
+                  フロントエンドの一部とデプロイを担当。
+                  GMOインターネットグループ株式会社 2024年5daysインターン&ハッカソン 最優秀賞`,
     image: "https://via.placeholder.com/300x200",
-    tags: ["iOS", "Swift", "CoreData"],
-    githubLink: "https://github.com/yourusername/project2",
-    liveLink: "https://apps.apple.com/app/project2",
+    tags: ["React", "TypeScript", "Vite", "ConoHa VPS"],
+    githubLink: "https://github.com/baba-jun/ConoHA",
+    liveLink: "",
   },
   {
-    title: "Project 3",
-    description: "A machine learning model for image classification",
+    title: "readme generator",
+    description: `githubのアカウントのreadmeを簡単に作成出来るツール。
+                  フロントエンドを担当。
+                  技育キャンプハッカソン vol.12 最優秀賞`,
     image: "https://via.placeholder.com/300x200",
-    tags: ["Python", "TensorFlow", "Computer Vision"],
-    githubLink: "https://github.com/yourusername/project3",
-    liveLink: null,
+    tags: ["React", "TypeScript", "TailwindCSS", "Vite", "AWS Amplify"],
+    githubLink: "https://github.com/Teamsasa/readme-generator",
+    liveLink: "https://readmes.studio/",
   },
 ];
 
@@ -154,7 +173,7 @@ function Works({ isSidebarOpen }: { isSidebarOpen: boolean }) {
         className={`w-full ${isSidebarOpen ? "max-w-5xl" : "max-w-6xl"} px-4`}
       >
         <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-          My Works - this page is preparing
+          My Works - images are preparing
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {worksData.map((work, index) => (
