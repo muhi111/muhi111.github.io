@@ -1,35 +1,35 @@
-import { useState } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import { useState } from "react";
+import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 
 const worksData = [
   {
-    title: 'Project 1',
-    description: 'A web application built with React and Node.js',
-    image: 'https://via.placeholder.com/300x200',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    githubLink: 'https://github.com/yourusername/project1',
-    liveLink: 'https://project1.com',
+    title: "Project 1",
+    description: "A web application built with React and Node.js",
+    image: "https://via.placeholder.com/300x200",
+    tags: ["React", "Node.js", "MongoDB"],
+    githubLink: "https://github.com/yourusername/project1",
+    liveLink: "https://project1.com",
   },
   {
-    title: 'Project 2',
-    description: 'An iOS app developed using Swift',
-    image: 'https://via.placeholder.com/300x200',
-    tags: ['iOS', 'Swift', 'CoreData'],
-    githubLink: 'https://github.com/yourusername/project2',
-    liveLink: 'https://apps.apple.com/app/project2',
+    title: "Project 2",
+    description: "An iOS app developed using Swift",
+    image: "https://via.placeholder.com/300x200",
+    tags: ["iOS", "Swift", "CoreData"],
+    githubLink: "https://github.com/yourusername/project2",
+    liveLink: "https://apps.apple.com/app/project2",
   },
   {
-    title: 'Project 3',
-    description: 'A machine learning model for image classification',
-    image: 'https://via.placeholder.com/300x200',
-    tags: ['Python', 'TensorFlow', 'Computer Vision'],
-    githubLink: 'https://github.com/yourusername/project3',
+    title: "Project 3",
+    description: "A machine learning model for image classification",
+    image: "https://via.placeholder.com/300x200",
+    tags: ["Python", "TensorFlow", "Computer Vision"],
+    githubLink: "https://github.com/yourusername/project3",
     liveLink: null,
   },
 ];
 
 interface WorkDetailsProps {
-  work: typeof worksData[0];
+  work: (typeof worksData)[0];
   onClose: () => void;
 }
 
@@ -39,27 +39,49 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
       <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-2xl font-semibold text-gray-800">{work.title}</h3>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+            <h3 className="text-2xl font-semibold text-gray-800">
+              {work.title}
+            </h3>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700"
+            >
               <FaTimes size={24} />
             </button>
           </div>
-          <img src={work.image} alt={work.title} className="w-full h-64 object-cover mb-4 rounded" />
+          <img
+            src={work.image}
+            alt={work.title}
+            className="w-full h-64 object-cover mb-4 rounded"
+          />
           <p className="text-gray-600 mb-4">{work.description}</p>
           <div className="flex flex-wrap mb-4">
             {work.tags.map((tag, index) => (
-              <span key={index} className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
+              <span
+                key={index}
+                className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
+              >
                 {tag}
               </span>
             ))}
           </div>
           <div className="flex justify-between">
-            <a href={work.githubLink} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600">
+            <a
+              href={work.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 hover:text-gray-600"
+            >
               <FaGithub className="inline mr-2" />
               GitHub
             </a>
             {work.liveLink && (
-              <a href={work.liveLink} target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600">
+              <a
+                href={work.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-800 hover:text-gray-600"
+              >
                 <FaExternalLinkAlt className="inline mr-2" />
                 Live Demo
               </a>
@@ -71,25 +93,45 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
   );
 }
 
-function WorkCard({ work, onClick }: { work: typeof worksData[0]; onClick: () => void }) {
+function WorkCard({
+  work,
+  onClick,
+}: {
+  work: (typeof worksData)[0];
+  onClick: () => void;
+}) {
   const maxDescriptionLength = 100;
 
   const truncateDescription = (description: string) => {
     if (description.length <= maxDescriptionLength) {
       return description;
     }
-    return description.slice(0, maxDescriptionLength) + '...';
+    return description.slice(0, maxDescriptionLength) + "...";
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer" onClick={onClick}>
-      <img src={work.image} alt={work.title} className="w-full h-48 object-cover" />
+    <div
+      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
+      onClick={onClick}
+    >
+      <img
+        src={work.image}
+        alt={work.title}
+        className="w-full h-48 object-cover"
+      />
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2 text-gray-800">{work.title}</h3>
-        <p className="text-gray-600 mb-4">{truncateDescription(work.description)}</p>
+        <h3 className="text-xl font-semibold mb-2 text-gray-800">
+          {work.title}
+        </h3>
+        <p className="text-gray-600 mb-4">
+          {truncateDescription(work.description)}
+        </p>
         <div className="flex flex-wrap mb-4">
           {work.tags.map((tag, index) => (
-            <span key={index} className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded">
+            <span
+              key={index}
+              className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
+            >
               {tag}
             </span>
           ))}
@@ -100,24 +142,38 @@ function WorkCard({ work, onClick }: { work: typeof worksData[0]; onClick: () =>
 }
 
 function Works({ isSidebarOpen }: { isSidebarOpen: boolean }) {
-  const [selectedWork, setSelectedWork] = useState<typeof worksData[0] | null>(null);
+  const [selectedWork, setSelectedWork] = useState<
+    (typeof worksData)[0] | null
+  >(null);
 
   return (
-    <div className={`flex items-center ${isSidebarOpen ? 'justify-center' : 'justify-center'} min-h-screen bg-gray-100 py-10`}>
-      <div className={`w-full ${isSidebarOpen ? 'max-w-5xl' : 'max-w-6xl'} px-4`}>
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">My Works - this page is preparing</h2>
+    <div
+      className={`flex items-center ${isSidebarOpen ? "justify-center" : "justify-center"} min-h-screen bg-gray-100 py-10`}
+    >
+      <div
+        className={`w-full ${isSidebarOpen ? "max-w-5xl" : "max-w-6xl"} px-4`}
+      >
+        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+          My Works - this page is preparing
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {worksData.map((work, index) => (
-            <WorkCard key={index} work={work} onClick={() => setSelectedWork(work)} />
+            <WorkCard
+              key={index}
+              work={work}
+              onClick={() => setSelectedWork(work)}
+            />
           ))}
         </div>
       </div>
       {selectedWork && (
-        <WorkDetails work={selectedWork} onClose={() => setSelectedWork(null)} />
+        <WorkDetails
+          work={selectedWork}
+          onClose={() => setSelectedWork(null)}
+        />
       )}
     </div>
   );
 }
-
 
 export default Works;

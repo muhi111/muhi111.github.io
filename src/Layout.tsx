@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { HashRouter as Router } from 'react-router-dom';
-import Sidebar from './Sidebar';
-import Content from './Content';
+import { useState } from "react";
+import { HashRouter as Router } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import Content from "./Content";
 
 function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

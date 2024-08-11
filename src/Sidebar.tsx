@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaGithub, FaBars } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaGithub, FaBars } from "react-icons/fa";
 
-function Sidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
+function Sidebar({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
 
@@ -15,8 +21,8 @@ function Sidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: React.Disp
       }
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const toggleSidebar = () => {
@@ -36,17 +42,26 @@ function Sidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: React.Disp
         <nav>
           <ul className="space-y-2">
             <li>
-              <button onClick={() => handleNavigation('/')} className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200">
+              <button
+                onClick={() => handleNavigation("/")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200"
+              >
                 Home
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavigation('/skills')} className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200">
+              <button
+                onClick={() => handleNavigation("/skills")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200"
+              >
                 Skills
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavigation('/works')} className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200">
+              <button
+                onClick={() => handleNavigation("/works")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200"
+              >
                 Works
               </button>
             </li>
@@ -71,14 +86,14 @@ function Sidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: React.Disp
       <button
         onClick={toggleSidebar}
         className={`fixed top-4 left-4 z-20 text-white bg-gray-800 p-2 rounded hover:bg-gray-700 transition duration-200 ${
-          isOpen && !isMobile ? 'left-68' : 'left-4'
+          isOpen && !isMobile ? "left-68" : "left-4"
         }`}
       >
         <FaBars size={24} />
       </button>
       <div
         className={`bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {sidebarContent}
