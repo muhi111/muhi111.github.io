@@ -23,7 +23,7 @@ function Sidebar({
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setIsOpen]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
