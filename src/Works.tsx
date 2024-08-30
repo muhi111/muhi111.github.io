@@ -3,11 +3,10 @@ import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 
 const worksData = [
   {
-    title: "es writer",
+    title: "Es writer",
     description: `経歴を入力するとESを自動で書いてくれるツール。
                   フロントエンドの大部分とバックエンドの一部を担当。
                   Progateハッカソン powered by AWS エムスリー株式会社賞`,
-    image: "https://via.placeholder.com/300x200",
     tags: [
       "React",
       "TypeScript",
@@ -23,14 +22,14 @@ const worksData = [
       "Amazon RDS",
     ],
     githubLink: "https://github.com/yamamoto99/es-writer",
-    liveLink: "",
+    liveLink:
+      "https://chromewebstore.google.com/detail/es-writer-extension/jkencchebhkbaomammmgbhnpalgkchkm",
   },
   {
     title: "ConoHa Control Panel",
     description: `ConoHaのAPIを使ってConoHaのサーバー作成をよりシンプルにより簡単にするツール。
                   フロントエンドの一部とデプロイを担当。
                   GMOインターネットグループ株式会社 2024年5daysインターン&ハッカソン 最優秀賞`,
-    image: "https://via.placeholder.com/300x200",
     tags: ["React", "TypeScript", "Vite", "ConoHa VPS"],
     githubLink: "https://github.com/baba-jun/ConoHA",
     liveLink: "",
@@ -40,7 +39,6 @@ const worksData = [
     description: `githubのアカウントのreadmeを簡単に作成出来るツール。
                   フロントエンドを担当。
                   技育キャンプハッカソン vol.12 最優秀賞`,
-    image: "https://via.placeholder.com/300x200",
     tags: ["React", "TypeScript", "TailwindCSS", "Vite", "AWS Amplify"],
     githubLink: "https://github.com/Teamsasa/readme-generator",
     liveLink: "https://readmes.studio/",
@@ -68,11 +66,6 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
               <FaTimes size={24} />
             </button>
           </div>
-          <img
-            src={work.image}
-            alt={work.title}
-            className="w-full h-64 object-cover mb-4 rounded"
-          />
           <p className="text-gray-600 mb-4">{work.description}</p>
           <div className="flex flex-wrap mb-4">
             {work.tags.map((tag, index) => (
@@ -133,11 +126,6 @@ function WorkCard({
       className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
       onClick={onClick}
     >
-      <img
-        src={work.image}
-        alt={work.title}
-        className="w-full h-48 object-cover"
-      />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2 text-gray-800">
           {work.title}
@@ -173,7 +161,7 @@ function Works({ isSidebarOpen }: { isSidebarOpen: boolean }) {
         className={`w-full ${isSidebarOpen ? "max-w-5xl" : "max-w-6xl"} px-4`}
       >
         <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-          My Works - images are preparing
+          My Works
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {worksData.map((work, index) => (
