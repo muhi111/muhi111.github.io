@@ -4,7 +4,8 @@ import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 const worksData = [
   {
     title: "Es writer",
-    description: `経歴を入力するとESを自動で書いてくれるツール。
+    description: `一度経歴を入力すると以降はそれをもとにワンクリックでESを書いてくれるツール。
+                  UXを重視してブラウザ拡張機能として実装したところが推しポイント。
                   フロントエンドの大部分とバックエンドの一部を担当。
                   Progateハッカソン powered by AWS エムスリー株式会社賞`,
     tags: [
@@ -27,21 +28,34 @@ const worksData = [
   },
   {
     title: "ConoHa Control Panel",
-    description: `ConoHaのAPIを使ってConoHaのサーバー作成をよりシンプルにより簡単にするツール。
+    description: `GMO インターネットグループ株式会社 5daysインターン内の「ConoHaのコンパネを改良する」というお題のハッカソンで作成したConoHaのコントロールパネル。
+                  初心者にも優しいUI・UXをテーマにチャット機能と、分かりやすい料金比較機能、スマホ表示時のミニマムなデザインを実装。
+                  ConoHaのAPIを使用してチャット画面での対話形式でのVPS契約まで行えるところが推しポイント。
                   フロントエンドの一部とデプロイを担当。
                   GMOインターネットグループ株式会社 2024年5daysインターン&ハッカソン 最優秀賞`,
-    tags: ["React", "TypeScript", "Vite", "ConoHa VPS"],
+    tags: ["React", "TypeScript", "Vite", "Go", "Docker", "ConoHa VPS"],
     githubLink: "https://github.com/baba-jun/ConoHA",
     liveLink: "",
   },
   {
     title: "readme generator",
-    description: `githubのアカウントのreadmeを簡単に作成出来るツール。
-                  フロントエンドを担当。
+    description: `バッチや統計などのツールをプルダウンから選択すると、githubのプロフィールのREADMEを生成してくれるツール。
+                  様々なOSSのコンテンツに対応していて、プレビュー機能も実装しているところが推しポイント。
+                  メンバー全員で並行して実装。
                   技育キャンプハッカソン vol.12 最優秀賞`,
     tags: ["React", "TypeScript", "TailwindCSS", "Vite", "AWS Amplify"],
     githubLink: "https://github.com/Teamsasa/readme-generator",
     liveLink: "https://readmes.studio/",
+  },
+  {
+    title: "github sns profile card",
+    description: `githubのプロフィールのREADMEにSNSのバッチと簡単な情報を表示するツール。
+                  フォロー・フォロワー数や記事数など、SNSに関する情報を簡単に表示できるところが推しポイント。
+                  メンバー全員で並行して実装。
+                  技育キャンプハッカソン vol.13 努力賞`,
+    tags: ["Go", "Docker", "GCP Cloud Run"],
+    githubLink: "https://github.com/Teamsasa/github-sns-profile-card",
+    liveLink: "https://github-sns-profile-card-e53bc5obaa-an.a.run.app",
   },
 ];
 
@@ -66,7 +80,9 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
               <FaTimes size={24} />
             </button>
           </div>
-          <p className="text-gray-600 mb-4">{work.description}</p>
+          <p className="text-gray-600 mb-4 whitespace-pre-line">
+            {work.description}
+          </p>
           <div className="flex flex-wrap mb-4">
             {work.tags.map((tag, index) => (
               <span
