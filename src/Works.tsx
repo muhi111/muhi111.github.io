@@ -6,8 +6,8 @@ const worksData = [
     title: "Es writer",
     description: `一度経歴を入力すると以降はそれをもとにワンクリックでESを書いてくれるツール。
                   UXを重視してブラウザ拡張機能として実装したところが推しポイント。
-                  フロントエンドの大部分とバックエンドの一部を担当。
-                  Progateハッカソン powered by AWS エムスリー株式会社賞`,
+                  フロントエンドの大部分とバックエンドの一部を担当。`,
+    achievements: ["Progateハッカソン powered by AWS エムスリー株式会社賞"],
     tags: [
       "React",
       "TypeScript",
@@ -31,8 +31,10 @@ const worksData = [
     description: `GMO インターネットグループ株式会社 5daysインターン内の「ConoHaのコンパネを改良する」というお題のハッカソンで作成したConoHaのコントロールパネル。
                   初心者にも優しいUI・UXをテーマにチャット機能と、分かりやすい料金比較機能、スマホ表示時のミニマムなデザインを実装。
                   ConoHaのAPIを使用してチャット画面での対話形式でのVPS契約まで行えるところが推しポイント。
-                  フロントエンドの一部とデプロイを担当。
-                  GMOインターネットグループ株式会社 2024年5daysインターン&ハッカソン 最優秀賞`,
+                  フロントエンドの一部とデプロイを担当。`,
+    achievements: [
+      "GMOインターネットグループ株式会社 2024年5daysインターン&ハッカソン 最優秀賞",
+    ],
     tags: ["React", "TypeScript", "Vite", "Go", "Docker", "ConoHa VPS"],
     githubLink: "https://github.com/baba-jun/ConoHA",
     liveLink: "",
@@ -41,8 +43,8 @@ const worksData = [
     title: "readme generator",
     description: `バッチや統計などのツールをプルダウンから選択すると、githubのプロフィールのREADMEを生成してくれるツール。
                   様々なOSSのコンテンツに対応していて、プレビュー機能も実装しているところが推しポイント。
-                  メンバー全員で並行して実装。
-                  技育キャンプハッカソン vol.12 最優秀賞`,
+                  メンバー全員で並行して実装。`,
+    achievements: ["技育キャンプハッカソン vol.12 最優秀賞"],
     tags: ["React", "TypeScript", "TailwindCSS", "Vite", "AWS Amplify"],
     githubLink: "https://github.com/Teamsasa/readme-generator",
     liveLink: "https://readmes.studio/",
@@ -51,8 +53,8 @@ const worksData = [
     title: "github sns profile card",
     description: `githubのプロフィールのREADMEにSNSのバッチと簡単な情報を表示するツール。
                   フォロー・フォロワー数や記事数など、SNSに関する情報を簡単に表示できるところが推しポイント。
-                  メンバー全員で並行して実装。
-                  技育キャンプハッカソン vol.13 努力賞`,
+                  メンバー全員で並行して実装。`,
+    achievements: ["技育キャンプハッカソン vol.13 努力賞"],
     tags: ["Go", "Docker", "GCP Cloud Run"],
     githubLink: "https://github.com/Teamsasa/github-sns-profile-card",
     liveLink: "https://github-sns-profile-card-e53bc5obaa-an.a.run.app",
@@ -83,11 +85,20 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
           <p className="text-gray-600 mb-4 whitespace-pre-line">
             {work.description}
           </p>
+          {work.achievements.length > 0 && (
+            <div className="mb-4 bg-blue-50 p-3 rounded-lg">
+              {work.achievements.map((achievement, index) => (
+                <p key={index} className="text-blue-800 font-medium">
+                  {achievement}
+                </p>
+              ))}
+            </div>
+          )}
           <div className="flex flex-wrap mb-4">
             {work.tags.map((tag, index) => (
               <span
                 key={index}
-                className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
+                className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
               >
                 {tag}
               </span>
@@ -149,15 +160,27 @@ function WorkCard({
         <p className="text-gray-600 mb-4">
           {truncateDescription(work.description)}
         </p>
+        {work.achievements.length > 0 && (
+          <div className="mb-4 bg-blue-50 p-2 rounded">
+            <p className="text-blue-800 font-medium text-sm">
+              {work.achievements[0]}
+            </p>
+          </div>
+        )}
         <div className="flex flex-wrap mb-4">
-          {work.tags.map((tag, index) => (
+          {work.tags.slice(0, 3).map((tag, index) => (
             <span
               key={index}
-              className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
+              className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
             >
               {tag}
             </span>
           ))}
+          {work.tags.length > 3 && (
+            <span className="text-gray-600 text-xs">
+              +{work.tags.length - 3} more
+            </span>
+          )}
         </div>
       </div>
     </div>
