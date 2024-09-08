@@ -35,8 +35,8 @@ const worksData = [
     achievements: [
       "GMOインターネットグループ株式会社 2024年5daysインターン&ハッカソン 最優秀賞",
     ],
-    tags: ["React", "TypeScript", "Vite", "Go", "Docker", "ConoHa VPS"],
-    githubLink: "https://github.com/baba-jun/ConoHA",
+    tags: ["React", "TypeScript", "Vite", "Go", "Gin", "Docker", "ConoHa VPS"],
+    githubLink: "https://github.com/muhi111/ConoHa",
     liveLink: "",
   },
   {
