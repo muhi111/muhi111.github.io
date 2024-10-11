@@ -139,15 +139,6 @@ function WorkCard({
   work: (typeof worksData)[0];
   onClick: () => void;
 }) {
-  const maxDescriptionLength = 100;
-
-  const truncateDescription = (description: string) => {
-    if (description.length <= maxDescriptionLength) {
-      return description;
-    }
-    return description.slice(0, maxDescriptionLength) + "...";
-  };
-
   return (
     <div
       className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
@@ -157,9 +148,7 @@ function WorkCard({
         <h3 className="text-xl font-semibold mb-2 text-gray-800">
           {work.title}
         </h3>
-        <p className="text-gray-600 mb-4">
-          {truncateDescription(work.description)}
-        </p>
+        <p className="text-gray-600 mb-4 line-clamp-3">{work.description}</p>
         {work.achievements.length > 0 && (
           <div className="mb-4 bg-blue-50 p-2 rounded">
             <p className="text-blue-800 font-medium text-sm">
