@@ -1,4 +1,15 @@
 import { useState } from "react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  Icon,
+  Link,
+  Text,
+} from "@chakra-ui/react";
+import { Tag } from "./components/ui/tag";
 import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
 
 const worksData = [
@@ -68,67 +79,90 @@ interface WorkDetailsProps {
 
 function WorkDetails({ work, onClose }: WorkDetailsProps) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-2xl font-semibold text-gray-800">
-              {work.title}
-            </h3>
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-700"
+    <Flex
+      position="fixed"
+      inset="0"
+      bg="blackAlpha.600"
+      align="center"
+      justify="center"
+      p="4"
+      zIndex="50"
+    >
+      <Box
+        bg="white"
+        rounded="lg"
+        maxW="2xl"
+        w="full"
+        maxH="90vh"
+        overflowY="auto"
+      >
+        <Box p="6">
+          <Flex justify="space-between" align="center" mb="4">
+            <Heading
+              as="h3"
+              size="lg"
+              color="gray.800"
+              fontWeight="bold"
+              fontSize={{ base: "1xl", md: "2xl" }}
             >
-              <FaTimes size={24} />
-            </button>
-          </div>
-          <p className="text-gray-600 mb-4 whitespace-pre-line">
+              {work.title}
+            </Heading>
+            <Button onClick={onClose} variant="ghost" colorScheme="gray">
+              <Icon boxSize={6}>
+                <FaTimes />
+              </Icon>
+            </Button>
+          </Flex>
+          <Text color="gray.600" mb="4" whiteSpace="pre-line">
             {work.description}
-          </p>
+          </Text>
           {work.achievements.length > 0 && (
-            <div className="mb-4 bg-blue-50 p-3 rounded-lg">
+            <Box mb="4" bg="blue.50" p="3" rounded="lg">
               {work.achievements.map((achievement, index) => (
-                <p key={index} className="text-blue-800 font-medium">
+                <Text key={index} color="blue.800" fontWeight="medium">
                   {achievement}
-                </p>
+                </Text>
               ))}
-            </div>
+            </Box>
           )}
-          <div className="flex flex-wrap mb-4">
+          <Flex wrap="wrap" mb="4">
             {work.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
-              >
+              <Tag key={index} bg="gray.200" color="gray.700" mr="2" mb="2">
                 {tag}
-              </span>
+              </Tag>
             ))}
-          </div>
-          <div className="flex justify-between">
-            <a
+          </Flex>
+          <Flex justify="space-between">
+            <Link
               href={work.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 hover:text-gray-600"
+              color="gray.800"
+              _hover={{ color: "gray.600" }}
             >
-              <FaGithub className="inline mr-2" />
+              <Icon mr="2">
+                <FaGithub />
+              </Icon>
               GitHub
-            </a>
+            </Link>
             {work.liveLink && (
-              <a
+              <Link
                 href={work.liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-800 hover:text-gray-600"
+                color="gray.800"
+                _hover={{ color: "gray.600" }}
               >
-                <FaExternalLinkAlt className="inline mr-2" />
+                <Icon mr="2">
+                  <FaExternalLinkAlt />
+                </Icon>
                 Live Demo
-              </a>
+              </Link>
             )}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Flex>
+        </Box>
+      </Box>
+    </Flex>
   );
 }
 
@@ -140,58 +174,74 @@ function WorkCard({
   onClick: () => void;
 }) {
   return (
-    <div
-      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300 cursor-pointer"
+    <Box
+      bg="white"
+      rounded="lg"
+      shadow="lg"
+      overflow="hidden"
+      _hover={{ shadow: "xl" }}
+      transition="all 0.3s"
+      cursor="pointer"
       onClick={onClick}
     >
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2 text-gray-800">
+      <Box p="6">
+        <Heading as="h3" size="md" mb="2" color="gray.800" fontWeight="bold">
           {work.title}
-        </h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">{work.description}</p>
+        </Heading>
+        <Text color="gray.600" mb="4" lineClamp={2}>
+          {work.description}
+        </Text>
         {work.achievements.length > 0 && (
-          <div className="mb-4 bg-blue-50 p-2 rounded">
-            <p className="text-blue-800 font-medium text-sm">
+          <Box mb="4" bg="blue.50" p="2" rounded="lg">
+            <Text color="blue.800" fontWeight="medium" fontSize="sm">
               {work.achievements[0]}
-            </p>
-          </div>
+            </Text>
+          </Box>
         )}
-        <div className="flex flex-wrap mb-4">
+        <Flex wrap="wrap" mb="4">
           {work.tags.slice(0, 3).map((tag, index) => (
-            <span
-              key={index}
-              className="bg-gray-200 text-gray-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded"
-            >
+            <Tag key={index} bg="gray.200" color="gray.700" mr="2" mb="2">
               {tag}
-            </span>
+            </Tag>
           ))}
           {work.tags.length > 3 && (
-            <span className="text-gray-600 text-xs">
+            <Text color="gray.600" fontSize="xs">
               +{work.tags.length - 3} more
-            </span>
+            </Text>
           )}
-        </div>
-      </div>
-    </div>
+        </Flex>
+      </Box>
+    </Box>
   );
 }
 
-function Works({ isSidebarOpen }: { isSidebarOpen: boolean }) {
+function Works() {
   const [selectedWork, setSelectedWork] = useState<
     (typeof worksData)[0] | null
   >(null);
 
   return (
-    <div
-      className={`flex items-center ${isSidebarOpen ? "justify-center" : "justify-center"} min-h-screen bg-gray-100 py-10`}
-    >
-      <div
-        className={`w-full ${isSidebarOpen ? "max-w-5xl" : "max-w-6xl"} px-4`}
-      >
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+    <Flex align="center" justify="center" minH="100vh" bg="gray.100" py="10">
+      <Box w="full" maxW="6xl" px="4">
+        <Heading
+          as="h2"
+          size="xl"
+          mb="8"
+          textAlign="center"
+          color="gray.800"
+          fontWeight="bold"
+          fontSize={{ base: "1xl", md: "2xl" }}
+        >
           My Works
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </Heading>
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(2, minmax(300px, 1fr))",
+            lg: "repeat(3, minmax(300px, 1fr))",
+          }}
+          gap="6"
+        >
           {worksData.map((work, index) => (
             <WorkCard
               key={index}
@@ -199,15 +249,15 @@ function Works({ isSidebarOpen }: { isSidebarOpen: boolean }) {
               onClick={() => setSelectedWork(work)}
             />
           ))}
-        </div>
-      </div>
+        </Grid>
+      </Box>
       {selectedWork && (
         <WorkDetails
           work={selectedWork}
           onClose={() => setSelectedWork(null)}
         />
       )}
-    </div>
+    </Flex>
   );
 }
 

@@ -1,103 +1,118 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGithub, FaBars } from "react-icons/fa";
+import {
+  Box,
+  Flex,
+  Button,
+  IconButton,
+  Icon,
+  VStack,
+  Link,
+} from "@chakra-ui/react";
 
 function Sidebar({
   isOpen,
   setIsOpen,
+  isNarrowScreen,
 }: {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isNarrowScreen: boolean;
 }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
-      const newIsMobile = window.innerWidth < 768;
-      setIsMobile(newIsMobile);
-      if (newIsMobile) {
-        setIsOpen(false);
-      }
+      const width = window.innerWidth;
+      const newIsNarrowScreen = width <= 1650;
+      if (newIsNarrowScreen) setIsOpen(false);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [setIsOpen]);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   const handleNavigation = (path: string): void => {
     navigate(path);
-    if (isMobile) {
-      setIsOpen(false);
-    }
+    if (isNarrowScreen) setIsOpen(false);
   };
-
-  const sidebarContent = (
-    <>
-      <div className="mt-14">
-        <nav>
-          <ul className="space-y-2">
-            <li>
-              <button
-                onClick={() => handleNavigation("/")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200"
-              >
-                Home
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleNavigation("/skills")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200"
-              >
-                Skills
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => handleNavigation("/works")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded transition duration-200"
-              >
-                Works
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div className="mt-auto">
-        <a
-          href="https://github.com/muhi111"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block hover:text-gray-400 transition duration-200"
-        >
-          <FaGithub size={24} />
-        </a>
-      </div>
-    </>
-  );
 
   return (
     <>
-      <button
-        onClick={toggleSidebar}
-        className={`fixed top-4 left-4 z-20 text-white bg-gray-800 p-2 rounded hover:bg-gray-700 transition duration-200 ${
-          isOpen && !isMobile ? "left-68" : "left-4"
-        }`}
+      <IconButton
+        aria-label="Toggle Sidebar"
+        onClick={() => setIsOpen(!isOpen)}
+        position="fixed"
+        top="1rem"
+        left="1rem"
+        zIndex="20"
+        size="lg"
+        color={isOpen ? "gray.100" : "gray.800"}
+        _hover={{
+          color: isOpen ? "gray.400" : "gray.500",
+        }}
       >
-        <FaBars size={24} />
-      </button>
-      <div
-        className={`bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        <FaBars />
+      </IconButton>
+
+      <Box
+        bg="gray.800"
+        color="white"
+        w="64"
+        minH="100vh"
+        p="4"
+        pos="fixed"
+        top="0"
+        left="0"
+        zIndex="9"
+        transform={isOpen ? "translateX(0)" : "translateX(-100%)"}
+        transition="transform 0.3s ease-in-out"
       >
-        {sidebarContent}
-      </div>
+        <VStack align="stretch" mt="10">
+          <Button
+            variant="ghost"
+            w="full"
+            justifyContent="flex-start"
+            onClick={() => handleNavigation("/")}
+            color="gray.100"
+            _hover={{ color: "gray.400" }}
+          >
+            Home
+          </Button>
+          <Button
+            variant="ghost"
+            w="full"
+            justifyContent="flex-start"
+            onClick={() => handleNavigation("/skills")}
+            color="gray.100"
+            _hover={{ color: "gray.400" }}
+          >
+            Skills
+          </Button>
+          <Button
+            variant="ghost"
+            w="full"
+            justifyContent="flex-start"
+            onClick={() => handleNavigation("/works")}
+            color="gray.100"
+            _hover={{ color: "gray.400" }}
+          >
+            Works
+          </Button>
+        </VStack>
+        <Flex position="absolute" bottom="4" left="4">
+          <Link
+            href="https://github.com/muhi111"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon w={6} h={6} color="gray.400" _hover={{ color: "gray.200" }}>
+              <FaGithub />
+            </Icon>
+          </Link>
+        </Flex>
+      </Box>
     </>
   );
 }

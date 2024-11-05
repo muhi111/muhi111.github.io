@@ -14,6 +14,7 @@ import {
 import { FaGolang } from "react-icons/fa6";
 import { SiC, SiTypescript, SiMysql } from "react-icons/si";
 import { AiOutlineStar } from "react-icons/ai";
+import { Box, Flex, Grid, Heading, Icon, Text } from "@chakra-ui/react";
 
 const skillsData = [
   {
@@ -47,37 +48,53 @@ const skillsData = [
 
 function StarRating({ level }: { level: number }) {
   return (
-    <div className="flex">
+    <Flex>
       {[1, 2, 3, 4, 5].map((star) => {
         if (star <= level) {
-          return <FaStar key={star} className="text-yellow-400" />;
+          return (
+            <Icon key={star} color="yellow.400">
+              <FaStar />
+            </Icon>
+          );
         } else if (star - 0.5 <= level) {
-          return <FaStarHalfAlt key={star} className="text-yellow-400" />;
+          return (
+            <Icon key={star} color="yellow.400">
+              <FaStarHalfAlt />
+            </Icon>
+          );
         } else {
-          return <AiOutlineStar key={star} className="text-yellow-400" />;
+          return (
+            <Icon key={star} color="yellow.400">
+              <AiOutlineStar />
+            </Icon>
+          );
         }
       })}
-    </div>
+    </Flex>
   );
 }
 
 function SkillItem({
   name,
   level,
-  Icon,
+  IconComponent,
 }: {
   name: string;
   level: number;
-  Icon: React.ElementType;
+  IconComponent: React.ElementType;
 }) {
   return (
-    <div className="flex items-center justify-between mb-3">
-      <div className="flex items-center">
-        <Icon className="w-5 h-5 mr-2 text-gray-600" />
-        <span className="text-sm font-medium text-gray-700">{name}</span>
-      </div>
+    <Flex align="center" justify="space-between" mb={3}>
+      <Flex align="center">
+        <Icon w={5} h={5} mr={2} color="gray.600">
+          <IconComponent />
+        </Icon>
+        <Text fontSize="sm" fontWeight="medium" color="gray.700">
+          {name}
+        </Text>
+      </Flex>
       <StarRating level={level} />
-    </div>
+    </Flex>
   );
 }
 
@@ -89,32 +106,52 @@ function SkillCard({
   skills: { name: string; level: number; icon: React.ElementType }[];
 }) {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800">{category}</h3>
+    <Box
+      bg="white"
+      rounded="lg"
+      shadow="lg"
+      p={6}
+      _hover={{ shadow: "xl" }}
+      transition="0.3s"
+    >
+      <Heading as="h3" size="md" mb={4} color="gray.800">
+        {category}
+      </Heading>
       {skills.map((skill, index) => (
         <SkillItem
           key={index}
           name={skill.name}
           level={skill.level}
-          Icon={skill.icon}
+          IconComponent={skill.icon}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
-function Skills({ isSidebarOpen }: { isSidebarOpen: boolean }) {
+function Skills() {
   return (
-    <div
-      className={`flex items-center ${isSidebarOpen ? "justify-center" : "justify-center"} min-h-screen bg-gray-100 py-10`}
-    >
-      <div
-        className={`w-full ${isSidebarOpen ? "max-w-5xl" : "max-w-6xl"} px-4`}
-      >
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+    <Flex align="center" justify="center" minH="100vh" bg="gray.100" py={10}>
+      <Box w="full" maxW="6xl" px={4}>
+        <Heading
+          as="h2"
+          size="xl"
+          mb={8}
+          textAlign="center"
+          color="gray.800"
+          fontWeight="bold"
+          fontSize={{ base: "1xl", md: "2xl" }}
+        >
           My Skills
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </Heading>
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(2, minmax(280px, 1fr))",
+            lg: "repeat(3, minmax(280px, 1fr))",
+          }}
+          gap={6}
+        >
           {skillsData.map((category, index) => (
             <SkillCard
               key={index}
@@ -122,9 +159,9 @@ function Skills({ isSidebarOpen }: { isSidebarOpen: boolean }) {
               skills={category.skills}
             />
           ))}
-        </div>
-      </div>
-    </div>
+        </Grid>
+      </Box>
+    </Flex>
   );
 }
 
