@@ -1,15 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGithub, FaBars } from "react-icons/fa";
-import {
-  Box,
-  Flex,
-  Button,
-  IconButton,
-  Icon,
-  VStack,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Flex, Button, IconButton, VStack, Link } from "@chakra-ui/react";
 
 function Sidebar({
   isOpen,
@@ -69,13 +61,14 @@ function Sidebar({
         transform={isOpen ? "translateX(0)" : "translateX(-100%)"}
         transition="transform 0.3s ease-in-out"
       >
-        <VStack align="stretch" mt="10">
+        <VStack align="stretch" mt="20">
           <Button
             variant="ghost"
             w="full"
             justifyContent="flex-start"
             onClick={() => handleNavigation("/")}
             color="gray.100"
+            fontSize="lg"
             _hover={{ color: "gray.400" }}
           >
             Home
@@ -86,6 +79,7 @@ function Sidebar({
             justifyContent="flex-start"
             onClick={() => handleNavigation("/skills")}
             color="gray.100"
+            fontSize="lg"
             _hover={{ color: "gray.400" }}
           >
             Skills
@@ -96,6 +90,7 @@ function Sidebar({
             justifyContent="flex-start"
             onClick={() => handleNavigation("/works")}
             color="gray.100"
+            fontSize="lg"
             _hover={{ color: "gray.400" }}
           >
             Works
@@ -107,9 +102,22 @@ function Sidebar({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon w={6} h={6} color="gray.400" _hover={{ color: "gray.200" }}>
-              <FaGithub />
-            </Icon>
+            <FaGithub size={50} color="gray.400" />
+          </Link>
+          <Link
+            href="https://qiita.com/muhi111"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/portfolio/qiita.png"
+              alt="Qiita"
+              width={50}
+              style={{
+                filter: "grayscale(100%) brightness(160%)",
+                marginLeft: "1rem",
+              }}
+            />
           </Link>
         </Flex>
       </Box>
