@@ -7,10 +7,9 @@ import {
   Image,
   List,
 } from "@chakra-ui/react";
-import { useState } from "react";
 
 function Home() {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  // const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Flex align="center" justify="center" minH="100vh" bg="gray.100" py={10}>
       <Container maxW="5xl" px={4}>
@@ -23,17 +22,12 @@ function Home() {
               mb={6}
               color="gray.800"
             >
-              <div className="relative min-h-[50px]">
-                {!imageLoaded && <div className="w-[435px] h-[50px]" />}
-                <Image
-                  src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&pause=1000&width=435&lines=Hi!+%F0%9F%91%8B++I'm+muhi111.+;I'm+a+student.;I'm+a+web+developer."
-                  alt="Hi I'm muhi111. I'm a student. I'm a web developer."
-                  width="435"
-                  height="50"
-                  onLoad={() => setImageLoaded(true)}
-                  className={`${!imageLoaded ? "invisible" : "visible"}`}
-                />
-              </div>
+              <Image
+                src="/portfolio/typing.svg"
+                alt="Hi I'm muhi111. I'm a student. I'm a web developer."
+                width="435"
+                height="50"
+              />
             </Heading>
             <Box mb={6}>
               <Text fontSize="xl" mb={4} color="gray.700">
