@@ -15,7 +15,7 @@ export function ColorModeProvider(props: ColorModeProviderProps) {
   );
 }
 
-export function useColorMode() {
+function useColorMode() {
   const { resolvedTheme, setTheme } = useTheme();
   const toggleColorMode = () => {
     setTheme(resolvedTheme === "light" ? "dark" : "light");
@@ -27,41 +27,40 @@ export function useColorMode() {
   };
 }
 
-export function useColorModeValue<T>(light: T, dark: T) {
+function useColorModeValue<T>(light: T, dark: T) {
   const { colorMode } = useColorMode();
   return colorMode === "light" ? light : dark;
 }
 
-export function ColorModeIcon() {
+function ColorModeIcon() {
   const { colorMode } = useColorMode();
   return colorMode === "light" ? <LuSun /> : <LuMoon />;
 }
 
 interface ColorModeButtonProps extends Omit<IconButtonProps, "aria-label"> {}
 
-export const ColorModeButton = forwardRef<
-  HTMLButtonElement,
-  ColorModeButtonProps
->(function ColorModeButton(props, ref) {
-  const { toggleColorMode } = useColorMode();
-  return (
-    <ClientOnly fallback={<Skeleton boxSize="8" />}>
-      <IconButton
-        onClick={toggleColorMode}
-        variant="ghost"
-        aria-label="Toggle color mode"
-        size="sm"
-        ref={ref}
-        {...props}
-        css={{
-          _icon: {
-            width: "5",
-            height: "5",
-          },
-        }}
-      >
-        <ColorModeIcon />
-      </IconButton>
-    </ClientOnly>
-  );
-});
+const ColorModeButton = forwardRef<HTMLButtonElement, ColorModeButtonProps>(
+  function ColorModeButton(props, ref) {
+    const { toggleColorMode } = useColorMode();
+    return (
+      <ClientOnly fallback={<Skeleton boxSize="8" />}>
+        <IconButton
+          onClick={toggleColorMode}
+          variant="ghost"
+          aria-label="Toggle color mode"
+          size="sm"
+          ref={ref}
+          {...props}
+          css={{
+            _icon: {
+              width: "5",
+              height: "5",
+            },
+          }}
+        >
+          <ColorModeIcon />
+        </IconButton>
+      </ClientOnly>
+    );
+  },
+);
