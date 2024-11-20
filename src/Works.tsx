@@ -166,7 +166,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
                 <Icon mr="2">
                   <FaExternalLinkAlt />
                 </Icon>
-                Live Demo
+                External Link
               </Link>
             )}
           </Flex>
@@ -189,7 +189,7 @@ function WorkCard({
       rounded="lg"
       shadow="lg"
       overflow="hidden"
-      _hover={{ shadow: "xl" }}
+      _hover={{ shadow: "2xl", transform: "scale(1.03)" }}
       transition="all 0.3s"
       cursor="pointer"
       onClick={onClick}
@@ -198,7 +198,7 @@ function WorkCard({
         <Heading as="h3" size="md" mb="2" color="gray.800" fontWeight="bold">
           {work.title}
         </Heading>
-        <Text color="gray.600" mb="4" lineClamp={2}>
+        <Text color="gray.600" mb="4" lineClamp={3}>
           {work.description}
         </Text>
         {work.achievements.length > 0 && (

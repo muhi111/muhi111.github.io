@@ -106,14 +106,7 @@ function SkillCard({
   skills: { name: string; level: number; icon: React.ElementType }[];
 }) {
   return (
-    <Box
-      bg="white"
-      rounded="lg"
-      shadow="lg"
-      p={6}
-      _hover={{ shadow: "xl" }}
-      transition="0.3s"
-    >
+    <Box bg="white" rounded="lg" shadow="lg" p={6} transition="0.3s">
       <Heading as="h3" size="md" mb={4} color="gray.800">
         {category}
       </Heading>
