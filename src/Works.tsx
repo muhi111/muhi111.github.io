@@ -70,6 +70,16 @@ const worksData = [
     githubLink: "https://github.com/Teamsasa/github-sns-profile-card",
     liveLink: "https://github-sns-profile-card-e53bc5obaa-an.a.run.app",
   },
+  {
+    title: "splatoon API",
+    description: `Splatoon 3の非公開APIを叩くためのパラメータを取得するためのプログラム。
+                  ステージや戦績・使用ブキ等々、大体の情報をAPI経由で取得できる。
+                  Nintendo Switch Onlineのアプリ内で叩いているものをリバースエンジニアリングして実装。`,
+    achievements: [],
+    tags: ["Python"],
+    githubLink: "https://github.com/muhi111/splatoon_api",
+    liveLink: "",
+  },
 ];
 
 interface WorkDetailsProps {
