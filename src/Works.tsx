@@ -117,7 +117,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
             >
               {work.title}
             </Heading>
-            <Button onClick={onClose} variant="ghost" colorScheme="gray">
+            <Button onClick={onClose} color="gray.700">
               <Icon boxSize={6}>
                 <FaTimes />
               </Icon>
