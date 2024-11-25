@@ -52,7 +52,7 @@ function Sidebar({
         bg="gray.800"
         color="white"
         w="64"
-        minH="100vh"
+        minH="100dvh"
         p="4"
         pos="fixed"
         top="0"
