@@ -88,6 +88,11 @@ interface WorkDetailsProps {
 }
 
 function WorkDetails({ work, onClose }: WorkDetailsProps) {
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
   return (
     <Flex
       position="fixed"
@@ -97,6 +102,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
       justify="center"
       p="4"
       zIndex="50"
+      onClick={handleOverlayClick}
     >
       <Box
         bg="white"
@@ -105,6 +111,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
         w="full"
         maxH="90vh"
         overflowY="auto"
+        onClick={(e) => e.stopPropagation()}
       >
         <Box p="6">
           <Flex justify="space-between" align="center" mb="4">
