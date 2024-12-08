@@ -80,6 +80,29 @@ const worksData = [
     githubLink: "https://github.com/muhi111/splatoon_api",
     liveLink: "",
   },
+  {
+    title: "Bonded",
+    description: `カレンダーの共有を容易にするためのwebアプリケーション。
+                  カレンダーの作成や共有やイベントの作成はもちろん、カレンダーの公開・非公開も可能。
+                  公開カレンダーはフォローすることができ、イベントを追うことも可能。
+                  公開カレンダーはログインなしでも閲覧できるようにミドルウェアの認証を調整したのが推しポイント。
+                  バックエンドの一部とフロントエンドの大部分を担当。`,
+    achievements: ["Progateハッカソン powered by AWS AWS賞"],
+    tags: [
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "Vite",
+      "Material UI",
+      "Go",
+      "AWS Lambda",
+      "Amazon API Gateway",
+      "Amazon DynamoDB",
+      "Amazon Cognito",
+    ],
+    githubLink: "https://github.com/Teamsasa/Bonded",
+    livelink: "",
+  },
 ];
 
 interface WorkDetailsProps {
