@@ -8,5 +8,6 @@
 - TypeScript
 - TailwindCSS
 - Vite
+- Biome
 - GitHub Actions
 - GItHub Pages
