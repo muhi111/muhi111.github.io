@@ -1,16 +1,5 @@
-import {
-	Box,
-	Button,
-	Flex,
-	Grid,
-	Heading,
-	Icon,
-	Link,
-	Text,
-} from "@chakra-ui/react";
 import { useState } from "react";
 import { FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
-import { Tag } from "./components/ui/tag";
 
 const worksData = [
 	{
@@ -111,98 +100,84 @@ interface WorkDetailsProps {
 }
 
 function WorkDetails({ work, onClose }: WorkDetailsProps) {
-	const handleOverlayClick = (e: React.MouseEvent) => {
-		if (e.target === e.currentTarget) {
-			onClose();
-		}
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === "Escape") onClose();
 	};
+
 	return (
-		<Flex
-			position="fixed"
-			inset="0"
-			bg="blackAlpha.600"
-			align="center"
-			justify="center"
-			p="4"
-			zIndex="50"
-			onClick={handleOverlayClick}
+		<dialog
+			open
+			className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+			onClick={(e) => e.target === e.currentTarget && onClose()}
+			onKeyDown={handleKeyDown}
 		>
-			<Box
-				bg="white"
-				rounded="lg"
-				maxW="2xl"
-				w="full"
-				maxH="90vh"
-				overflowY="auto"
+			<div
+				className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all"
 				onClick={(e) => e.stopPropagation()}
+				onKeyDown={(e) => e.stopPropagation()}
 			>
-				<Box p="6">
-					<Flex justify="space-between" align="center" mb="4">
-						<Heading
-							as="h3"
-							size="lg"
-							color="gray.800"
-							fontWeight="bold"
-							fontSize={{ base: "1xl", md: "2xl" }}
+				<div className="p-6">
+					<div className="flex justify-between items-center mb-4">
+						<h3 className="text-2xl font-bold text-gray-900">{work.title}</h3>
+						<button
+							type="button"
+							onClick={onClose}
+							className="p-2 hover:bg-gray-100 rounded-full transition-colors"
 						>
-							{work.title}
-						</Heading>
-						<Button onClick={onClose} color="gray.700">
-							<Icon boxSize={6}>
-								<FaTimes />
-							</Icon>
-						</Button>
-					</Flex>
-					<Text color="gray.600" mb="4" whiteSpace="pre-line">
+							<FaTimes className="w-5 h-5 text-gray-600" />
+						</button>
+					</div>
+
+					<p className="text-gray-600 mb-6 whitespace-pre-line">
 						{work.description}
-					</Text>
+					</p>
+
 					{work.achievements.length > 0 && (
-						<Box mb="4" bg="blue.50" p="3" rounded="lg">
+						<div className="mb-6 bg-blue-50 p-4 rounded-lg">
 							{work.achievements.map((achievement) => (
-								<Text key={achievement} color="blue.800" fontWeight="medium">
+								<p key={achievement} className="text-blue-900 font-medium">
 									{achievement}
-								</Text>
+								</p>
 							))}
-						</Box>
+						</div>
 					)}
-					<Flex wrap="wrap" mb="4">
+
+					<div className="flex flex-wrap gap-2 mb-6">
 						{work.tags.map((tag) => (
-							<Tag key={tag} bg="gray.200" color="gray.700" mr="2" mb="2">
+							<span
+								key={tag}
+								className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm"
+							>
 								{tag}
-							</Tag>
+							</span>
 						))}
-					</Flex>
-					<Flex justify="space-between">
-						<Link
+					</div>
+
+					<div className="flex justify-between">
+						<a
 							href={work.githubLink}
 							target="_blank"
 							rel="noopener noreferrer"
-							color="gray.800"
-							_hover={{ color: "gray.600" }}
+							className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
 						>
-							<Icon mr="2">
-								<FaGithub />
-							</Icon>
+							<FaGithub className="w-5 h-5 mr-2" />
 							GitHub
-						</Link>
+						</a>
 						{work.liveLink && (
-							<Link
+							<a
 								href={work.liveLink}
 								target="_blank"
 								rel="noopener noreferrer"
-								color="gray.800"
-								_hover={{ color: "gray.600" }}
+								className="flex items-center text-gray-700 hover:text-gray-900 transition-colors"
 							>
-								<Icon mr="2">
-									<FaExternalLinkAlt />
-								</Icon>
+								<FaExternalLinkAlt className="w-5 h-5 mr-2" />
 								External Link
-							</Link>
+							</a>
 						)}
-					</Flex>
-				</Box>
-			</Box>
-		</Flex>
+					</div>
+				</div>
+			</div>
+		</dialog>
 	);
 }
 
@@ -213,45 +188,50 @@ function WorkCard({
 	work: (typeof worksData)[0];
 	onClick: () => void;
 }) {
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			onClick();
+		}
+	};
+
 	return (
-		<Box
-			bg="white"
-			rounded="lg"
-			shadow="lg"
-			overflow="hidden"
-			_hover={{ shadow: "2xl", transform: "scale(1.03)" }}
-			transition="all 0.3s"
-			cursor="pointer"
+		<button
+			type="button"
+			className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 
+                 transform hover:-translate-y-1 cursor-pointer overflow-hidden w-full text-left"
 			onClick={onClick}
+			onKeyDown={handleKeyDown}
 		>
-			<Box p="6">
-				<Heading as="h3" size="md" mb="2" color="gray.800" fontWeight="bold">
-					{work.title}
-				</Heading>
-				<Text color="gray.600" mb="4" lineClamp={3}>
-					{work.description}
-				</Text>
+			<div className="p-6">
+				<h3 className="text-xl font-bold text-gray-900 mb-3">{work.title}</h3>
+				<p className="text-gray-600 mb-4 line-clamp-3">{work.description}</p>
+
 				{work.achievements.length > 0 && (
-					<Box mb="4" bg="blue.50" p="2" rounded="lg">
-						<Text color="blue.800" fontWeight="medium" fontSize="sm">
+					<div className="mb-4 bg-blue-50 p-3 rounded-lg">
+						<p className="text-blue-900 font-medium text-sm">
 							{work.achievements[0]}
-						</Text>
-					</Box>
+						</p>
+					</div>
 				)}
-				<Flex wrap="wrap" mb="4">
+
+				<div className="flex flex-wrap gap-2">
 					{work.tags.slice(0, 3).map((tag) => (
-						<Tag key={tag} bg="gray.200" color="gray.700" mr="2" mb="2">
+						<span
+							key={tag}
+							className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm"
+						>
 							{tag}
-						</Tag>
+						</span>
 					))}
 					{work.tags.length > 3 && (
-						<Text color="gray.600" fontSize="xs">
+						<span className="text-gray-500 text-sm self-center">
 							+{work.tags.length - 3} more
-						</Text>
+						</span>
 					)}
-				</Flex>
-			</Box>
-		</Box>
+				</div>
+			</div>
+		</button>
 	);
 }
 
@@ -261,27 +241,12 @@ function Works() {
 	>(null);
 
 	return (
-		<Flex align="center" justify="center" minH="100vh" bg="gray.100" py="10">
-			<Box w="full" maxW="6xl" px="4">
-				<Heading
-					as="h2"
-					size="xl"
-					mb="8"
-					textAlign="center"
-					color="gray.800"
-					fontWeight="bold"
-					fontSize={{ base: "1xl", md: "2xl" }}
-				>
+		<div className="min-h-screen bg-gray-50 py-16">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
 					My Works
-				</Heading>
-				<Grid
-					templateColumns={{
-						base: "1fr",
-						md: "repeat(2, minmax(300px, 1fr))",
-						lg: "repeat(3, minmax(300px, 1fr))",
-					}}
-					gap="6"
-				>
+				</h2>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					{worksData.map((work) => (
 						<WorkCard
 							key={work.title}
@@ -289,15 +254,15 @@ function Works() {
 							onClick={() => setSelectedWork(work)}
 						/>
 					))}
-				</Grid>
-			</Box>
+				</div>
+			</div>
 			{selectedWork && (
 				<WorkDetails
 					work={selectedWork}
 					onClose={() => setSelectedWork(null)}
 				/>
 			)}
-		</Flex>
+		</div>
 	);
 }
 

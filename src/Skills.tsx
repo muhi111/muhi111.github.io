@@ -1,4 +1,3 @@
-import { Box, Flex, Grid, Heading, Icon, Text } from "@chakra-ui/react";
 import type React from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import {
@@ -48,29 +47,19 @@ const skillsData = [
 
 function StarRating({ level }: { level: number }) {
 	return (
-		<Flex>
+		<div className="flex">
 			{[1, 2, 3, 4, 5].map((star) => {
 				if (star <= level) {
-					return (
-						<Icon key={star} color="yellow.400">
-							<FaStar />
-						</Icon>
-					);
+					return <FaStar key={star} className="w-4 h-4 text-amber-400" />;
 				}
 				if (star - 0.5 <= level) {
 					return (
-						<Icon key={star} color="yellow.400">
-							<FaStarHalfAlt />
-						</Icon>
+						<FaStarHalfAlt key={star} className="w-4 h-4 text-amber-400" />
 					);
 				}
-				return (
-					<Icon key={star} color="yellow.400">
-						<AiOutlineStar />
-					</Icon>
-				);
+				return <AiOutlineStar key={star} className="w-4 h-4 text-amber-400" />;
 			})}
-		</Flex>
+		</div>
 	);
 }
 
@@ -84,17 +73,13 @@ function SkillItem({
 	IconComponent: React.ElementType;
 }) {
 	return (
-		<Flex align="center" justify="space-between" mb={3}>
-			<Flex align="center">
-				<Icon w={5} h={5} mr={2} color="gray.600">
-					<IconComponent />
-				</Icon>
-				<Text fontSize="sm" fontWeight="medium" color="gray.700">
-					{name}
-				</Text>
-			</Flex>
+		<div className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+			<div className="flex items-center gap-3">
+				<IconComponent className="w-5 h-5 text-gray-600" />
+				<span className="text-sm font-medium text-gray-700">{name}</span>
+			</div>
 			<StarRating level={level} />
-		</Flex>
+		</div>
 	);
 }
 
@@ -106,45 +91,30 @@ function SkillCard({
 	skills: { name: string; level: number; icon: React.ElementType }[];
 }) {
 	return (
-		<Box bg="white" rounded="lg" shadow="lg" p={6} transition="0.3s">
-			<Heading as="h3" size="md" mb={4} color="gray.800">
-				{category}
-			</Heading>
-			{skills.map((skill) => (
-				<SkillItem
-					key={skill.name}
-					name={skill.name}
-					level={skill.level}
-					IconComponent={skill.icon}
-				/>
-			))}
-		</Box>
+		<div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
+			<h3 className="text-xl font-bold text-gray-800 mb-4">{category}</h3>
+			<div className="space-y-2">
+				{skills.map((skill) => (
+					<SkillItem
+						key={skill.name}
+						name={skill.name}
+						level={skill.level}
+						IconComponent={skill.icon}
+					/>
+				))}
+			</div>
+		</div>
 	);
 }
 
 function Skills() {
 	return (
-		<Flex align="center" justify="center" minH="100vh" bg="gray.100" py={10}>
-			<Box w="full" maxW="6xl" px={4}>
-				<Heading
-					as="h2"
-					size="xl"
-					mb={8}
-					textAlign="center"
-					color="gray.800"
-					fontWeight="bold"
-					fontSize={{ base: "1xl", md: "2xl" }}
-				>
+		<div className="min-h-screen bg-gray-50 flex items-center">
+			<div className="w-full max-w-7xl mx-auto px-4">
+				<h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
 					My Skills
-				</Heading>
-				<Grid
-					templateColumns={{
-						base: "1fr",
-						md: "repeat(2, minmax(280px, 1fr))",
-						lg: "repeat(3, minmax(280px, 1fr))",
-					}}
-					gap={6}
-				>
+				</h2>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					{skillsData.map((category) => (
 						<SkillCard
 							key={category.category}
@@ -152,9 +122,9 @@ function Skills() {
 							skills={category.skills}
 						/>
 					))}
-				</Grid>
-			</Box>
-		</Flex>
+				</div>
+			</div>
+		</div>
 	);
 }
 

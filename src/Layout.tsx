@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { HashRouter as Router } from "react-router-dom";
 import Content from "./Content";
@@ -11,12 +10,11 @@ function Layout() {
 	useEffect(() => {
 		const handleResize = () => {
 			const width = window.innerWidth;
-			const newIsNarrowScreen = width <= 1650;
+			const newIsNarrowScreen = width <= 1300;
 			setIsNarrowScreen(newIsNarrowScreen);
-			setIsSidebarOpen(width > 1650);
+			setIsSidebarOpen(width > 1024);
 		};
 
-		// 初期レンダリング時にチェック
 		handleResize();
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
@@ -24,29 +22,33 @@ function Layout() {
 
 	return (
 		<Router>
-			<div>
+			<div className="min-h-screen bg-gray-50">
 				<Sidebar
 					isOpen={isSidebarOpen}
 					setIsOpen={setIsSidebarOpen}
 					isNarrowScreen={isNarrowScreen}
 				/>
-				<Box position="relative">
+				<div className="relative">
 					{isNarrowScreen && isSidebarOpen && (
-						<Box
-							position="fixed"
-							top="0"
-							left="0"
-							right="0"
-							bottom="0"
-							bg="blackAlpha.400"
-							zIndex="8"
+						<div
+							className="fixed inset-0 bg-black/50 z-5 transition-opacity"
 							onClick={() => setIsSidebarOpen(false)}
+							onKeyDown={(e) => {
+								if (e.key === "Escape") setIsSidebarOpen(false);
+							}}
+							role="presentation"
 						/>
 					)}
-					<main>
-						<Content />
+					<main
+						className={`transition-all duration-300 ${
+							!isNarrowScreen && isSidebarOpen ? "ml-80" : "ml-0"
+						}`}
+					>
+						<div className="container mx-auto px-4 py-6">
+							<Content />
+						</div>
 					</main>
-				</Box>
+				</div>
 			</div>
 		</Router>
 	);

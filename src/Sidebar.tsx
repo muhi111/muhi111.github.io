@@ -1,4 +1,3 @@
-import { Box, Button, Flex, IconButton, Link, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { FaBars, FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -32,95 +31,78 @@ function Sidebar({
 
 	return (
 		<>
-			<IconButton
-				aria-label="Toggle Sidebar"
+			<button
+				type="button"
 				onClick={() => setIsOpen(!isOpen)}
-				position="fixed"
-				top="1rem"
-				left="1rem"
-				zIndex="20"
-				size="lg"
-				color={isOpen ? "gray.100" : "gray.800"}
-				_hover={{
-					color: isOpen ? "gray.400" : "gray.500",
-				}}
+				className={`fixed top-4 left-4 z-20 p-3 rounded-full shadow-md transition-all duration-300
+          ${
+						isOpen
+							? "bg-gray-700 text-white hover:bg-gray-600"
+							: "bg-white text-gray-800 hover:bg-gray-100"
+					}`}
+				aria-label="Toggle Sidebar"
 			>
-				<FaBars />
-			</IconButton>
+				<FaBars className="w-6 h-6" />
+			</button>
 
-			<Box
-				bg="gray.800"
-				color="white"
-				w="64"
-				minH="100dvh"
-				p="4"
-				pos="fixed"
-				top="0"
-				left="0"
-				zIndex="9"
-				transform={isOpen ? "translateX(0)" : "translateX(-100%)"}
-				transition="transform 0.3s ease-in-out"
+			<div
+				className={`fixed top-0 left-0 z-10 w-64 h-full bg-gray-800 shadow-2xl
+          transform transition-transform duration-300 ease-in-out
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
 			>
-				<VStack align="stretch" mt="20">
-					<Button
-						variant="ghost"
-						w="full"
-						justifyContent="flex-start"
+				<nav className="flex flex-col mt-20 p-4 space-y-3">
+					<button
+						type="button"
 						onClick={() => handleNavigation("/")}
-						color="gray.100"
-						fontSize="lg"
-						_hover={{ color: "gray.400" }}
+						className="w-full text-left px-6 py-4 text-gray-100 text-xl font-bold
+              rounded-lg transition-all duration-200
+              hover:bg-gray-700 hover:translate-x-1"
 					>
 						Home
-					</Button>
-					<Button
-						variant="ghost"
-						w="full"
-						justifyContent="flex-start"
+					</button>
+					<button
+						type="button"
 						onClick={() => handleNavigation("/skills")}
-						color="gray.100"
-						fontSize="lg"
-						_hover={{ color: "gray.400" }}
+						className="w-full text-left px-6 py-4 text-gray-100 text-xl font-bold
+              rounded-lg transition-all duration-200
+              hover:bg-gray-700 hover:translate-x-1"
 					>
 						Skills
-					</Button>
-					<Button
-						variant="ghost"
-						w="full"
-						justifyContent="flex-start"
+					</button>
+					<button
+						type="button"
 						onClick={() => handleNavigation("/works")}
-						color="gray.100"
-						fontSize="lg"
-						_hover={{ color: "gray.400" }}
+						className="w-full text-left px-6 py-4 text-gray-100 text-xl font-bold
+              rounded-lg transition-all duration-200
+              hover:bg-gray-700 hover:translate-x-1"
 					>
 						Works
-					</Button>
-				</VStack>
-				<Flex position="absolute" bottom="4" left="4">
-					<Link
+					</button>
+				</nav>
+
+				<div className="absolute bottom-4 left-4 flex items-center space-x-4">
+					<a
 						href="https://github.com/muhi111"
 						target="_blank"
 						rel="noopener noreferrer"
+						className="text-white hover:opacity-80 transition-colors duration-200"
 					>
-						<FaGithub size={50} color="gray.400" />
-					</Link>
-					<Link
+						<FaGithub className="w-12 h-12" />
+					</a>
+					<a
 						href="https://qiita.com/muhi111"
 						target="_blank"
 						rel="noopener noreferrer"
+						className="hover:opacity-80 transition-opacity duration-200"
 					>
 						<img
 							src="/portfolio/qiita.png"
 							alt="Qiita"
-							width={50}
-							style={{
-								filter: "grayscale(100%) brightness(160%)",
-								marginLeft: "1rem",
-							}}
+							className="w-12 h-12 filter"
 						/>
-					</Link>
-				</Flex>
-			</Box>
+					</a>
+				</div>
+			</div>
 		</>
 	);
 }
