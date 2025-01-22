@@ -12,7 +12,7 @@ function Layout() {
 			const width = window.innerWidth;
 			const newIsNarrowScreen = width <= 1300;
 			setIsNarrowScreen(newIsNarrowScreen);
-			setIsSidebarOpen(width > 1024);
+			setIsSidebarOpen(width > 1300);
 		};
 
 		handleResize();
