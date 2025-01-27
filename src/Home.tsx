@@ -28,7 +28,7 @@ export default function Home() {
 						{/* Quick Facts Section */}
 						<div className="bg-gray-50 rounded-lg p-8">
 							<h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-								<span className="material-icons-outlined mr-3">lightbulb</span>
+								<span className="text-2xl mr-3">💡</span>
 								Quick Facts
 							</h2>
 							<ul className="space-y-4">
