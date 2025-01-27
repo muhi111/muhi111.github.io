@@ -31,7 +31,7 @@ function Layout() {
 				<div className="relative">
 					{isNarrowScreen && isSidebarOpen && (
 						<div
-							className="fixed inset-0 bg-black/50 z-5 transition-opacity"
+							className="fixed inset-0 bg-black/50 z-[15] transition-opacity"
 							onClick={() => setIsSidebarOpen(false)}
 							onKeyDown={(e) => {
 								if (e.key === "Escape") setIsSidebarOpen(false);
