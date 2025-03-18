@@ -12,7 +12,15 @@ function Content({ isNarrowScreen, isSidebarOpen }: ContentProps) {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />} />
-			<Route path="/skills" element={<Skills />} />
+			<Route
+				path="/skills"
+				element={
+					<Skills
+						isNarrowScreen={isNarrowScreen}
+						isSidebarOpen={isSidebarOpen}
+					/>
+				}
+			/>
 			<Route
 				path="/works"
 				element={
