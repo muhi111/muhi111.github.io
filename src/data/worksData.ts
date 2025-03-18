@@ -53,7 +53,7 @@ export const worksData: Work[] = [
 		achievements: ["技育キャンプハッカソン vol.12 最優秀賞"],
 		tags: ["React", "TypeScript", "TailwindCSS", "Vite", "AWS Amplify"],
 		githubLink: "https://github.com/Teamsasa/readme-generator",
-		liveLink: "https://readmes.studio/",
+		liveLink: "https://teamsasa.github.io/readme-generator/",
 	},
 	{
 		title: "github sns profile card",
