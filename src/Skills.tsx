@@ -73,10 +73,10 @@ function SkillItem({
 	IconComponent: React.ElementType;
 }) {
 	return (
-		<div className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-			<div className="flex items-center gap-3">
-				<IconComponent className="w-5 h-5 text-gray-600" />
-				<span className="text-sm font-medium text-gray-700">{name}</span>
+<div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors duration-200">
+<div className="flex items-center gap-3">
+<IconComponent className="w-5 h-5 text-slate-600" />
+<span className="text-sm font-medium text-slate-700">{name}</span>
 			</div>
 			<StarRating level={level} />
 		</div>
@@ -92,7 +92,7 @@ function SkillCard({
 }) {
 	return (
 		<div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
-			<h3 className="text-xl font-bold text-gray-800 mb-4">{category}</h3>
+			<h3 className="text-xl font-bold text-slate-800 mb-4">{category}</h3>
 			<div className="space-y-2">
 				{skills.map((skill) => (
 					<SkillItem
@@ -109,9 +109,9 @@ function SkillCard({
 
 function Skills() {
 	return (
-		<div className="min-h-screen bg-gray-50 flex items-center">
+		<div className="min-h-screen bg-slate-50 flex items-center">
 			<div className="w-full max-w-7xl mx-auto px-4">
-				<h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+				<h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">
 					My Skills
 				</h2>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
