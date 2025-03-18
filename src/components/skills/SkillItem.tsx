@@ -30,9 +30,9 @@ function StarRating({ level }: { level: number }) {
 
 function SkillItem({ name, level, IconComponent, onClick }: SkillItemProps) {
 	return (
-<div
-className="group flex items-center justify-between p-2 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer"
-onClick={onClick}
+		<div
+			className="group flex items-center justify-between p-2 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer"
+			onClick={onClick}
 			onKeyUp={(event) => {
 				if (event.key === " ") {
 					event.preventDefault();
@@ -43,11 +43,11 @@ onClick={onClick}
 				<IconComponent className="w-5 h-5 text-slate-600" />
 				<span className="text-sm font-medium text-slate-700">{name}</span>
 			</div>
-<div className="flex items-center gap-2">
-<StarRating level={level} />
-<MdKeyboardArrowRight className="w-5 h-5 text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-</div>
-</div>
+			<div className="flex items-center gap-2">
+				<StarRating level={level} />
+				<MdKeyboardArrowRight className="w-5 h-5 text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+			</div>
+		</div>
 	);
 }
 
