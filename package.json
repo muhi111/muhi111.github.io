@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
-		"lint": "npx @biomejs/biome check --write ./src",
+		"check": "biome check --write --vcs-enabled=true --vcs-client-kind=git --vcs-use-ignore-file=true .",
 		"preview": "vite preview"
 	},
 	"dependencies": {
@@ -29,6 +29,6 @@
 		"vite-tsconfig-paths": "^5.1.4"
 	},
 	"overrides": {
-		"esbuild" : "0.25.0"
+		"esbuild": "0.25.0"
 	}
 }
