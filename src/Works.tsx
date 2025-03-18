@@ -113,7 +113,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
 		>
 			<dialog
 				open
-				className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all"
+				className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
 				onClick={(e) => e.stopPropagation()}
 				onKeyDown={(e) => e.stopPropagation()}
 			>
