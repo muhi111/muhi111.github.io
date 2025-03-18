@@ -73,10 +73,10 @@ function SkillItem({
 	IconComponent: React.ElementType;
 }) {
 	return (
-<div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors duration-200">
-<div className="flex items-center gap-3">
-<IconComponent className="w-5 h-5 text-slate-600" />
-<span className="text-sm font-medium text-slate-700">{name}</span>
+		<div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors duration-200">
+			<div className="flex items-center gap-3">
+				<IconComponent className="w-5 h-5 text-slate-600" />
+				<span className="text-sm font-medium text-slate-700">{name}</span>
 			</div>
 			<StarRating level={level} />
 		</div>

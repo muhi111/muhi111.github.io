@@ -26,8 +26,8 @@ export default function Home() {
 						</div>
 
 						{/* Quick Facts Section */}
-<div className="bg-slate-50 rounded-lg p-8">
-<h2 className="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
+						<div className="bg-slate-50 rounded-lg p-8">
+							<h2 className="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
 								<span className="text-2xl mr-3">💡</span>
 								Quick Facts
 							</h2>
@@ -36,21 +36,21 @@ export default function Home() {
 									<span className="text-2xl mr-4">🎓</span>
 									<span>Studying at Tokyo Institute of Technology</span>
 								</li>
-<li className="flex items-center text-slate-700 text-lg">
-<span className="text-2xl mr-4">🖥️</span>
-<span>Student at 42 Tokyo</span>
-</li>
-<li className="flex items-center text-slate-700 text-lg">
-<span className="text-2xl mr-4">💻</span>
-<span>
-Focusing on Information and Communications Engineering
-</span>
-</li>
-<li className="flex items-center text-slate-700 text-lg">
-<span className="text-2xl mr-4">🌐</span>
-<span>Exploring the world of web development</span>
-</li>
-<li className="flex items-center text-slate-700 text-lg">
+								<li className="flex items-center text-slate-700 text-lg">
+									<span className="text-2xl mr-4">🖥️</span>
+									<span>Student at 42 Tokyo</span>
+								</li>
+								<li className="flex items-center text-slate-700 text-lg">
+									<span className="text-2xl mr-4">💻</span>
+									<span>
+										Focusing on Information and Communications Engineering
+									</span>
+								</li>
+								<li className="flex items-center text-slate-700 text-lg">
+									<span className="text-2xl mr-4">🌐</span>
+									<span>Exploring the world of web development</span>
+								</li>
+								<li className="flex items-center text-slate-700 text-lg">
 									<span className="text-2xl mr-4">🚀</span>
 									<span>Always eager to learn and grow</span>
 								</li>

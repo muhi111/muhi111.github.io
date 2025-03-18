@@ -34,12 +34,12 @@ function Sidebar({
 			<button
 				type="button"
 				onClick={() => setIsOpen(!isOpen)}
-className={`fixed top-4 left-4 z-[30] p-3 rounded-full shadow-md transition-all duration-300
+				className={`fixed top-4 left-4 z-[30] p-3 rounded-full shadow-md transition-all duration-300
           ${
-isOpen
-? "bg-slate-700 text-white hover:bg-slate-600"
-: "bg-white text-slate-800 hover:bg-slate-100"
-}`}
+						isOpen
+							? "bg-slate-700 text-white hover:bg-slate-600"
+							: "bg-white text-slate-800 hover:bg-slate-100"
+					}`}
 				aria-label="Toggle Sidebar"
 			>
 				<FaBars className="w-6 h-6" />
@@ -63,16 +63,16 @@ isOpen
 					<button
 						type="button"
 						onClick={() => handleNavigation("/skills")}
-className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
+						className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
               rounded-lg transition-all duration-200
               hover:bg-slate-700 hover:translate-x-1"
->
-Skills
-</button>
-<button
-type="button"
-onClick={() => handleNavigation("/works")}
-className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
+					>
+						Skills
+					</button>
+					<button
+						type="button"
+						onClick={() => handleNavigation("/works")}
+						className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
               rounded-lg transition-all duration-200
               hover:bg-slate-700 hover:translate-x-1"
 					>

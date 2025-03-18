@@ -3,12 +3,25 @@ import Home from "./Home";
 import Skills from "./Skills";
 import Works from "./Works";
 
-function Content() {
+interface ContentProps {
+	isNarrowScreen: boolean;
+	isSidebarOpen: boolean;
+}
+
+function Content({ isNarrowScreen, isSidebarOpen }: ContentProps) {
 	return (
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/skills" element={<Skills />} />
-			<Route path="/works" element={<Works />} />
+			<Route
+				path="/works"
+				element={
+					<Works
+						isNarrowScreen={isNarrowScreen}
+						isSidebarOpen={isSidebarOpen}
+					/>
+				}
+			/>
 		</Routes>
 	);
 }

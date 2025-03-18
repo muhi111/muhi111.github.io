@@ -41,11 +41,16 @@ function Layout() {
 					)}
 					<main
 						className={`transition-all duration-300 ${
-							!isNarrowScreen && isSidebarOpen ? "ml-80" : "ml-0"
+							!isNarrowScreen && isSidebarOpen
+								? "ml-64 max-w-[calc(100%-256px)]"
+								: ""
 						}`}
 					>
 						<div className="container mx-auto px-4 py-6">
-							<Content />
+							<Content
+								isNarrowScreen={isNarrowScreen}
+								isSidebarOpen={isSidebarOpen}
+							/>
 						</div>
 					</main>
 				</div>
