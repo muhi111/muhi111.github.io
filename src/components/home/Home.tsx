@@ -13,9 +13,6 @@ export default function Home() {
 
 						{/* Timeline Section */}
 						<div className="mt-10">
-							<h2 className="text-2xl font-semibold text-slate-800 mb-8">
-								経歴
-							</h2>
 							<Timeline />
 						</div>
 					</div>
