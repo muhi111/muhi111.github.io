@@ -1,21 +1,27 @@
 interface TimelineEventProps {
 	year: string;
 	month: string;
+	endYear?: string;
+	endMonth?: string;
 	title: string;
 	description?: string;
 	icon: string;
-	type: "education" | "work" | "achievement";
+	type: "education" | "work" | "achievement" | "certification" | "internship";
 }
 
 export default function TimelineEvent({
 	year,
 	month,
+	endYear,
+	endMonth,
 	title,
 	description,
 	icon,
 	type,
 }: TimelineEventProps) {
-	const getBorderColor = (type: "education" | "work" | "achievement") => {
+	const getBorderColor = (
+		type: "education" | "work" | "achievement" | "certification" | "internship",
+	) => {
 		switch (type) {
 			case "education":
 				return "border-blue-500";
@@ -23,6 +29,10 @@ export default function TimelineEvent({
 				return "border-green-500";
 			case "achievement":
 				return "border-yellow-500";
+			case "certification":
+				return "border-purple-500";
+			case "internship":
+				return "border-pink-500";
 			default:
 				return "border-gray-500";
 		}
@@ -31,16 +41,30 @@ export default function TimelineEvent({
 	return (
 		<div className="flex items-start">
 			{/* 年と丸いポイント */}
-			<div className="flex-shrink-0 w-24 text-right">
-				<div className="font-semibold text-gray-600">{year}</div>
-				<div className="mt-1 text-sm text-gray-500">{month}</div>
+			<div className="flex-shrink-0 w-48 text-right pr-8">
+				<div className="font-semibold text-gray-600">
+					{endYear && endMonth ? (
+						<>
+							<div>
+								{year}年{month}
+							</div>
+							<div className="text-sm text-gray-500">
+								～ {endYear}年{endMonth}
+							</div>
+						</>
+					) : (
+						<div className="mt-2">
+							{year}年{month}
+						</div>
+					)}
+				</div>
 				<div
-					className={`absolute left-12 w-3 h-3 bg-white border-2 ${getBorderColor(type)} rounded-full transform -translate-x-1.5 mt-2`}
+					className={`absolute left-16 w-3 h-3 bg-white border-2 ${getBorderColor(type)} rounded-full transform -translate-x-1.5 mt-2`}
 				/>
 			</div>
 
 			{/* イベントカード */}
-			<div className="ml-8 w-full">
+			<div className="ml-4 w-full">
 				<div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-[160px]">
 					<div className="flex items-center mb-2">
 						<span className="text-2xl mr-3">{icon}</span>
