@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { worksData } from "../../data/worksData";
 import WorkCard from "./WorkCard";
 import WorkDetails from "./WorkDetails";
-import { worksData } from "../../data/worksData";
 
 interface WorksProps {
 	isNarrowScreen: boolean;
