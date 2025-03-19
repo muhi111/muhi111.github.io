@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Layout from "./Layout";
+import Layout from "./components/layout/Layout";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
