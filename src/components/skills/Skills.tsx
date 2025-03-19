@@ -1,8 +1,8 @@
 import { useState } from "react";
-import SkillCard from "./components/skills/SkillCard";
-import SkillDetails from "./components/skills/SkillDetails";
-import skillsData from "./data/skillsData";
-import type { Skill } from "./data/skillsData";
+import SkillCard from "./SkillCard";
+import SkillDetails from "./SkillDetails";
+import skillsData from "../../data/skillsData";
+import type { Skill } from "../../data/skillsData";
 interface SkillsProps {
 	isNarrowScreen: boolean;
 	isSidebarOpen: boolean;

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./Home";
-import Skills from "./Skills";
-import Works from "./Works";
+import Home from "./components/home/Home";
+import Skills from "./components/skills/Skills";
+import Works from "./components/works/Works";
 
 interface ContentProps {
 	isNarrowScreen: boolean;

@@ -1,7 +1,7 @@
 import { timelineData } from "../../data/timelineData";
 import TimelineEvent from "./TimelineEvent";
 
-export default function TimelineContent() {
+export default function Timeline() {
 	return (
 		<div className="relative">
 			{/* 中央の垂直線 */}
