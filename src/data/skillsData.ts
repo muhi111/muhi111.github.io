@@ -1,16 +1,7 @@
 import type { IconType } from "react-icons";
-import {
-	FaDocker,
-	FaGitAlt,
-	FaHtml5,
-	FaJs,
-	FaLinux,
-	FaNodeJs,
-	FaPython,
-	FaReact,
-} from "react-icons/fa";
+import { FaDocker, FaGitAlt, FaJs, FaLinux, FaPython } from "react-icons/fa";
 import { FaGolang } from "react-icons/fa6";
-import { SiC, SiMysql, SiTypescript } from "react-icons/si";
+import { SiC, SiMysql } from "react-icons/si";
 
 export interface Skill {
 	name: string;
@@ -19,6 +10,7 @@ export interface Skill {
 	description: string;
 	experience: string;
 	projects: string[];
+	technologies?: string[];
 }
 
 export interface SkillCategory {
@@ -34,26 +26,27 @@ const skillsData: SkillCategory[] = [
 				name: "C",
 				level: 4.5,
 				icon: SiC,
-				description:
-					"システムプログラミングとパフォーマンス重視のアプリケーション開発に使用",
-				experience: "5年以上",
+				description: "システムプログラミングや42tokyoの課題で使用",
+				experience: "3年",
 				projects: [
-					"組み込みシステムの開発",
-					"システムドライバーの実装",
-					"高性能計算アプリケーションの開発",
+					"シェルやコンパイラの実装",
+					"標準関数の再実装",
+					"データ構造とアルゴリズムの実装",
 				],
+				technologies: [],
 			},
 			{
 				name: "Go",
 				level: 4,
 				icon: FaGolang,
-				description: "バックエンドサービスとマイクロサービスの開発に使用",
-				experience: "3年",
+				description: "Webバックエンド開発やその他広範な用途に使用",
+				experience: "1年",
 				projects: [
-					"RESTful APIの設計と実装",
-					"クラウドネイティブアプリケーションの開発",
-					"高性能Webサーバーの構築",
+					"Webサーバーの構築",
+					"データ構造とアルゴリズムの実装",
+					"CLIツールの開発",
 				],
+				technologies: ["Echo", "Gin", "Gorm"],
 			},
 			{
 				name: "Python",
@@ -61,77 +54,22 @@ const skillsData: SkillCategory[] = [
 				icon: FaPython,
 				description:
 					"データ分析、自動化スクリプト、Webアプリケーション開発に使用",
-				experience: "3年",
+				experience: "0.5年",
 				projects: [
-					"データ分析パイプラインの構築",
-					"バッチ処理の自動化",
-					"Django Webアプリケーション",
+					"データ分析・機械学習",
+					"DjangoやFlaskによるWebアプリケーション",
+					"CLIツールの開発",
 				],
+				technologies: ["Django", "Flask", "scikit-learn"],
 			},
 			{
 				name: "JavaScript",
-				level: 3.5,
-				icon: FaJs,
-				description: "フロントエンド開発とNode.jsバックエンド開発に使用",
-				experience: "3年",
-				projects: [
-					"シングルページアプリケーション開発",
-					"インタラクティブなUI/UXの実装",
-					"RESTful APIの開発",
-				],
-			},
-		],
-	},
-	{
-		category: "Web Technologies",
-		skills: [
-			{
-				name: "HTML/CSS",
-				level: 4.5,
-				icon: FaHtml5,
-				description: "モダンなWebサイトとアプリケーションのフロントエンド開発",
-				experience: "4年",
-				projects: [
-					"レスポンシブWebデザインの実装",
-					"アクセシビリティに配慮したUI設計",
-					"アニメーションとインタラクションの実装",
-				],
-			},
-			{
-				name: "React",
 				level: 4,
-				icon: FaReact,
-				description: "モダンなユーザーインターフェースとSPAの開発",
-				experience: "3年",
-				projects: [
-					"大規模Webアプリケーションの開発",
-					"コンポーネントライブラリの設計",
-					"パフォーマンス最適化",
-				],
-			},
-			{
-				name: "Node.js",
-				level: 3.5,
-				icon: FaNodeJs,
-				description: "スケーラブルなバックエンドサービスの開発",
+				icon: FaJs,
+				description: "フロントエンド開発からモダンな技術スタックまで幅広く使用",
 				experience: "2年",
-				projects: [
-					"RESTful APIの開発",
-					"リアルタイムアプリケーション",
-					"マイクロサービスの実装",
-				],
-			},
-			{
-				name: "TypeScript",
-				level: 3.5,
-				icon: SiTypescript,
-				description: "型安全なJavaScriptアプリケーションの開発",
-				experience: "2年",
-				projects: [
-					"大規模フロントエンドアプリケーション",
-					"共有ライブラリの開発",
-					"APIクライアントの実装",
-				],
+				projects: ["Reactアプリケーションの開発", "Webサイトの実装"],
+				technologies: ["TypeScript", "React", "Node.js"],
 			},
 		],
 	},
@@ -142,49 +80,33 @@ const skillsData: SkillCategory[] = [
 				name: "Linux",
 				level: 4.5,
 				icon: FaLinux,
-				description: "システム管理、開発環境構築、サーバー運用",
-				experience: "5年以上",
-				projects: [
-					"サーバーインフラの構築と運用",
-					"自動化スクリプトの開発",
-					"システムパフォーマンスの最適化",
-				],
+				description: "開発環境構築、サーバー運用",
+				experience: "1.5年",
+				projects: ["開発環境の構築", "デプロイ"],
 			},
 			{
 				name: "Git",
 				level: 4,
 				icon: FaGitAlt,
 				description: "バージョン管理とチーム開発のワークフロー管理",
-				experience: "4年",
-				projects: [
-					"大規模プロジェクトのバージョン管理",
-					"CI/CDパイプラインの構築",
-					"チーム開発ワークフローの最適化",
-				],
+				experience: "2年",
+				projects: ["プロジェクトのバージョン管理", "CI/CDパイプラインの構築"],
 			},
 			{
 				name: "Docker",
 				level: 3.5,
 				icon: FaDocker,
 				description: "コンテナ化されたアプリケーションの開発と運用",
-				experience: "2年",
-				projects: [
-					"マイクロサービスのコンテナ化",
-					"開発環境の標準化",
-					"本番環境のコンテナオーケストレーション",
-				],
+				experience: "0.5年",
+				projects: ["サービスのコンテナ化", "開発環境の標準化"],
 			},
 			{
 				name: "SQL",
-				level: 3.5,
+				level: 3,
 				icon: SiMysql,
 				description: "データベース設計と最適化",
 				experience: "3年",
-				projects: [
-					"大規模データベースの設計",
-					"クエリパフォーマンスの最適化",
-					"データ移行プロジェクト",
-				],
+				projects: ["データベースの設計", "Webアプリケーションの開発"],
 			},
 		],
 	},

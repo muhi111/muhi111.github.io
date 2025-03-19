@@ -17,7 +17,7 @@ function Skills({ isNarrowScreen, isSidebarOpen }: SkillsProps) {
 				<h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">
 					My Skills
 				</h2>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{skillsData.map((category) => (
 						<SkillCard
 							key={category.category}

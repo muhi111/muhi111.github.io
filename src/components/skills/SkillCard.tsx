@@ -18,6 +18,7 @@ function SkillCard({ category, skills, onSkillClick }: SkillCardProps) {
 						name={skill.name}
 						level={skill.level}
 						IconComponent={skill.icon}
+						technologies={skill.technologies}
 						onClick={() => onSkillClick(skill)}
 					/>
 				))}

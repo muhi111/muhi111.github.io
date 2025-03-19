@@ -58,6 +58,24 @@ function SkillDetails({
 							<p className="text-slate-600">{skill.experience}</p>
 						</div>
 
+						{skill.technologies && skill.technologies.length > 0 && (
+							<div>
+								<h4 className="text-lg font-semibold text-slate-800 mb-2">
+									使用技術
+								</h4>
+								<div className="flex flex-wrap gap-2">
+									{skill.technologies.map((tech) => (
+										<span
+											key={tech}
+											className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm"
+										>
+											{tech}
+										</span>
+									))}
+								</div>
+							</div>
+						)}
+
 						<div>
 							<h4 className="text-lg font-semibold text-slate-800 mb-2">
 								主なプロジェクト
