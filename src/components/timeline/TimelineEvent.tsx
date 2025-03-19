@@ -1,4 +1,4 @@
-import type { TimelineEvent, TimelineEventType } from "../../types/timeline";
+import type { TimelineEvent, TimelineEventType } from "../../data/timelineData";
 
 type TimelineEventProps = Omit<TimelineEvent, "id">;
 
