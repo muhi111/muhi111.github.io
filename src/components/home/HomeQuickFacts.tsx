@@ -5,21 +5,21 @@ export default function HomeQuickFacts() {
 				About me
 			</h2>
 			<div className="bg-slate-50 rounded-lg p-8 mb-14">
-				<ul className="space-y-4">
-					<li className="flex items-center text-slate-700 text-lg">
+				<ul className="space-y-0">
+					<li className="flex items-center text-slate-700 text-lg py-2 px-4 hover:bg-slate-50 rounded-lg transition-colors duration-200">
 						<span className="text-2xl mr-4">🎓</span>
 						<span>東京工業大学 工学院 在学中</span>
 					</li>
-					<li className="flex items-center text-slate-700 text-lg">
-						<span className="text-2xl mr-4">🖥️</span>
+					<li className="flex items-center text-slate-700 text-lg py-2 px-4 hover:bg-slate-50 rounded-lg transition-colors duration-200">
+						<span className="text-2xl mr-4">🌱</span>
 						<span>42 Tokyo 所属</span>
 					</li>
-					<li className="flex items-center text-slate-700 text-lg">
-						<span className="text-2xl mr-4">💻</span>
+					<li className="flex items-center text-slate-700 text-lg py-2 px-4 hover:bg-slate-50 rounded-lg transition-colors duration-200">
+						<span className="text-2xl mr-4">🌐</span>
 						<span>情報通信工学を専攻</span>
 					</li>
-					<li className="flex items-center text-slate-700 text-lg">
-						<span className="text-2xl mr-4">🌐</span>
+					<li className="flex items-center text-slate-700 text-lg py-2 px-4 hover:bg-slate-50 rounded-lg transition-colors duration-200">
+						<span className="text-2xl mr-4">🖥️</span>
 						<span>Web開発やシステムプログラミングが好き</span>
 					</li>
 				</ul>
