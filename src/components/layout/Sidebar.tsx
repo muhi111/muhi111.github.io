@@ -95,11 +95,7 @@ function Sidebar({
 						rel="noopener noreferrer"
 						className="hover:opacity-80 transition-opacity duration-200"
 					>
-						<img
-							src="/qiita.png"
-							alt="Qiita"
-							className="w-12 h-12 filter"
-						/>
+						<img src="/qiita.png" alt="Qiita" className="w-12 h-12 filter" />
 					</a>
 				</div>
 			</div>
