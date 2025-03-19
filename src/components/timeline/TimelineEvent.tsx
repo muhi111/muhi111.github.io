@@ -1,15 +1,8 @@
-interface TimelineEventProps {
-	year: string;
-	month: string;
-	endYear?: string;
-	endMonth?: string;
-	title: string;
-	description?: string;
-	icon: string;
-	type: "education" | "work" | "achievement" | "certification" | "internship";
-}
+import type { TimelineEvent, TimelineEventType } from "../../types/timeline";
 
-export default function TimelineEvent({
+type TimelineEventProps = Omit<TimelineEvent, "id">;
+
+export default function TimelineEventComponent({
 	year,
 	month,
 	endYear,
@@ -19,9 +12,7 @@ export default function TimelineEvent({
 	icon,
 	type,
 }: TimelineEventProps) {
-	const getBorderColor = (
-		type: "education" | "work" | "achievement" | "certification" | "internship",
-	) => {
+	const getBorderColor = (type: TimelineEventType) => {
 		switch (type) {
 			case "education":
 				return "border-blue-500";

@@ -1,14 +1,4 @@
-export interface TimelineEvent {
-	id: string;
-	year: string;
-	month: string;
-	endYear?: string;
-	endMonth?: string;
-	title: string;
-	icon: string;
-	description?: string;
-	type: "education" | "work" | "achievement" | "certification" | "internship";
-}
+import type { TimelineEvent } from "../types/timeline";
 
 export const timelineData: TimelineEvent[] = [
 	{

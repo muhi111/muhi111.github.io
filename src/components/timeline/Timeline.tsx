@@ -1,5 +1,5 @@
 import { timelineData } from "../../data/timelineData";
-import TimelineEvent from "./TimelineEvent";
+import TimelineEventComponent from "./TimelineEvent";
 
 export default function Timeline() {
 	return (
@@ -10,7 +10,7 @@ export default function Timeline() {
 			{/* タイムラインイベント */}
 			<div className="space-y-12">
 				{timelineData.map((event) => (
-					<TimelineEvent
+					<TimelineEventComponent
 						key={event.id}
 						year={event.year}
 						month={event.month}
