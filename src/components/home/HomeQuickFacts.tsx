@@ -3,12 +3,12 @@ export default function HomeQuickFacts() {
 		<div className="bg-slate-50 rounded-lg p-8 mb-14">
 			<h2 className="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
 				<span className="text-2xl mr-3">💡</span>
-				クイックファクト
+				Quick Facts
 			</h2>
 			<ul className="space-y-4">
 				<li className="flex items-center text-slate-700 text-lg">
 					<span className="text-2xl mr-4">🎓</span>
-					<span>東京工業大学 在学中</span>
+					<span>東京工業大学 工学院 在学中</span>
 				</li>
 				<li className="flex items-center text-slate-700 text-lg">
 					<span className="text-2xl mr-4">🖥️</span>
@@ -20,11 +20,7 @@ export default function HomeQuickFacts() {
 				</li>
 				<li className="flex items-center text-slate-700 text-lg">
 					<span className="text-2xl mr-4">🌐</span>
-					<span>Web開発に注力</span>
-				</li>
-				<li className="flex items-center text-slate-700 text-lg">
-					<span className="text-2xl mr-4">🚀</span>
-					<span>常に学び、成長を続けています</span>
+					<span>Web開発やシステムプログラミングが好き</span>
 				</li>
 			</ul>
 		</div>
