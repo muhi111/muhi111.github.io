@@ -30,7 +30,7 @@ function SkillDetails({
 		>
 			<dialog
 				open
-				className={`bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all fixed ${modalPosition} top-1/2 -translate-x-1/2 -translate-y-1/2`}
+				className={`bg-white rounded-xl shadow-xl max-w-2xl w-[calc(100%-2rem)] md:w-full max-h-[90vh] overflow-y-auto transform transition-all fixed ${modalPosition} top-1/2 -translate-x-1/2 -translate-y-1/2`}
 				onClick={(e) => e.stopPropagation()}
 				onKeyDown={(e) => e.stopPropagation()}
 			>
