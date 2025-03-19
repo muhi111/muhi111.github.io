@@ -1,10 +1,10 @@
 export default function HomeHero() {
 	return (
 		<div className="mb-14">
-			<div className="relative h-14 mb-10">
+			<div className="relative h-20">
 				<img
 					src="/portfolio/typing.svg"
-					alt="Hi I'm muhi111. I'm a student. I'm a web developer."
+					alt="Hi!👋 I'm muhi111. I'm a student. And I'm a programmer."
 					className="h-full w-auto"
 				/>
 			</div>
