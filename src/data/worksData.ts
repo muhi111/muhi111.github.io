@@ -28,7 +28,7 @@ export const worksData: Work[] = [
 			"Amazon EC2",
 			"Amazon RDS",
 		],
-		githubLink: "https://github.com/yamamoto99/es-writer",
+		githubLink: "https://github.com/Teamsasa/es-writer-extension",
 		liveLink:
 			"https://chromewebstore.google.com/detail/es-writer-extension/jkencchebhkbaomammmgbhnpalgkchkm",
 	},
