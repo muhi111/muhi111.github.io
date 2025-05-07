@@ -14,7 +14,7 @@ export default function Home({ isNarrowScreen }: HomeProps) {
 					About Me
 				</h2>
 				<div className="bg-white rounded-lg md:rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
-					<div className="p-2 md:p-10">
+					<div className="p-2 md:p-5">
 						<HomeHero />
 						<HomeQuickFacts />
 
