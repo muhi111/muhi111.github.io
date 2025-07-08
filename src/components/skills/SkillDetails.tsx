@@ -1,97 +1,157 @@
-import { FaTimes } from "react-icons/fa";
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Icon,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
+import { FaStar } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import type { Skill } from "../../data/skillsData";
 
 interface SkillDetailsProps {
 	skill: Skill;
 	onClose: () => void;
 	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
 }
 
-function SkillDetails({
-	skill,
-	onClose,
-	isNarrowScreen,
-	isSidebarOpen,
-}: SkillDetailsProps) {
-	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Escape") onClose();
-	};
-
-	const modalPosition =
-		!isNarrowScreen && isSidebarOpen ? "left-[calc(50%+160px)]" : "left-1/2";
+function SkillDetails({ skill, onClose, isNarrowScreen }: SkillDetailsProps) {
+	const levelIndicators = Array.from({ length: 5 }, (_, i) => ({
+		id: `level-indicator-${i + 1}`,
+		position: i + 1,
+		filled: i < skill.level,
+	}));
 
 	return (
-		<div
-			className="fixed inset-0 z-[20] flex items-center justify-center p-4 bg-black/50"
+		<Box
+			position="fixed"
+			inset="0"
+			zIndex="20"
+			display="flex"
+			alignItems="center"
+			justifyContent="center"
+			p="4"
+			bg="blackAlpha.500"
 			onClick={(e) => e.target === e.currentTarget && onClose()}
-			onKeyDown={handleKeyDown}
-			role="presentation"
 		>
-			<dialog
-				open
-				className={`bg-white rounded-xl shadow-xl max-w-2xl w-[calc(100%-2rem)] md:w-full max-h-[90vh] overflow-y-auto transform transition-all fixed ${modalPosition} top-1/2 -translate-x-1/2 -translate-y-1/2`}
+			<Box
+				bg="white"
+				borderRadius="xl"
+				boxShadow="2xl"
+				maxW="2xl"
+				w={`calc(100% - ${isNarrowScreen ? "2rem" : "4rem"})`}
+				maxH="90vh"
+				overflowY="auto"
 				onClick={(e) => e.stopPropagation()}
-				onKeyDown={(e) => e.stopPropagation()}
 			>
-				<div className="p-6">
-					<div className="flex justify-between items-center mb-4">
-						<h3 className="text-2xl font-bold text-slate-900">{skill.name}</h3>
-						<button
-							type="button"
+				<Box p="6">
+					<Flex justify="space-between" align="center" mb="6">
+						<Flex align="center" gap="3">
+							<Icon as={skill.icon} w="8" h="8" color="blue.500" />
+							<Heading as="h2" size="lg" fontWeight="bold" color="gray.900">
+								{skill.name}
+							</Heading>
+						</Flex>
+						<Button
+							size="sm"
+							variant="ghost"
+							borderRadius="full"
+							p="2"
 							onClick={onClose}
-							className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+							_hover={{ bg: "gray.100" }}
 						>
-							<FaTimes className="w-5 h-5 text-slate-600" />
-						</button>
-					</div>
+							<MdClose size={24} />
+						</Button>
+					</Flex>
 
-					<div className="space-y-6">
-						<p className="text-slate-600 whitespace-pre-line">
-							{skill.description}
-						</p>
+					<VStack gap="6" align="stretch">
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="2">
+								レベル
+							</Heading>
+							<Flex align="center" gap="2">
+								{levelIndicators.map((indicator) => (
+									<Icon
+										as={FaStar}
+										key={indicator.id}
+										w={4}
+										h={4}
+										color={indicator.filled ? "yellow.400" : "gray.300"}
+									/>
+								))}
+								<Text ml="2" fontSize="sm" color="gray.600">
+									{skill.level}/5
+								</Text>
+							</Flex>
+						</Box>
 
-						<div>
-							<h4 className="text-lg font-semibold text-slate-800 mb-2">
-								経験年数
-							</h4>
-							<p className="text-slate-600">{skill.experience}</p>
-						</div>
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="2">
+								説明
+							</Heading>
+							<Text color="gray.700" lineHeight="relaxed">
+								{skill.description}
+							</Text>
+						</Box>
+
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="2">
+								経験
+							</Heading>
+							<Text color="gray.700">{skill.experience}</Text>
+						</Box>
+
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="2">
+								プロジェクト
+							</Heading>
+							<VStack align="stretch" gap="2">
+								{skill.projects.map((project) => (
+									<Box
+										key={project}
+										bg="gray.50"
+										p="3"
+										borderRadius="md"
+										borderLeft="4px solid"
+										borderLeftColor="blue.500"
+									>
+										<Text fontSize="sm" color="gray.700">
+											{project}
+										</Text>
+									</Box>
+								))}
+							</VStack>
+						</Box>
 
 						{skill.technologies && skill.technologies.length > 0 && (
-							<div>
-								<h4 className="text-lg font-semibold text-slate-800 mb-2">
-									使用技術
-								</h4>
-								<div className="flex flex-wrap gap-2">
+							<Box>
+								<Heading as="h3" size="md" fontWeight="semibold" mb="2">
+									関連技術
+								</Heading>
+								<Flex wrap="wrap" gap="2">
 									{skill.technologies.map((tech) => (
-										<span
+										<Text
 											key={tech}
-											className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm"
+											fontSize="sm"
+											bg="blue.100"
+											color="blue.700"
+											px="3"
+											py="1"
+											borderRadius="md"
+											fontWeight="medium"
 										>
 											{tech}
-										</span>
+										</Text>
 									))}
-								</div>
-							</div>
+								</Flex>
+							</Box>
 						)}
-
-						<div>
-							<h4 className="text-lg font-semibold text-slate-800 mb-2">
-								主なプロジェクト
-							</h4>
-							<ul className="list-disc list-inside space-y-1">
-								{skill.projects.map((project) => (
-									<li key={project} className="text-slate-600">
-										{project}
-									</li>
-								))}
-							</ul>
-						</div>
-					</div>
-				</div>
-			</dialog>
-		</div>
+					</VStack>
+				</Box>
+			</Box>
+		</Box>
 	);
 }
 

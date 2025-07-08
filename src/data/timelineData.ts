@@ -1,4 +1,4 @@
-export type TimelineEventType =
+type TimelineEventType =
 	| "education"
 	| "work"
 	| "achievement"
@@ -134,5 +134,14 @@ export const timelineData: TimelineEvent[] = [
 		icon: "🏆",
 		description: "カレンダーの作成・共有を簡単に行えるツールを開発し受賞。",
 		type: "achievement",
+	},
+	{
+		id: "applied-it-cert",
+		year: "2025",
+		month: "7月",
+		title: "応用情報技術者",
+		icon: "📜",
+		description: "情報技術の全般的な知識を身につけたくなり取得。",
+		type: "certification",
 	},
 ];

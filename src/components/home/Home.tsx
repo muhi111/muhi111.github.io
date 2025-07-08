@@ -1,3 +1,4 @@
+import { Box, Heading } from "@chakra-ui/react";
 import Timeline from "../timeline/Timeline";
 import HomeHero from "./HomeHero";
 import HomeQuickFacts from "./HomeQuickFacts";
@@ -8,28 +9,54 @@ interface HomeProps {
 
 export default function Home({ isNarrowScreen }: HomeProps) {
 	return (
-		<div className="min-h-screen bg-slate-50 flex flex-col py-2 md:py-12">
-			<div className="max-w-5xl mx-auto px-1 md:px-4 w-full">
-				<h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
+		<Box
+			minH="100vh"
+			bg="gray.50"
+			display="flex"
+			flexDirection="column"
+			py={{ base: "2", md: "12" }}
+		>
+			<Box maxW="1200px" mx="auto" px={{ base: "1", md: "4" }} w="100%">
+				<Heading
+					as="h2"
+					size="3xl"
+					fontWeight="bold"
+					color="gray.900"
+					textAlign="center"
+					mb="12"
+				>
 					About Me
-				</h2>
-				<div className="bg-white rounded-lg md:rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
-					<div className="p-2 md:p-5">
+				</Heading>
+				<Box
+					bg="white"
+					borderRadius={{ base: "lg", md: "xl" }}
+					boxShadow="md"
+					transition="all 0.3s"
+					_hover={{ boxShadow: "xl" }}
+				>
+					<Box p={{ base: "2", md: "5" }}>
 						<HomeHero />
 						<HomeQuickFacts />
 
 						{/* Timeline Section */}
 						{isNarrowScreen && (
-							<h3 className="text-2xl font-semibold text-slate-800 text-center mb-4 md:mb-8">
+							<Heading
+								as="h3"
+								size="2xl"
+								fontWeight="semibold"
+								color="gray.800"
+								textAlign="center"
+								mb={{ base: "4", md: "8" }}
+							>
 								経歴
-							</h3>
+							</Heading>
 						)}
-						<div className="mt-4 md:mt-10">
+						<Box mt={{ base: "4", md: "10" }}>
 							<Timeline />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						</Box>
+					</Box>
+				</Box>
+			</Box>
+		</Box>
 	);
 }

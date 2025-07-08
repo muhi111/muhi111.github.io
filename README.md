@@ -6,7 +6,7 @@
 
 - React
 - TypeScript
-- TailwindCSS
+- ChakraUI
 - Vite
 - Biome
 - GitHub Actions

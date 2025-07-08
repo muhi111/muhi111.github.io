@@ -1,9 +1,9 @@
+import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { HashRouter as Router } from "react-router-dom";
 import Content from "./Content";
 import Sidebar from "./Sidebar";
 
-function Layout() {
+export default function Layout() {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isNarrowScreen, setIsNarrowScreen] = useState(true);
 
@@ -11,8 +11,10 @@ function Layout() {
 		const handleResize = () => {
 			const width = window.innerWidth;
 			const newIsNarrowScreen = width <= 1300;
+			const newIsSidebarOpen = width > 1300;
+
 			setIsNarrowScreen(newIsNarrowScreen);
-			setIsSidebarOpen(width > 1300);
+			setIsSidebarOpen(newIsSidebarOpen);
 		};
 
 		handleResize();
@@ -21,42 +23,43 @@ function Layout() {
 	}, []);
 
 	return (
-		<Router>
-			<div className="min-h-screen bg-gray-50">
-				<Sidebar
-					isOpen={isSidebarOpen}
-					setIsOpen={setIsSidebarOpen}
-					isNarrowScreen={isNarrowScreen}
-				/>
-				<div className="relative">
-					{isNarrowScreen && isSidebarOpen && (
-						<div
-							className="fixed inset-0 bg-black/50 z-[15] transition-opacity"
-							onClick={() => setIsSidebarOpen(false)}
-							onKeyDown={(e) => {
-								if (e.key === "Escape") setIsSidebarOpen(false);
-							}}
-							role="presentation"
-						/>
-					)}
-					<main
-						className={`transition-all duration-300 ${
-							!isNarrowScreen && isSidebarOpen
-								? "ml-64 max-w-[calc(100%-256px)]"
-								: ""
-						}`}
-					>
-						<div className="container mx-auto px-4 py-6">
-							<Content
-								isNarrowScreen={isNarrowScreen}
-								isSidebarOpen={isSidebarOpen}
-							/>
-						</div>
-					</main>
-				</div>
-			</div>
-		</Router>
+		<Box minH="100vh" bg="gray.50">
+			<Sidebar
+				isOpen={isSidebarOpen}
+				setIsOpen={setIsSidebarOpen}
+				isNarrowScreen={isNarrowScreen}
+			/>
+			<Box position="relative">
+				{isNarrowScreen && isSidebarOpen && (
+					<Box
+						position="fixed"
+						top="0"
+						left="0"
+						right="0"
+						bottom="0"
+						bg="blackAlpha.500"
+						zIndex="15"
+						transition="opacity 0.3s"
+						onClick={() => setIsSidebarOpen(false)}
+						onKeyDown={(e: React.KeyboardEvent) => {
+							if (e.key === "Escape") setIsSidebarOpen(false);
+						}}
+						role="presentation"
+					/>
+				)}
+				<Box
+					as="main"
+					transition="all 0.3s"
+					ml={!isNarrowScreen && isSidebarOpen ? "256px" : "0"}
+					maxW={
+						!isNarrowScreen && isSidebarOpen ? "calc(100% - 256px)" : "100%"
+					}
+				>
+					<Box maxW="1200px" mx="auto" px="4" py="6">
+						<Content isNarrowScreen={isNarrowScreen} />
+					</Box>
+				</Box>
+			</Box>
+		</Box>
 	);
 }
-
-export default Layout;

@@ -5,30 +5,19 @@ import Works from "../works/Works";
 
 interface ContentProps {
 	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
 }
 
-function Content({ isNarrowScreen, isSidebarOpen }: ContentProps) {
+function Content({ isNarrowScreen }: ContentProps) {
 	return (
 		<Routes>
 			<Route path="/" element={<Home isNarrowScreen={isNarrowScreen} />} />
 			<Route
 				path="/skills"
-				element={
-					<Skills
-						isNarrowScreen={isNarrowScreen}
-						isSidebarOpen={isSidebarOpen}
-					/>
-				}
+				element={<Skills isNarrowScreen={isNarrowScreen} />}
 			/>
 			<Route
 				path="/works"
-				element={
-					<Works
-						isNarrowScreen={isNarrowScreen}
-						isSidebarOpen={isSidebarOpen}
-					/>
-				}
+				element={<Works isNarrowScreen={isNarrowScreen} />}
 			/>
 		</Routes>
 	);

@@ -1,101 +1,177 @@
-import { FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Link,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import type { Work } from "../../data/worksData";
 
 interface WorkDetailsProps {
 	work: Work;
 	onClose: () => void;
 	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
 }
 
-function WorkDetails({
-	work,
-	onClose,
-	isNarrowScreen,
-	isSidebarOpen,
-}: WorkDetailsProps) {
-	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Escape") onClose();
-	};
-
-	const modalPosition =
-		!isNarrowScreen && isSidebarOpen ? "left-[calc(50%+160px)]" : "left-1/2";
-
+function WorkDetails({ work, onClose, isNarrowScreen }: WorkDetailsProps) {
 	return (
-		<div
-			className="fixed inset-0 z-[20] flex items-center justify-center p-4 bg-black/50"
+		<Box
+			position="fixed"
+			inset="0"
+			zIndex="20"
+			display="flex"
+			alignItems="center"
+			justifyContent="center"
+			p="4"
+			bg="blackAlpha.500"
 			onClick={(e) => e.target === e.currentTarget && onClose()}
-			onKeyDown={handleKeyDown}
-			role="presentation"
 		>
-			<dialog
-				open
-				className={`bg-white rounded-xl shadow-xl max-w-2xl w-[calc(100%-2rem)] md:w-full max-h-[90vh] overflow-y-auto transform transition-all fixed ${modalPosition} top-1/2 -translate-x-1/2 -translate-y-1/2`}
+			<Box
+				bg="white"
+				borderRadius="xl"
+				boxShadow="2xl"
+				maxW="3xl"
+				w={`calc(100% - ${isNarrowScreen ? "2rem" : "4rem"})`}
+				maxH="90vh"
+				overflowY="auto"
 				onClick={(e) => e.stopPropagation()}
-				onKeyDown={(e) => e.stopPropagation()}
 			>
-				<div className="p-6">
-					<div className="flex justify-between items-center mb-4">
-						<h3 className="text-2xl font-bold text-slate-900">{work.title}</h3>
-						<button
-							type="button"
+				<Box p="6">
+					<Flex justify="space-between" align="center" mb="6">
+						<Heading as="h2" size="lg" fontWeight="bold" color="gray.900">
+							{work.title}
+						</Heading>
+						<Button
+							size="sm"
+							variant="ghost"
+							borderRadius="full"
+							p="2"
 							onClick={onClose}
-							className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+							_hover={{ bg: "gray.100" }}
 						>
-							<FaTimes className="w-5 h-5 text-slate-600" />
-						</button>
-					</div>
+							<MdClose size={24} />
+						</Button>
+					</Flex>
 
-					<p className="text-slate-600 mb-6 whitespace-pre-line">
-						{work.description}
-					</p>
+					<VStack gap="6" align="stretch">
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="3">
+								説明
+							</Heading>
+							<Text color="gray.700" lineHeight="relaxed" whiteSpace="pre-line">
+								{work.description}
+							</Text>
+						</Box>
 
-					{work.achievements.length > 0 && (
-						<div className="mb-6 bg-blue-50 p-4 rounded-lg">
-							{work.achievements.map((achievement) => (
-								<p key={achievement} className="text-blue-900 font-medium">
-									{achievement}
-								</p>
-							))}
-						</div>
-					)}
-
-					<div className="flex flex-wrap gap-2 mb-6">
-						{work.tags.map((tag) => (
-							<span
-								key={tag}
-								className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm"
-							>
-								{tag}
-							</span>
-						))}
-					</div>
-
-					<div className="flex justify-between">
-						<a
-							href={work.githubLink}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="flex items-center text-slate-700 hover:text-slate-900 transition-colors"
-						>
-							<FaGithub className="w-5 h-5 mr-2" />
-							GitHub
-						</a>
-						{work.liveLink && (
-							<a
-								href={work.liveLink}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="flex items-center text-slate-700 hover:text-slate-900 transition-colors"
-							>
-								<FaExternalLinkAlt className="w-5 h-5 mr-2" />
-								External Link
-							</a>
+						{work.achievements.length > 0 && (
+							<Box>
+								<Heading as="h3" size="md" fontWeight="semibold" mb="3">
+									受賞歴
+								</Heading>
+								<VStack align="stretch" gap="2">
+									{work.achievements.map((achievement) => (
+										<Box
+											key={achievement}
+											bg="blue.50"
+											p="3"
+											borderRadius="md"
+											borderLeft="4px solid"
+											borderLeftColor="blue.500"
+										>
+											<Text fontSize="sm" color="blue.900" fontWeight="medium">
+												{achievement}
+											</Text>
+										</Box>
+									))}
+								</VStack>
+							</Box>
 						)}
-					</div>
-				</div>
-			</dialog>
-		</div>
+
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="3">
+								使用技術
+							</Heading>
+							<Flex wrap="wrap" gap="2">
+								{work.tags.map((tag) => (
+									<Text
+										key={tag}
+										fontSize="sm"
+										bg="blue.100"
+										color="blue.700"
+										px="3"
+										py="1"
+										borderRadius="md"
+										fontWeight="medium"
+									>
+										{tag}
+									</Text>
+								))}
+							</Flex>
+						</Box>
+
+						<Box>
+							<Heading as="h3" size="md" fontWeight="semibold" mb="3">
+								リンク
+							</Heading>
+							<Flex gap="4">
+								{work.githubLink && (
+									<Link
+										href={work.githubLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										display="flex"
+										alignItems="center"
+										gap="2"
+										px="4"
+										py="2"
+										bg="gray.100"
+										borderRadius="md"
+										color="gray.800"
+										fontWeight="medium"
+										transition="all 0.2s"
+										_hover={{
+											bg: "gray.200",
+											transform: "translateY(-1px)",
+										}}
+									>
+										<FaGithub size={20} />
+										<Text>GitHub</Text>
+									</Link>
+								)}
+								{work.liveLink && (
+									<Link
+										href={work.liveLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										display="flex"
+										alignItems="center"
+										gap="2"
+										px="4"
+										py="2"
+										bg="blue.100"
+										borderRadius="md"
+										color="blue.800"
+										fontWeight="medium"
+										transition="all 0.2s"
+										_hover={{
+											bg: "blue.200",
+											transform: "translateY(-1px)",
+										}}
+									>
+										<FaExternalLinkAlt size={18} />
+										<Text>サイトへ</Text>
+									</Link>
+								)}
+							</Flex>
+						</Box>
+					</VStack>
+				</Box>
+			</Box>
+		</Box>
 	);
 }
 

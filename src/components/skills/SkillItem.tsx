@@ -1,32 +1,13 @@
-import type { ElementType } from "react";
-import { AiOutlineStar } from "react-icons/ai";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import type { IconType } from "react-icons";
+import { FaStar } from "react-icons/fa";
 
 interface SkillItemProps {
 	name: string;
 	level: number;
-	IconComponent: ElementType;
+	IconComponent: IconType;
 	technologies?: string[];
-	onClick: () => void;
-}
-
-function StarRating({ level }: { level: number }) {
-	return (
-		<div className="flex">
-			{[1, 2, 3, 4, 5].map((star) => {
-				if (star <= level) {
-					return <FaStar key={star} className="w-4 h-4 text-amber-400" />;
-				}
-				if (star - 0.5 <= level) {
-					return (
-						<FaStarHalfAlt key={star} className="w-4 h-4 text-amber-400" />
-					);
-				}
-				return <AiOutlineStar key={star} className="w-4 h-4 text-amber-400" />;
-			})}
-		</div>
-	);
+	onClick?: () => void;
 }
 
 function SkillItem({
@@ -36,39 +17,60 @@ function SkillItem({
 	technologies,
 	onClick,
 }: SkillItemProps) {
+	const levelIndicators = Array.from({ length: 5 }, (_, i) => ({
+		id: `level-indicator-${i + 1}`,
+		position: i + 1,
+		filled: i < level,
+	}));
+
 	return (
-		<div
-			className="group flex flex-col p-3 rounded-lg hover:shadow-md transition-shadow duration-300 cursor-pointer"
+		<Box
+			w="full"
+			bg="gray.50"
+			borderRadius="lg"
+			p="4"
+			cursor="pointer"
+			transition="all 0.3s"
+			_hover={{ bg: "gray.100", transform: "translateY(-2px)" }}
 			onClick={onClick}
-			onKeyUp={(event) => {
-				if (event.key === " ") {
-					event.preventDefault();
-				}
-			}}
 		>
-			<div className="flex items-center justify-between mb-2">
-				<div className="flex items-center gap-3">
-					<IconComponent className="w-5 h-5 text-slate-600" />
-					<span className="text-sm font-medium text-slate-700">{name}</span>
-				</div>
-				<div className="flex items-center gap-2">
-					<StarRating level={level} />
-					<MdKeyboardArrowRight className="w-5 h-5 text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-				</div>
-			</div>
+			<Flex align="center" justify="space-between">
+				<Flex align="center" gap="3">
+					<Icon as={IconComponent} w="5" h="5" color="gray.600" />
+					<Text fontSize="md" fontWeight="medium" color="gray.800">
+						{name}
+					</Text>
+				</Flex>
+				<Flex align="center" gap="1">
+					{levelIndicators.map((indicator) => (
+						<Icon
+							as={FaStar}
+							key={indicator.id}
+							w={4}
+							h={4}
+							color={indicator.filled ? "yellow.400" : "gray.300"}
+						/>
+					))}
+				</Flex>
+			</Flex>
 			{technologies && technologies.length > 0 && (
-				<div className="flex flex-wrap gap-1 mt-1">
+				<Flex mt="2" gap="1" wrap="wrap">
 					{technologies.map((tech) => (
-						<span
+						<Text
 							key={tech}
-							className="px-2 py-0.5 text-xs bg-slate-100 text-slate-600 rounded-full"
+							fontSize="xs"
+							bg="blue.100"
+							color="blue.700"
+							px="2"
+							py="1"
+							borderRadius="md"
 						>
 							{tech}
-						</span>
+						</Text>
 					))}
-				</div>
+				</Flex>
 			)}
-		</div>
+		</Box>
 	);
 }
 

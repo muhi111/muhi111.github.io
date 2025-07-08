@@ -1,3 +1,4 @@
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import type { SkillCategory } from "../../data/skillsData";
 import SkillItem from "./SkillItem";
 
@@ -9,9 +10,11 @@ interface SkillCardProps {
 
 function SkillCard({ category, skills, onSkillClick }: SkillCardProps) {
 	return (
-		<div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
-			<h3 className="text-xl font-bold text-slate-800 mb-4">{category}</h3>
-			<div className="space-y-2">
+		<Box bg="white" borderRadius="xl" boxShadow="sm" p="6">
+			<Heading as="h3" size="lg" fontWeight="bold" color="gray.800" mb="4">
+				{category}
+			</Heading>
+			<VStack gap="2">
 				{skills.map((skill) => (
 					<SkillItem
 						key={skill.name}
@@ -22,8 +25,8 @@ function SkillCard({ category, skills, onSkillClick }: SkillCardProps) {
 						onClick={() => onSkillClick(skill)}
 					/>
 				))}
-			</div>
-		</div>
+			</VStack>
+		</Box>
 	);
 }
 

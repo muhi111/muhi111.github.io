@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Box, Button, Image, Link } from "@chakra-ui/react";
 import { FaBars, FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -13,17 +13,6 @@ function Sidebar({
 }) {
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const handleResize = () => {
-			const width = window.innerWidth;
-			const newIsNarrowScreen = width <= 1650;
-			if (newIsNarrowScreen) setIsOpen(false);
-		};
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, [setIsOpen]);
-
 	const handleNavigation = (path: string): void => {
 		navigate(path);
 		if (isNarrowScreen) setIsOpen(false);
@@ -31,74 +20,136 @@ function Sidebar({
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(!isOpen)}
-				className={`fixed top-4 left-4 z-[30] p-3 rounded-full shadow-md transition-all duration-300
-          ${
-						isOpen
-							? "bg-slate-700 text-white hover:bg-slate-600"
-							: "bg-white text-slate-800 hover:bg-slate-100"
-					}`}
+			<Button
+				position="fixed"
+				top="4"
+				left="4"
+				zIndex="30"
+				p="3"
+				borderRadius="full"
+				boxShadow="md"
+				transition="all 0.3s"
+				bg={isOpen ? "gray.700" : "white"}
+				color={isOpen ? "white" : "gray.800"}
+				_hover={{
+					bg: isOpen ? "gray.600" : "gray.100",
+				}}
 				aria-label="Toggle Sidebar"
+				onClick={() => setIsOpen(!isOpen)}
 			>
-				<FaBars className="w-6 h-6" />
-			</button>
+				<FaBars size={24} />
+			</Button>
 
-			<div
-				className={`fixed top-0 left-0 z-[25] w-64 h-full bg-slate-800 shadow-2xl
-          transform transition-transform duration-300 ease-in-out
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+			<Box
+				position="fixed"
+				top="0"
+				left="0"
+				zIndex="25"
+				w="256px"
+				h="100vh"
+				bg="gray.800"
+				boxShadow="2xl"
+				transform={isOpen ? "translateX(0)" : "translateX(-100%)"}
+				transition="transform 0.3s ease-in-out"
 			>
-				<nav className="flex flex-col mt-20 p-4 space-y-3">
-					<button
-						type="button"
+				<Box
+					as="nav"
+					display="flex"
+					flexDirection="column"
+					mt="20"
+					p="4"
+					gap="3"
+					overflowY="auto"
+					maxH="calc(100vh - 160px)"
+				>
+					<Button
+						w="full"
+						textAlign="left"
+						px="6"
+						py="4"
+						color="gray.100"
+						fontSize="xl"
+						fontWeight="bold"
+						borderRadius="lg"
+						transition="all 0.2s"
+						bg="transparent"
+						_hover={{
+							bg: "gray.800",
+							transform: "translateX(2px)",
+						}}
 						onClick={() => handleNavigation("/")}
-						className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
-              rounded-lg transition-all duration-200
-              hover:bg-slate-700 hover:translate-x-1"
 					>
 						Home
-					</button>
-					<button
-						type="button"
+					</Button>
+					<Button
+						w="full"
+						textAlign="left"
+						px="6"
+						py="4"
+						color="gray.100"
+						fontSize="xl"
+						fontWeight="bold"
+						borderRadius="lg"
+						transition="all 0.2s"
+						bg="transparent"
+						_hover={{
+							bg: "gray.800",
+							transform: "translateX(2px)",
+						}}
 						onClick={() => handleNavigation("/skills")}
-						className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
-              rounded-lg transition-all duration-200
-              hover:bg-slate-700 hover:translate-x-1"
 					>
 						Skills
-					</button>
-					<button
-						type="button"
+					</Button>
+					<Button
+						w="full"
+						textAlign="left"
+						px="6"
+						py="4"
+						color="gray.100"
+						fontSize="xl"
+						fontWeight="bold"
+						borderRadius="lg"
+						transition="all 0.2s"
+						bg="transparent"
+						_hover={{
+							bg: "gray.800",
+							transform: "translateX(2px)",
+						}}
 						onClick={() => handleNavigation("/works")}
-						className="w-full text-left px-6 py-4 text-slate-100 text-xl font-bold
-              rounded-lg transition-all duration-200
-              hover:bg-slate-700 hover:translate-x-1"
 					>
 						Works
-					</button>
-				</nav>
+					</Button>
+				</Box>
 
-				<div className="absolute bottom-4 left-4 flex items-center space-x-4">
-					<a
+				<Box
+					position="absolute"
+					bottom="4"
+					left="4"
+					display="flex"
+					alignItems="center"
+					gap="4"
+				>
+					<Link
 						href="https://github.com/muhi111"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-white hover:opacity-80 transition-colors duration-200"
+						color="white"
+						_hover={{ opacity: 0.8 }}
+						transition="opacity 0.2s"
 					>
-						<FaGithub className="w-12 h-12" />
-					</a>
-					<a
+						<FaGithub size={48} />
+					</Link>
+					<Link
 						href="https://qiita.com/muhi111"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="hover:opacity-80 transition-opacity duration-200"
+						_hover={{ opacity: 0.8 }}
+						transition="opacity 0.2s"
 					>
-						<img src="/qiita.png" alt="Qiita" className="w-12 h-12 filter" />
-					</a>
-				</div>
-			</div>
+						<Image src="/qiita.png" alt="Qiita" w="48px" h="48px" />
+					</Link>
+				</Box>
+			</Box>
 		</>
 	);
 }

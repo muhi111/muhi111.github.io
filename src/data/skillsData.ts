@@ -24,7 +24,7 @@ const skillsData: SkillCategory[] = [
 		skills: [
 			{
 				name: "C",
-				level: 4.5,
+				level: 4,
 				icon: SiC,
 				description: "システムプログラミングや42tokyoの課題で使用",
 				experience: "3年",
@@ -50,7 +50,7 @@ const skillsData: SkillCategory[] = [
 			},
 			{
 				name: "Python",
-				level: 3.5,
+				level: 3,
 				icon: FaPython,
 				description:
 					"データ分析、自動化スクリプト、Webアプリケーション開発に使用",
@@ -64,7 +64,7 @@ const skillsData: SkillCategory[] = [
 			},
 			{
 				name: "JavaScript",
-				level: 4,
+				level: 3,
 				icon: FaJs,
 				description: "フロントエンド開発からモダンな技術スタックまで幅広く使用",
 				experience: "2年",
@@ -78,7 +78,7 @@ const skillsData: SkillCategory[] = [
 		skills: [
 			{
 				name: "Linux",
-				level: 4.5,
+				level: 4,
 				icon: FaLinux,
 				description: "開発環境構築、サーバー運用",
 				experience: "1.5年",
@@ -94,7 +94,7 @@ const skillsData: SkillCategory[] = [
 			},
 			{
 				name: "Docker",
-				level: 3.5,
+				level: 3,
 				icon: FaDocker,
 				description: "コンテナ化されたアプリケーションの開発と運用",
 				experience: "0.5年",

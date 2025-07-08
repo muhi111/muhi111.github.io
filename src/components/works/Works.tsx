@@ -1,49 +1,74 @@
-import { useState } from "react";
+import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import type { Work } from "../../data/worksData";
 import { worksData } from "../../data/worksData";
 import WorkCard from "./WorkCard";
 import WorkDetails from "./WorkDetails";
 
 interface WorksProps {
 	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
 }
 
-function Works({ isNarrowScreen, isSidebarOpen }: WorksProps) {
-	const [selectedWork, setSelectedWork] = useState<
-		(typeof worksData)[0] | null
-	>(null);
+export default function Works({ isNarrowScreen }: WorksProps) {
+	const [selectedWork, setSelectedWork] = useState<Work | null>(null);
+	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-	const gridColumns =
-		!isNarrowScreen && isSidebarOpen
-			? "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-			: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+	useEffect(() => {
+		const handleEscape = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				setIsDetailsOpen(false);
+			}
+		};
+
+		if (isDetailsOpen) {
+			document.addEventListener("keydown", handleEscape);
+		}
+
+		return () => {
+			document.removeEventListener("keydown", handleEscape);
+		};
+	}, [isDetailsOpen]);
+
+	const handleWorkClick = (work: Work) => {
+		setSelectedWork(work);
+		setIsDetailsOpen(true);
+	};
 
 	return (
-		<div className="min-h-screen bg-slate-50 py-16">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<h2 className="text-3xl font-bold text-slate-900 text-center mb-12">
-					My Works
-				</h2>
-				<div className={`grid ${gridColumns} gap-6`}>
+		<Box minH="100vh" bg="gray.50" py={{ base: "2", md: "12" }}>
+			<Box maxW="1200px" mx="auto" px={{ base: "1", md: "4" }} w="full">
+				<Heading
+					as="h2"
+					size="3xl"
+					fontWeight="bold"
+					color="gray.900"
+					textAlign="center"
+					mb="12"
+				>
+					Works
+				</Heading>
+				<SimpleGrid
+					columns={{ base: 1, md: 2, lg: 3 }}
+					gap={{ base: "4", md: "6" }}
+					w="full"
+				>
 					{worksData.map((work) => (
 						<WorkCard
 							key={work.title}
 							work={work}
-							onClick={() => setSelectedWork(work)}
+							onClick={() => handleWorkClick(work)}
 						/>
 					))}
-				</div>
-			</div>
-			{selectedWork && (
-				<WorkDetails
-					work={selectedWork}
-					onClose={() => setSelectedWork(null)}
-					isNarrowScreen={isNarrowScreen}
-					isSidebarOpen={isSidebarOpen}
-				/>
-			)}
-		</div>
+				</SimpleGrid>
+
+				{isDetailsOpen && selectedWork && (
+					<WorkDetails
+						work={selectedWork}
+						onClose={() => setIsDetailsOpen(false)}
+						isNarrowScreen={isNarrowScreen}
+					/>
+				)}
+			</Box>
+		</Box>
 	);
 }
-
-export default Works;

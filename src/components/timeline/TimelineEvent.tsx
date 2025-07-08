@@ -1,4 +1,5 @@
-import type { TimelineEvent, TimelineEventType } from "../../data/timelineData";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import type { TimelineEvent } from "../../data/timelineData";
 
 type TimelineEventProps = Omit<TimelineEvent, "id">;
 
@@ -12,84 +13,91 @@ export default function TimelineEventComponent({
 	icon,
 	type,
 }: TimelineEventProps) {
-	const getBorderColor = (type: TimelineEventType) => {
+	const getTypeColor = (type: string) => {
 		switch (type) {
 			case "education":
-				return "border-blue-500";
+				return "blue.500";
 			case "work":
-				return "border-green-500";
+				return "green.500";
 			case "achievement":
-				return "border-yellow-500";
+				return "purple.500";
 			case "certification":
-				return "border-purple-500";
-			case "internship":
-				return "border-pink-500";
+				return "orange.500";
 			default:
-				return "border-gray-500";
+				return "gray.500";
 		}
 	};
 
+	const getDateRange = () => {
+		if (endYear && endMonth) {
+			return `${year}年${month} - ${endYear}年${endMonth}`;
+		}
+		return `${year}年${month}`;
+	};
+
 	return (
-		<div className="flex flex-col md:flex-row items-start">
-			{/* モバイルでの年月表示（上部） */}
-			<div className="w-full mb-2 md:hidden">
-				<div className="font-semibold text-gray-600 bg-white px-2 py-1 rounded-lg">
-					{endYear && endMonth ? (
-						<div className="flex items-center justify-between">
-							<span>
-								{year}年{month}
-							</span>
-							<span className="text-sm text-gray-500">
-								～ {endYear}年{endMonth}
-							</span>
-						</div>
-					) : (
-						<div>
-							{year}年{month}
-						</div>
-					)}
-				</div>
-			</div>
+		<Box position="relative" w="full">
+			{/* アイコン */}
+			<Flex
+				position="absolute"
+				left={{ base: "0", md: "14" }}
+				top={{ base: "0", md: "1" }}
+				w="8"
+				h="8"
+				align="center"
+				justify="center"
+				bg="white"
+				borderRadius="full"
+				border="2px solid"
+				borderColor={getTypeColor(type)}
+				zIndex={10}
+			>
+				<Box fontSize="md" role="img" aria-label={`${type} icon`}>
+					{icon}
+				</Box>
+			</Flex>
 
-			{/* デスクトップでの年月表示（左側） */}
-			<div className="hidden md:block flex-shrink-0 w-48 text-right pr-8">
-				<div className="font-semibold text-gray-600">
-					{endYear && endMonth ? (
-						<>
-							<div>
-								{year}年{month}
-							</div>
-							<div className="text-sm text-gray-500">
-								～ {endYear}年{endMonth}
-							</div>
-						</>
-					) : (
-						<div className="mt-2">
-							{year}年{month}
-						</div>
-					)}
-				</div>
-				<div
-					className={`absolute left-16 w-3 h-3 bg-white border-2 ${getBorderColor(type)} rounded-full transform -translate-x-1.5 mt-2`}
-				/>
-			</div>
-
-			{/* イベントカード */}
-			<div className="w-full pl-4 md:pl-0 md:ml-4">
-				<div className="bg-white p-2 md:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-auto md:h-[160px]">
-					<div className="flex items-center mb-2">
-						<span className="text-xl md:text-2xl mr-2 md:mr-3">{icon}</span>
-						<h3 className="text-base md:text-lg font-semibold text-gray-800">
-							{title}
-						</h3>
-					</div>
-					{description && (
-						<div className="text-sm md:text-base text-gray-600 max-h-[80px] md:h-[100px] overflow-y-auto pr-2">
-							{description}
-						</div>
-					)}
-				</div>
-			</div>
-		</div>
+			{/* コンテンツ */}
+			<Box
+				ml={{ base: "12", md: "24" }}
+				p={{ base: "4", md: "6" }}
+				bg="white"
+				borderRadius="lg"
+				boxShadow="sm"
+				border="1px solid"
+				borderColor="gray.200"
+			>
+				<Flex
+					direction={{ base: "column", md: "row" }}
+					align={{ base: "flex-start", md: "center" }}
+					justify="space-between"
+					mb="2"
+				>
+					<Text
+						fontSize={{ base: "lg", md: "xl" }}
+						fontWeight="semibold"
+						color="gray.900"
+					>
+						{title}
+					</Text>
+					<Text
+						fontSize={{ base: "sm", md: "base" }}
+						color="gray.600"
+						mt={{ base: "1", md: "0" }}
+					>
+						{getDateRange()}
+					</Text>
+				</Flex>
+				{description && (
+					<Text
+						fontSize={{ base: "sm", md: "base" }}
+						color="gray.700"
+						lineHeight="relaxed"
+					>
+						{description}
+					</Text>
+				)}
+			</Box>
+		</Box>
 	);
 }
