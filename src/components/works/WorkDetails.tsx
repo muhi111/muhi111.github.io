@@ -36,7 +36,7 @@ function WorkDetails({ work, onClose, isNarrowScreen }: WorkDetailsProps) {
 				boxShadow="2xl"
 				maxW="3xl"
 				w={`calc(100% - ${isNarrowScreen ? "2rem" : "4rem"})`}
-				maxH="90vh"
+				maxH="90dvh"
 				overflowY="auto"
 				onClick={(e) => e.stopPropagation()}
 			>

@@ -42,7 +42,7 @@ function SkillDetails({ skill, onClose, isNarrowScreen }: SkillDetailsProps) {
 				boxShadow="2xl"
 				maxW="2xl"
 				w={`calc(100% - ${isNarrowScreen ? "2rem" : "4rem"})`}
-				maxH="90vh"
+				maxH="90dvh"
 				overflowY="auto"
 				onClick={(e) => e.stopPropagation()}
 			>

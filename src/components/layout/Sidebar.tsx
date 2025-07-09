@@ -1,6 +1,7 @@
 import { Box, Button, Image, Link } from "@chakra-ui/react";
 import { FaBars, FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { LAYOUT_CONSTANTS } from "../../constants/layout";
 
 function Sidebar({
 	isOpen,
@@ -45,8 +46,8 @@ function Sidebar({
 				top="0"
 				left="0"
 				zIndex="25"
-				w="256px"
-				h="100vh"
+				w={LAYOUT_CONSTANTS.SIDEBAR_WIDTH}
+				h="100dvh"
 				bg="gray.800"
 				boxShadow="2xl"
 				transform={isOpen ? "translateX(0)" : "translateX(-100%)"}
@@ -60,7 +61,7 @@ function Sidebar({
 					p="4"
 					gap="3"
 					overflowY="auto"
-					maxH="calc(100vh - 160px)"
+					maxH="calc(100dvh - 160px)"
 				>
 					<Button
 						w="full"

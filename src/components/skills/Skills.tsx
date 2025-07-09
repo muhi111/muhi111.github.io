@@ -1,5 +1,6 @@
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { LAYOUT_CONSTANTS } from "../../constants/layout";
 import type { Skill } from "../../data/skillsData";
 import skillsData from "../../data/skillsData";
 import SkillCard from "./SkillCard";
@@ -35,8 +36,13 @@ export default function Skills({ isNarrowScreen }: SkillsProps) {
 	};
 
 	return (
-		<Box minH="100vh" bg="gray.50" py={{ base: "2", md: "12" }}>
-			<Box maxW="1200px" mx="auto" px={{ base: "1", md: "4" }} w="full">
+		<Box minH="100dvh" bg="gray.50" py={{ base: "2", md: "12" }}>
+			<Box
+				maxW={LAYOUT_CONSTANTS.MAX_CONTENT_WIDTH}
+				mx="auto"
+				px={{ base: "1", md: "4" }}
+				w="full"
+			>
 				<Heading
 					as="h2"
 					size="3xl"

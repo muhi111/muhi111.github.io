@@ -1,4 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
+import { LAYOUT_CONSTANTS } from "../../constants/layout";
 import Timeline from "../timeline/Timeline";
 import HomeHero from "./HomeHero";
 import HomeQuickFacts from "./HomeQuickFacts";
@@ -10,13 +11,18 @@ interface HomeProps {
 export default function Home({ isNarrowScreen }: HomeProps) {
 	return (
 		<Box
-			minH="100vh"
+			minH="100dvh"
 			bg="gray.50"
 			display="flex"
 			flexDirection="column"
 			py={{ base: "2", md: "12" }}
 		>
-			<Box maxW="1200px" mx="auto" px={{ base: "1", md: "4" }} w="100%">
+			<Box
+				maxW={LAYOUT_CONSTANTS.MAX_CONTENT_WIDTH}
+				mx="auto"
+				px={{ base: "1", md: "4" }}
+				w="100%"
+			>
 				<Heading
 					as="h2"
 					size="3xl"
