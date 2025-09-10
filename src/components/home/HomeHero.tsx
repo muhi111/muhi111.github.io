@@ -41,18 +41,8 @@ export default function HomeHero() {
 					fontSize={{ base: "lg", md: "xl" }}
 					color="gray.600"
 					lineHeight="relaxed"
-					mb="4"
 				>
 					Web Developer & Software Engineer
-				</Text>
-				<Text
-					fontSize={{ base: "sm", md: "base" }}
-					color="gray.700"
-					lineHeight="relaxed"
-				>
-					情報通信工学を専攻している大学生です。
-					<br />
-					Web開発やシステムプログラミングに興味があります。
 				</Text>
 			</Box>
 		</Flex>

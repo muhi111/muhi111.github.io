@@ -66,7 +66,10 @@ export default function Layout() {
 						px="4"
 						py="6"
 					>
-						<Content isNarrowScreen={isNarrowScreen} />
+						<Content
+							isNarrowScreen={isNarrowScreen}
+							isSidebarOpen={isSidebarOpen}
+						/>
 					</Box>
 				</Box>
 			</Box>

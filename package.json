@@ -7,6 +7,7 @@
 		"dev": "vite",
 		"build": "tsc -b && vite build",
 		"check": "biome check --write --vcs-enabled=true --vcs-client-kind=git --vcs-use-ignore-file=true .",
+		"knip": "knip --fix",
 		"preview": "vite preview"
 	},
 	"dependencies": {
@@ -19,10 +20,12 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.1.1",
+		"@types/node": "^24.3.1",
 		"@types/react": "^19.0.10",
 		"@types/react-dom": "^19.0.4",
 		"@vitejs/plugin-react-swc": "^3.8.0",
-		"typescript": "^5.7.3",
+		"knip": "^5.63.1",
+		"typescript": "^5.9.2",
 		"vite": "^6.3.4",
 		"vite-tsconfig-paths": "^5.1.4"
 	},

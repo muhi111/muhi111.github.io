@@ -8,9 +8,10 @@ import WorkDetails from "./WorkDetails";
 
 interface WorksProps {
 	isNarrowScreen: boolean;
+	isSidebarOpen: boolean;
 }
 
-export default function Works({ isNarrowScreen }: WorksProps) {
+export default function Works({ isNarrowScreen, isSidebarOpen }: WorksProps) {
 	const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -72,6 +73,7 @@ export default function Works({ isNarrowScreen }: WorksProps) {
 						work={selectedWork}
 						onClose={() => setIsDetailsOpen(false)}
 						isNarrowScreen={isNarrowScreen}
+						isSidebarOpen={isSidebarOpen}
 					/>
 				)}
 			</Box>

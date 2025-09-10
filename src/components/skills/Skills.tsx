@@ -8,9 +8,10 @@ import SkillDetails from "./SkillDetails";
 
 interface SkillsProps {
 	isNarrowScreen: boolean;
+	isSidebarOpen: boolean;
 }
 
-export default function Skills({ isNarrowScreen }: SkillsProps) {
+export default function Skills({ isNarrowScreen, isSidebarOpen }: SkillsProps) {
 	const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -73,6 +74,7 @@ export default function Skills({ isNarrowScreen }: SkillsProps) {
 						skill={selectedSkill}
 						onClose={() => setIsDetailsOpen(false)}
 						isNarrowScreen={isNarrowScreen}
+						isSidebarOpen={isSidebarOpen}
 					/>
 				)}
 			</Box>

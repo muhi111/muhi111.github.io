@@ -15,13 +15,27 @@ interface WorkDetailsProps {
 	work: Work;
 	onClose: () => void;
 	isNarrowScreen: boolean;
+	isSidebarOpen: boolean;
 }
 
-function WorkDetails({ work, onClose, isNarrowScreen }: WorkDetailsProps) {
+function WorkDetails({
+	work,
+	onClose,
+	isNarrowScreen,
+	isSidebarOpen,
+}: WorkDetailsProps) {
+	// サイドバーが開いている場合のモーダル位置調整
+	const modalLeft = !isNarrowScreen && isSidebarOpen ? "256px" : "0";
+	const modalWidth =
+		!isNarrowScreen && isSidebarOpen ? "calc(100vw - 256px)" : "100vw";
+
 	return (
 		<Box
 			position="fixed"
-			inset="0"
+			top="0"
+			left={modalLeft}
+			width={modalWidth}
+			height="100vh"
 			zIndex="20"
 			display="flex"
 			alignItems="center"

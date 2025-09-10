@@ -15,19 +15,33 @@ interface SkillDetailsProps {
 	skill: Skill;
 	onClose: () => void;
 	isNarrowScreen: boolean;
+	isSidebarOpen: boolean;
 }
 
-function SkillDetails({ skill, onClose, isNarrowScreen }: SkillDetailsProps) {
+function SkillDetails({
+	skill,
+	onClose,
+	isNarrowScreen,
+	isSidebarOpen,
+}: SkillDetailsProps) {
 	const levelIndicators = Array.from({ length: 5 }, (_, i) => ({
 		id: `level-indicator-${i + 1}`,
 		position: i + 1,
 		filled: i < skill.level,
 	}));
 
+	// サイドバーが開いている場合のモーダル位置調整
+	const modalLeft = !isNarrowScreen && isSidebarOpen ? "256px" : "0";
+	const modalWidth =
+		!isNarrowScreen && isSidebarOpen ? "calc(100vw - 256px)" : "100vw";
+
 	return (
 		<Box
 			position="fixed"
-			inset="0"
+			top="0"
+			left={modalLeft}
+			width={modalWidth}
+			height="100vh"
 			zIndex="20"
 			display="flex"
 			alignItems="center"

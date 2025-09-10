@@ -1,8 +1,9 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { LAYOUT_CONSTANTS } from "../../constants/layout";
-import Timeline from "../timeline/Timeline";
+import Sections from "../sections/Sections";
 import HomeHero from "./HomeHero";
 import HomeQuickFacts from "./HomeQuickFacts";
+import SocialLinks from "./SocialLinks";
 
 interface HomeProps {
 	isNarrowScreen: boolean;
@@ -27,24 +28,20 @@ export default function Home({ isNarrowScreen }: HomeProps) {
 					as="h2"
 					size="3xl"
 					fontWeight="bold"
-					color="gray.900"
+					bgGradient="linear(to-r, blue.500, purple.600)"
+					bgClip="text"
 					textAlign="center"
 					mb="12"
 				>
 					About Me
 				</Heading>
-				<Box
-					bg="white"
-					borderRadius={{ base: "lg", md: "xl" }}
-					boxShadow="md"
-					transition="all 0.3s"
-					_hover={{ boxShadow: "xl" }}
-				>
+				<Box bg="white" borderRadius={{ base: "lg", md: "xl" }} boxShadow="md">
 					<Box p={{ base: "2", md: "5" }}>
 						<HomeHero />
 						<HomeQuickFacts />
+						<SocialLinks />
 
-						{/* Timeline Section */}
+						{/* Sections */}
 						{isNarrowScreen && (
 							<Heading
 								as="h3"
@@ -58,7 +55,7 @@ export default function Home({ isNarrowScreen }: HomeProps) {
 							</Heading>
 						)}
 						<Box mt={{ base: "4", md: "10" }}>
-							<Timeline />
+							<Sections />
 						</Box>
 					</Box>
 				</Box>

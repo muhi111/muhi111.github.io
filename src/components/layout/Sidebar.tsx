@@ -1,5 +1,5 @@
-import { Box, Button, Image, Link } from "@chakra-ui/react";
-import { FaBars, FaGithub } from "react-icons/fa";
+import { Box, Button } from "@chakra-ui/react";
+import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LAYOUT_CONSTANTS } from "../../constants/layout";
 
@@ -75,8 +75,7 @@ function Sidebar({
 						transition="all 0.2s"
 						bg="transparent"
 						_hover={{
-							bg: "gray.800",
-							transform: "translateX(2px)",
+							bg: "gray.600",
 						}}
 						onClick={() => handleNavigation("/")}
 					>
@@ -94,12 +93,11 @@ function Sidebar({
 						transition="all 0.2s"
 						bg="transparent"
 						_hover={{
-							bg: "gray.800",
-							transform: "translateX(2px)",
+							bg: "gray.600",
 						}}
-						onClick={() => handleNavigation("/skills")}
+						onClick={() => handleNavigation("/articles")}
 					>
-						Skills
+						Articles
 					</Button>
 					<Button
 						w="full"
@@ -113,42 +111,30 @@ function Sidebar({
 						transition="all 0.2s"
 						bg="transparent"
 						_hover={{
-							bg: "gray.800",
-							transform: "translateX(2px)",
+							bg: "gray.600",
 						}}
 						onClick={() => handleNavigation("/works")}
 					>
 						Works
 					</Button>
-				</Box>
-
-				<Box
-					position="absolute"
-					bottom="4"
-					left="4"
-					display="flex"
-					alignItems="center"
-					gap="4"
-				>
-					<Link
-						href="https://github.com/muhi111"
-						target="_blank"
-						rel="noopener noreferrer"
-						color="white"
-						_hover={{ opacity: 0.8 }}
-						transition="opacity 0.2s"
+					<Button
+						w="full"
+						textAlign="left"
+						px="6"
+						py="4"
+						color="gray.100"
+						fontSize="xl"
+						fontWeight="bold"
+						borderRadius="lg"
+						transition="all 0.2s"
+						bg="transparent"
+						_hover={{
+							bg: "gray.600",
+						}}
+						onClick={() => handleNavigation("/skills")}
 					>
-						<FaGithub size={48} />
-					</Link>
-					<Link
-						href="https://qiita.com/muhi111"
-						target="_blank"
-						rel="noopener noreferrer"
-						_hover={{ opacity: 0.8 }}
-						transition="opacity 0.2s"
-					>
-						<Image src="/qiita.png" alt="Qiita" w="48px" h="48px" />
-					</Link>
+						Skills
+					</Button>
 				</Box>
 			</Box>
 		</>
