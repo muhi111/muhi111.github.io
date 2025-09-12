@@ -31,4 +31,10 @@ export const articlesData: Article[] = [
 		url: "https://muhi111.hatenablog.com/entry/2025/09/09/122128",
 		publishedAt: "2025年9月",
 	},
+	{
+		id: "article-5",
+		title: "パスキーへの自動アップグレードの実装",
+		url: "https://qiita.com/muhi111/items/4088b130f6d1e57fcade",
+		publishedAt: "2025年9月",
+	},
 ];
