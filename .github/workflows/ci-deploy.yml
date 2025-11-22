@@ -22,8 +22,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Run Quality Check
-        uses: ./.github/actions/quality-check
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+      - name: Run Biome
+        run: biome ci .
 
   # デプロイジョブ (main ブランチへの直接プッシュ時のみ、quality ジョブ成功後に実行)
   # PR時は実行されない
