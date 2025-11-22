@@ -19,8 +19,8 @@ export interface SectionItem {
 // 時系列順でソートする関数
 const sortByDate = (items: SectionItem[]): SectionItem[] => {
 	return [...items].sort((a, b) => {
-		const aDate = new Date(parseInt(a.year), getMonthNumber(a.month) - 1);
-		const bDate = new Date(parseInt(b.year), getMonthNumber(b.month) - 1);
+		const aDate = new Date(parseInt(a.year, 10), getMonthNumber(a.month) - 1);
+		const bDate = new Date(parseInt(b.year, 10), getMonthNumber(b.month) - 1);
 		return aDate.getTime() - bDate.getTime();
 	});
 };
@@ -204,8 +204,7 @@ const internshipsDataRaw: SectionItem[] = [
 		endMonth: "11月",
 		title: "クックパッド株式会社 インターン参加",
 		iconType: "internship",
-		description:
-			"SREとして開発・運用の改善や自動化に携わる。",
+		description: "SREとして開発・運用の改善や自動化に携わる。",
 	},
 ];
 
