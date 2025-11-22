@@ -179,6 +179,8 @@ const internshipsDataRaw: SectionItem[] = [
 		id: "activecore-intern",
 		year: "2025",
 		month: "6月",
+		endYear: "2025",
+		endMonth: "12月",
 		title: "株式会社アクティブコア インターン参加",
 		iconType: "internship",
 		description:
@@ -193,6 +195,17 @@ const internshipsDataRaw: SectionItem[] = [
 		iconType: "internship",
 		description:
 			"3weekのインターンシップに参加。共通認証基盤の開発（特にパスキーの改善）に携わる。行ったタスクに対して社長賞を受賞。",
+	},
+	{
+		id: "cookpad-intern",
+		year: "2025",
+		month: "9月",
+		endYear: "2025",
+		endMonth: "11月",
+		title: "クックパッド株式会社 インターン参加",
+		iconType: "internship",
+		description:
+			"SREとして開発・運用の改善や自動化に携わる。",
 	},
 ];
 
