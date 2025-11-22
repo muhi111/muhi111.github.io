@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # コード品質チェックジョブ
+  # コード品質チェックジョブ (全てのpushとPRで実行)
   quality:
     runs-on: ubuntu-latest
     steps:
@@ -25,11 +25,12 @@ jobs:
       - name: Run Quality Check
         uses: ./.github/actions/quality-check
 
-  # デプロイジョブ (main ブランチへのプッシュ時のみ、quality ジョブ成功後に実行)
+  # デプロイジョブ (main ブランチへの直接プッシュ時のみ、quality ジョブ成功後に実行)
+  # PR時は実行されない
   deploy:
-    # main ブランチへのプッシュ時のみ実行
+    # main ブランチへの直接プッシュ時のみ実行 (PR時は実行されない)
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    # quality ジョブの完了を待つ
+    # quality ジョブが成功した場合のみ実行
     needs: quality
     environment:
       name: github-pages
