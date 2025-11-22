@@ -1,41 +1,19 @@
 import { Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import {
 	getMainContentMargin,
 	getMainContentMaxWidth,
 	LAYOUT_CONSTANTS,
 } from "../../constants/layout";
+import { LayoutProvider, useLayout } from "../../contexts/LayoutContext";
 import Content from "./Content";
 import Sidebar from "./Sidebar";
 
-export default function Layout() {
-	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-	const [isNarrowScreen, setIsNarrowScreen] = useState(true);
-
-	useEffect(() => {
-		const handleResize = () => {
-			const width = window.innerWidth;
-			const newIsNarrowScreen =
-				width <= LAYOUT_CONSTANTS.NARROW_SCREEN_BREAKPOINT;
-			const newIsSidebarOpen =
-				width > LAYOUT_CONSTANTS.NARROW_SCREEN_BREAKPOINT;
-
-			setIsNarrowScreen(newIsNarrowScreen);
-			setIsSidebarOpen(newIsSidebarOpen);
-		};
-
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
+function LayoutContent() {
+	const { isSidebarOpen, setIsSidebarOpen, isNarrowScreen } = useLayout();
 
 	return (
 		<Box minH="100dvh" bg="gray.50">
-			<Sidebar
-				isOpen={isSidebarOpen}
-				setIsOpen={setIsSidebarOpen}
-				isNarrowScreen={isNarrowScreen}
-			/>
+			<Sidebar />
 			<Box position="relative">
 				{isNarrowScreen && isSidebarOpen && (
 					<Box
@@ -66,13 +44,18 @@ export default function Layout() {
 						px="4"
 						py="6"
 					>
-						<Content
-							isNarrowScreen={isNarrowScreen}
-							isSidebarOpen={isSidebarOpen}
-						/>
+						<Content />
 					</Box>
 				</Box>
 			</Box>
 		</Box>
+	);
+}
+
+export default function Layout() {
+	return (
+		<LayoutProvider>
+			<LayoutContent />
+		</LayoutProvider>
 	);
 }

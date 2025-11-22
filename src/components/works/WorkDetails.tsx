@@ -9,21 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import { useLayout } from "../../contexts/LayoutContext";
 import type { Work } from "../../data/worksData";
 
 interface WorkDetailsProps {
 	work: Work;
 	onClose: () => void;
-	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
 }
 
-function WorkDetails({
-	work,
-	onClose,
-	isNarrowScreen,
-	isSidebarOpen,
-}: WorkDetailsProps) {
+function WorkDetails({ work, onClose }: WorkDetailsProps) {
+	const { isNarrowScreen, isSidebarOpen } = useLayout();
+
 	// サイドバーが開いている場合のモーダル位置調整
 	const modalLeft = !isNarrowScreen && isSidebarOpen ? "256px" : "0";
 	const modalWidth =

@@ -6,12 +6,7 @@ import { worksData } from "../../data/worksData";
 import WorkCard from "./WorkCard";
 import WorkDetails from "./WorkDetails";
 
-interface WorksProps {
-	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
-}
-
-export default function Works({ isNarrowScreen, isSidebarOpen }: WorksProps) {
+export default function Works() {
 	const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -72,8 +67,6 @@ export default function Works({ isNarrowScreen, isSidebarOpen }: WorksProps) {
 					<WorkDetails
 						work={selectedWork}
 						onClose={() => setIsDetailsOpen(false)}
-						isNarrowScreen={isNarrowScreen}
-						isSidebarOpen={isSidebarOpen}
 					/>
 				)}
 			</Box>

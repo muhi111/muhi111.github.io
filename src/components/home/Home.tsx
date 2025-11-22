@@ -1,15 +1,14 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { LAYOUT_CONSTANTS } from "../../constants/layout";
+import { useLayout } from "../../contexts/LayoutContext";
 import Sections from "../sections/Sections";
 import HomeHero from "./HomeHero";
 import HomeQuickFacts from "./HomeQuickFacts";
 import SocialLinks from "./SocialLinks";
 
-interface HomeProps {
-	isNarrowScreen: boolean;
-}
+export default function Home() {
+	const { isNarrowScreen } = useLayout();
 
-export default function Home({ isNarrowScreen }: HomeProps) {
 	return (
 		<Box
 			minH="100dvh"

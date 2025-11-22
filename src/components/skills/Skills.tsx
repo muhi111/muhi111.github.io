@@ -1,17 +1,33 @@
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { LAYOUT_CONSTANTS } from "../../constants/layout";
+
 import type { Skill } from "../../data/skillsData";
 import skillsData from "../../data/skillsData";
 import SkillCard from "./SkillCard";
 import SkillDetails from "./SkillDetails";
 
-interface SkillsProps {
-	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
-}
+export default function Skills() {
+	// useLayout is technically not used here directly if SkillDetails consumes it,
+	// BUT if Skills used isNarrowScreen for grid layout or something?
+	// Checking the file...
+	// It used props: interface SkillsProps { isNarrowScreen, isSidebarOpen }
+	// But inside the component:
+	// "SimpleGrid columns={{ base: 1, md: 2 }}" - uses Chakra responsive styles.
+	// The props were ONLY passed to SkillDetails.
+	// So I don't strictly need useLayout here if I don't pass them.
+	// However, just to be safe and consistent I'll check if anything else needed it.
+	// Previous code: passed props to SkillDetails.
+	// So Skills itself doesn't seem to use them.
 
-export default function Skills({ isNarrowScreen, isSidebarOpen }: SkillsProps) {
+	// Wait, I see:
+	// export default function Skills({ isNarrowScreen, isSidebarOpen }: SkillsProps)
+	// ...
+	// <SkillDetails ... isNarrowScreen={isNarrowScreen} isSidebarOpen={isSidebarOpen} />
+
+	// So Skills acts as a pass-through.
+	// If SkillDetails uses context, Skills doesn't need to fetch it.
+
 	const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -73,8 +89,6 @@ export default function Skills({ isNarrowScreen, isSidebarOpen }: SkillsProps) {
 					<SkillDetails
 						skill={selectedSkill}
 						onClose={() => setIsDetailsOpen(false)}
-						isNarrowScreen={isNarrowScreen}
-						isSidebarOpen={isSidebarOpen}
 					/>
 				)}
 			</Box>

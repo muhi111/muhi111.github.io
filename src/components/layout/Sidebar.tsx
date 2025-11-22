@@ -2,21 +2,16 @@ import { Box, Button } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LAYOUT_CONSTANTS } from "../../constants/layout";
+import { useLayout } from "../../contexts/LayoutContext";
+import { routes } from "../../routes";
 
-function Sidebar({
-	isOpen,
-	setIsOpen,
-	isNarrowScreen,
-}: {
-	isOpen: boolean;
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	isNarrowScreen: boolean;
-}) {
+function Sidebar() {
+	const { isSidebarOpen, setIsSidebarOpen, isNarrowScreen } = useLayout();
 	const navigate = useNavigate();
 
 	const handleNavigation = (path: string): void => {
 		navigate(path);
-		if (isNarrowScreen) setIsOpen(false);
+		if (isNarrowScreen) setIsSidebarOpen(false);
 	};
 
 	return (
@@ -30,13 +25,13 @@ function Sidebar({
 				borderRadius="full"
 				boxShadow="md"
 				transition="all 0.3s"
-				bg={isOpen ? "gray.700" : "white"}
-				color={isOpen ? "white" : "gray.800"}
+				bg={isSidebarOpen ? "gray.700" : "white"}
+				color={isSidebarOpen ? "white" : "gray.800"}
 				_hover={{
-					bg: isOpen ? "gray.600" : "gray.100",
+					bg: isSidebarOpen ? "gray.600" : "gray.100",
 				}}
 				aria-label="Toggle Sidebar"
-				onClick={() => setIsOpen(!isOpen)}
+				onClick={() => setIsSidebarOpen(!isSidebarOpen)}
 			>
 				<FaBars size={24} />
 			</Button>
@@ -50,7 +45,7 @@ function Sidebar({
 				h="100dvh"
 				bg="gray.800"
 				boxShadow="2xl"
-				transform={isOpen ? "translateX(0)" : "translateX(-100%)"}
+				transform={isSidebarOpen ? "translateX(0)" : "translateX(-100%)"}
 				transition="transform 0.3s ease-in-out"
 			>
 				<Box
@@ -63,78 +58,27 @@ function Sidebar({
 					overflowY="auto"
 					maxH="calc(100dvh - 160px)"
 				>
-					<Button
-						w="full"
-						textAlign="left"
-						px="6"
-						py="4"
-						color="gray.100"
-						fontSize="xl"
-						fontWeight="bold"
-						borderRadius="lg"
-						transition="all 0.2s"
-						bg="transparent"
-						_hover={{
-							bg: "gray.600",
-						}}
-						onClick={() => handleNavigation("/")}
-					>
-						Home
-					</Button>
-					<Button
-						w="full"
-						textAlign="left"
-						px="6"
-						py="4"
-						color="gray.100"
-						fontSize="xl"
-						fontWeight="bold"
-						borderRadius="lg"
-						transition="all 0.2s"
-						bg="transparent"
-						_hover={{
-							bg: "gray.600",
-						}}
-						onClick={() => handleNavigation("/articles")}
-					>
-						Articles
-					</Button>
-					<Button
-						w="full"
-						textAlign="left"
-						px="6"
-						py="4"
-						color="gray.100"
-						fontSize="xl"
-						fontWeight="bold"
-						borderRadius="lg"
-						transition="all 0.2s"
-						bg="transparent"
-						_hover={{
-							bg: "gray.600",
-						}}
-						onClick={() => handleNavigation("/works")}
-					>
-						Works
-					</Button>
-					<Button
-						w="full"
-						textAlign="left"
-						px="6"
-						py="4"
-						color="gray.100"
-						fontSize="xl"
-						fontWeight="bold"
-						borderRadius="lg"
-						transition="all 0.2s"
-						bg="transparent"
-						_hover={{
-							bg: "gray.600",
-						}}
-						onClick={() => handleNavigation("/skills")}
-					>
-						Skills
-					</Button>
+					{routes.map((route) => (
+						<Button
+							key={route.path}
+							w="full"
+							textAlign="left"
+							px="6"
+							py="4"
+							color="gray.100"
+							fontSize="xl"
+							fontWeight="bold"
+							borderRadius="lg"
+							transition="all 0.2s"
+							bg="transparent"
+							_hover={{
+								bg: "gray.600",
+							}}
+							onClick={() => handleNavigation(route.path)}
+						>
+							{route.label}
+						</Button>
+					))}
 				</Box>
 			</Box>
 		</>

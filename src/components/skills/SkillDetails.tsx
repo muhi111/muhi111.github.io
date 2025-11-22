@@ -9,21 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import { useLayout } from "../../contexts/LayoutContext";
 import type { Skill } from "../../data/skillsData";
 
 interface SkillDetailsProps {
 	skill: Skill;
 	onClose: () => void;
-	isNarrowScreen: boolean;
-	isSidebarOpen: boolean;
 }
 
-function SkillDetails({
-	skill,
-	onClose,
-	isNarrowScreen,
-	isSidebarOpen,
-}: SkillDetailsProps) {
+function SkillDetails({ skill, onClose }: SkillDetailsProps) {
+	const { isNarrowScreen, isSidebarOpen } = useLayout();
+
 	const levelIndicators = Array.from({ length: 5 }, (_, i) => ({
 		id: `level-indicator-${i + 1}`,
 		position: i + 1,
