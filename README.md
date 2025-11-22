@@ -10,4 +10,4 @@
 - Vite
 - Biome
 - GitHub Actions
-- GItHub Pages
+- GitHub Pages
