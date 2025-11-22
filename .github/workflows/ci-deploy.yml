@@ -1,13 +1,8 @@
-# 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
-name: Deploy static content to Pages
+name: CI and Deploy
 
 on:
-  # CI (Code quality) が完了した後に実行されます
-  workflow_run:
-    workflows: ["Code quality"]
-    branches: ["main"]
-    types:
-      - completed
+  push:
+  pull_request:
 
 # GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可します
 permissions:
@@ -21,9 +16,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # デプロイするだけなので、単一のデプロイジョブ
+  # コード品質チェックジョブ (全てのpushとPRで実行)
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+      - name: Run Biome
+        run: biome ci .
+
+  # デプロイジョブ (main ブランチへの直接プッシュ時のみ、quality ジョブ成功後に実行)
+  # PR時は実行されない
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # main ブランチへの直接プッシュ時のみ実行 (PR時は実行されない)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # quality ジョブが成功した場合のみ実行
+    needs: quality
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -31,8 +43,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
       - uses: pnpm/action-setup@v4
         with:
           version: 9
