@@ -21,7 +21,15 @@ export function LayoutProvider({ children }: { children: ReactNode }) {
 		`(max-width: ${LAYOUT_CONSTANTS.NARROW_SCREEN_BREAKPOINT}px)`,
 	]);
 
-	const [isSidebarOpen, setIsSidebarOpen] = useState(!isNarrowScreen);
+	// 初期ロード時の Layout Shift を防ぐ
+	const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+		if (typeof window !== "undefined") {
+			return !window.matchMedia(
+				`(max-width: ${LAYOUT_CONSTANTS.NARROW_SCREEN_BREAKPOINT}px)`,
+			).matches;
+		}
+		return false;
+	});
 
 	// 画面サイズが変わったときにサイドバーの状態を同期する
 	// 元のLayout.tsxの挙動を再現:

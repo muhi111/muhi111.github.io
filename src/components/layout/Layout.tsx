@@ -29,7 +29,9 @@ function LayoutContent() {
 						onKeyDown={(e: React.KeyboardEvent) => {
 							if (e.key === "Escape") setIsSidebarOpen(false);
 						}}
-						role="presentation"
+						role="button"
+						aria-label="Close navigation sidebar"
+						tabIndex={0}
 					/>
 				)}
 				<Box
