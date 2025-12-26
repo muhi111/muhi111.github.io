@@ -1,77 +1,75 @@
-import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text, VStack } from "@chakra-ui/react";
 import type { IconType } from "react-icons";
-import { FaStar } from "react-icons/fa";
 
 interface SkillItemProps {
-	name: string;
-	level: number;
-	IconComponent: IconType;
-	technologies?: string[];
-	onClick?: () => void;
+  name: string;
+  IconComponent: IconType;
+  description: string;
+  projects: string[];
+  technologies?: string[];
 }
 
-function SkillItem({
-	name,
-	level,
-	IconComponent,
-	technologies,
-	onClick,
-}: SkillItemProps) {
-	const levelIndicators = Array.from({ length: 5 }, (_, i) => ({
-		id: `level-indicator-${i + 1}`,
-		position: i + 1,
-		filled: i < level,
-	}));
+function SkillItem({ name, IconComponent, description, projects, technologies }: SkillItemProps) {
+  return (
+    <Box w="full" bg="gray.50" borderRadius="lg" p="4">
+      <Flex align="center" gap="3" mb="3">
+        <Icon as={IconComponent} w="6" h="6" color="blue.500" />
+        <Text fontSize="lg" fontWeight="bold" color="gray.800">
+          {name}
+        </Text>
+      </Flex>
 
-	return (
-		<Box
-			w="full"
-			bg="gray.50"
-			borderRadius="lg"
-			p="4"
-			cursor="pointer"
-			transition="all 0.3s"
-			_hover={{ bg: "gray.100", transform: "translateY(-2px)" }}
-			onClick={onClick}
-		>
-			<Flex align="center" justify="space-between">
-				<Flex align="center" gap="3">
-					<Icon as={IconComponent} w="5" h="5" color="gray.600" />
-					<Text fontSize="md" fontWeight="medium" color="gray.800">
-						{name}
-					</Text>
-				</Flex>
-				<Flex align="center" gap="1">
-					{levelIndicators.map((indicator) => (
-						<Icon
-							as={FaStar}
-							key={indicator.id}
-							w={4}
-							h={4}
-							color={indicator.filled ? "yellow.400" : "gray.300"}
-						/>
-					))}
-				</Flex>
-			</Flex>
-			{technologies && technologies.length > 0 && (
-				<Flex mt="2" gap="1" wrap="wrap">
-					{technologies.map((tech) => (
-						<Text
-							key={tech}
-							fontSize="xs"
-							bg="blue.100"
-							color="blue.700"
-							px="2"
-							py="1"
-							borderRadius="md"
-						>
-							{tech}
-						</Text>
-					))}
-				</Flex>
-			)}
-		</Box>
-	);
+      <VStack align="stretch" gap="3">
+        <Text color="gray.700" fontSize="sm" lineHeight="relaxed">
+          {description}
+        </Text>
+
+        {technologies && technologies.length > 0 && (
+          <Flex gap="2" wrap="wrap">
+            {technologies.map((tech) => (
+              <Text
+                key={tech}
+                fontSize="xs"
+                bg="blue.50"
+                color="blue.700"
+                px="2"
+                py="1"
+                borderRadius="md"
+                fontWeight="medium"
+              >
+                {tech}
+              </Text>
+            ))}
+          </Flex>
+        )}
+
+        {projects && projects.length > 0 && (
+          <Box>
+            <Text
+              fontSize="xs"
+              fontWeight="semibold"
+              color="gray.500"
+              mb="1"
+              textTransform="uppercase"
+              letterSpacing="wide"
+            >
+              Projects
+            </Text>
+            <VStack align="stretch" gap="1">
+              {projects.map((project) => (
+                <Flex key={project} align="center" gap="2">
+                  <Box w="1.5" h="1.5" borderRadius="full" bg="gray.400" />
+                  <Text fontSize="sm" color="gray.600">
+                    {project}
+                  </Text>
+                </Flex>
+              ))}
+            </VStack>
+          </Box>
+        )}
+      </VStack>
+    </Box>
+  );
 }
 
 export default SkillItem;

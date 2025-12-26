@@ -22,12 +22,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
+
+      - uses: pnpm/action-setup@v4
         with:
-          version: latest
-      - name: Run Biome
-        run: biome ci .
+          version: 10
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Oxlint
+        run: pnpm run lint
+
+      - name: Run Oxfmt check
+        run: pnpm exec oxfmt --check src
 
   # デプロイジョブ (main ブランチへの直接プッシュ時のみ、quality ジョブ成功後に実行)
   # PR時は実行されない

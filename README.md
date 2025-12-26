@@ -8,6 +8,9 @@
 - TypeScript
 - ChakraUI
 - Vite
-- Biome
+- oxlint/oxfmt
+- knip
+- lefthook
+- act
 - GitHub Actions
 - GitHub Pages
