@@ -44,10 +44,13 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
         maxH="90dvh"
         overflowY="auto"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={work.title}
       >
         <Box p="6">
           <Flex justify="space-between" align="center" mb="6">
-            <Heading as="h2" size="lg" fontWeight="bold" color="gray.900">
+            <Heading as="h3" size="lg" fontWeight="bold" color="gray.900">
               {work.title}
             </Heading>
             <Button
@@ -56,7 +59,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
               borderRadius="full"
               p="2"
               onClick={onClose}
-              _hover={{ bg: "gray.100" }}
+              aria-label="Close"
             >
               <MdClose size={24} />
             </Button>
@@ -64,7 +67,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
 
           <VStack gap="6" align="stretch">
             <Box>
-              <Heading as="h3" size="md" fontWeight="semibold" mb="3">
+              <Heading as="h4" size="md" fontWeight="semibold" mb="3">
                 説明
               </Heading>
               <Text color="gray.700" lineHeight="relaxed" whiteSpace="pre-line">
@@ -74,7 +77,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
 
             {work.achievements.length > 0 && (
               <Box>
-                <Heading as="h3" size="md" fontWeight="semibold" mb="3">
+                <Heading as="h4" size="md" fontWeight="semibold" mb="3">
                   受賞歴
                 </Heading>
                 <VStack align="stretch" gap="2">
@@ -97,7 +100,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
             )}
 
             <Box>
-              <Heading as="h3" size="md" fontWeight="semibold" mb="3">
+              <Heading as="h4" size="md" fontWeight="semibold" mb="3">
                 使用技術
               </Heading>
               <Flex wrap="wrap" gap="2">
@@ -119,7 +122,7 @@ function WorkDetails({ work, onClose }: WorkDetailsProps) {
             </Box>
 
             <Box>
-              <Heading as="h3" size="md" fontWeight="semibold" mb="3">
+              <Heading as="h4" size="md" fontWeight="semibold" mb="3">
                 リンク
               </Heading>
               <Flex gap="4">

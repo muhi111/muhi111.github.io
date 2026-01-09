@@ -2,53 +2,48 @@ name: CI and Deploy
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
-# GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可します
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-# 1 つの同時デプロイメントを可能にする
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
-  # コード品質チェックジョブ (全てのpushとPRで実行)
   quality:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - name: Set up Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
+      - name: Setup environment
+        uses: ./.github/actions/setup
       - name: Run Oxlint
         run: pnpm run lint
-
       - name: Run Oxfmt check
         run: pnpm exec oxfmt --check src
 
-  # デプロイジョブ (main ブランチへの直接プッシュ時のみ、quality ジョブ成功後に実行)
-  # PR時は実行されない
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup environment
+        uses: ./.github/actions/setup
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Run Playwright tests
+        run: pnpm exec playwright test
+
   deploy:
-    # main ブランチへの直接プッシュ時のみ実行 (PR時は実行されない)
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    # quality ジョブが成功した場合のみ実行
-    needs: quality
+    needs: [quality, test]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -56,16 +51,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      - name: Set up Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
+      - name: Setup environment
+        uses: ./.github/actions/setup
       - name: Build
         run: pnpm run build
       - name: Setup Pages
@@ -73,7 +60,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          # dist フォルダーのアップロード
           path: "./dist"
       - name: Deploy to GitHub Pages
         id: deployment

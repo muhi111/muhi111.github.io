@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import type { Article } from "../../data/articlesData";
 
@@ -35,12 +35,12 @@ export default function ArticleItem({ article }: ArticleItemProps) {
           {/* タイトルとリンクアイコン */}
           <Flex align="flex-start" justify="space-between" gap={3} minH="60px">
             <Box flex="1">
-              <Text
+              <Heading
+                as="h2"
                 fontSize="lg"
                 fontWeight="semibold"
                 color="gray.900"
                 lineHeight="short"
-                _hover={{ color: "blue.600" }}
                 transition="color 0.2s"
                 display="-webkit-box"
                 overflow="hidden"
@@ -50,7 +50,7 @@ export default function ArticleItem({ article }: ArticleItemProps) {
                 }}
               >
                 {article.title}
-              </Text>
+              </Heading>
             </Box>
             <Box color="gray.400" flexShrink={0} mt={1}>
               <FaExternalLinkAlt size={14} />

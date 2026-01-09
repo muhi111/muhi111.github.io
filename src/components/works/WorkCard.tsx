@@ -23,7 +23,7 @@ function WorkCard({ work, onClick }: WorkCardProps) {
       onClick={onClick}
     >
       <Heading
-        as="h3"
+        as="h2"
         size="md"
         fontWeight="bold"
         color="gray.900"
