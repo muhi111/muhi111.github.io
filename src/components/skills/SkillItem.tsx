@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Icon, Text, VStack } from "@chakra-ui/react";
 import type { IconType } from "react-icons";
 
 interface SkillItemProps {
@@ -14,9 +14,9 @@ function SkillItem({ name, IconComponent, description, projects, technologies }:
     <Box w="full" bg="gray.50" borderRadius="lg" p="4">
       <Flex align="center" gap="3" mb="3">
         <Icon as={IconComponent} w="6" h="6" color="blue.500" />
-        <Text fontSize="lg" fontWeight="bold" color="gray.800">
+        <Heading as="h3" fontSize="lg" fontWeight="bold" color="gray.800">
           {name}
-        </Text>
+        </Heading>
       </Flex>
 
       <VStack align="stretch" gap="3">
@@ -45,7 +45,8 @@ function SkillItem({ name, IconComponent, description, projects, technologies }:
 
         {projects && projects.length > 0 && (
           <Box>
-            <Text
+            <Heading
+              as="h4"
               fontSize="xs"
               fontWeight="semibold"
               color="gray.500"
@@ -54,7 +55,7 @@ function SkillItem({ name, IconComponent, description, projects, technologies }:
               letterSpacing="wide"
             >
               Projects
-            </Text>
+            </Heading>
             <VStack align="stretch" gap="1">
               {projects.map((project) => (
                 <Flex key={project} align="center" gap="2">

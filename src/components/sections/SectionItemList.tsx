@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import {
   FaBriefcase,
   FaCertificate,
@@ -53,9 +53,9 @@ export default function SectionItemList({ item }: SectionItemProps) {
         </Flex>
 
         {/* タイトル */}
-        <Text fontSize="lg" fontWeight="semibold" color="gray.900" lineHeight="short">
+        <Heading as="h3" fontSize="lg" fontWeight="semibold" color="gray.900" lineHeight="short">
           {item.title}
-        </Text>
+        </Heading>
 
         {/* 説明 */}
         {item.description && (

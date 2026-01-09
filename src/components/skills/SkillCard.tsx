@@ -10,7 +10,7 @@ interface SkillCardProps {
 function SkillCard({ category, skills }: SkillCardProps) {
   return (
     <Box bg="white" borderRadius="xl" boxShadow="sm" p="6">
-      <Heading as="h3" size="lg" fontWeight="bold" color="gray.800" mb="4">
+      <Heading as="h2" size="lg" fontWeight="bold" color="gray.800" mb="4">
         {category}
       </Heading>
       <VStack gap="4">

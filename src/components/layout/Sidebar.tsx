@@ -46,7 +46,8 @@ function Sidebar() {
         bg="gray.800"
         boxShadow="2xl"
         transform={isSidebarOpen ? "translateX(0)" : "translateX(-100%)"}
-        transition="transform 0.3s ease-in-out"
+        transition={`transform 0.3s ease-in-out, visibility 0s linear ${isSidebarOpen ? "0s" : "0.3s"}`}
+        visibility={isSidebarOpen ? "visible" : "hidden"}
       >
         <Box
           as="nav"
