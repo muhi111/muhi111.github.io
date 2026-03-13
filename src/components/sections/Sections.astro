@@ -1,0 +1,52 @@
+---
+import {
+	certificationsAndAchievementsData,
+	educationData,
+	internshipsData,
+} from "../../data/sectionsData";
+import SectionItemList from "./SectionItemList.astro";
+---
+
+<div class="flex flex-col gap-10">
+  <!-- 学業セクション -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-blue-100 text-blue-800 px-6 py-4">
+      <h2 class="text-lg font-bold">
+        学業
+      </h2>
+    </div>
+    <div class="p-6">
+      {educationData.map((item) => (
+        <SectionItemList item={item} />
+      ))}
+    </div>
+  </div>
+
+  <!-- 資格と入賞歴セクション -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-blue-100 text-blue-800 px-6 py-4">
+      <h2 class="text-lg font-bold">
+        資格と入賞歴
+      </h2>
+    </div>
+    <div class="p-6">
+      {certificationsAndAchievementsData.map((item) => (
+        <SectionItemList item={item} />
+      ))}
+    </div>
+  </div>
+
+  <!-- インターンセクション -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-blue-100 text-blue-800 px-6 py-4">
+      <h2 class="text-lg font-bold">
+        インターン
+      </h2>
+    </div>
+    <div class="p-6">
+      {internshipsData.map((item) => (
+        <SectionItemList item={item} />
+      ))}
+    </div>
+  </div>
+</div>

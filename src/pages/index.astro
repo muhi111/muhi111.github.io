@@ -1,0 +1,18 @@
+---
+import HomeHero from "../components/home/HomeHero.astro";
+import Sections from "../components/sections/Sections.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Home | muhi111 Portfolio">
+  <div class="w-full">
+    <div class="bg-white rounded-lg md:rounded-xl shadow-md">
+      <div class="p-2 md:p-5">
+        <HomeHero />
+        <div class="mt-4 md:mt-10">
+          <Sections />
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

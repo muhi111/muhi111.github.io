@@ -17,10 +17,8 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup environment
         uses: ./.github/actions/setup
-      - name: Run Oxlint
-        run: pnpm run lint
-      - name: Run Oxfmt check
-        run: pnpm exec oxfmt --check src
+      - name: Run Biome check
+        run: pnpm run check
 
   test:
     timeout-minutes: 60

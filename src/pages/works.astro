@@ -1,0 +1,27 @@
+---
+import WorkCard from "../components/works/WorkCard.astro";
+import WorkDetails from "../components/works/WorkDetails.astro";
+import { worksData } from "../data/worksData";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Works | muhi111 Portfolio">
+  <div class="min-h-[100dvh] flex flex-col py-2 md:py-12">
+    <div class="max-w-4xl mx-auto px-1 md:px-4 w-full">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12">
+        Works
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full">
+        {worksData.map((work, index) => (
+          <WorkCard work={work} id={`work-${index}`} />
+        ))}
+      </div>
+
+      <!-- Render all modals hidden by default -->
+      {worksData.map((work, index) => (
+        <WorkDetails work={work} id={`work-${index}`} />
+      ))}
+    </div>
+  </div>
+</Layout>

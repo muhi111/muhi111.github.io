@@ -1,0 +1,24 @@
+---
+import SkillCard from "../components/skills/SkillCard.astro";
+import skillsData from "../data/skillsData";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Skills | muhi111 Portfolio">
+  <div class="min-h-[100dvh] flex flex-col py-2 md:py-12">
+    <div class="max-w-4xl mx-auto px-1 md:px-4 w-full">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12">
+        Skills
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full">
+        {skillsData.map((category) => (
+          <SkillCard
+            category={category.category}
+            skills={category.skills}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,124 @@
+---
+import type { Work } from "../../data/worksData";
+
+interface Props {
+	work: Work;
+	id: string;
+}
+
+const { work, id } = Astro.props;
+---
+
+<div
+  id={`modal-${id}`}
+  class="hidden fixed inset-0 w-screen h-[100dvh] z-50 flex items-center justify-center p-4 bg-black/50"
+  onclick={`if(event.target === this) { this.classList.add('hidden'); document.body.style.overflow = ''; }`}
+>
+  <div
+    class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90dvh] flex flex-col"
+    role="dialog"
+    aria-modal="true"
+    aria-label={work.title}
+    onclick="event.stopPropagation();"
+  >
+    <div class="p-6 flex justify-between items-center border-b border-gray-100 shrink-0">
+      <h3 class="text-xl font-bold text-gray-900 pr-4">
+        {work.title}
+      </h3>
+      <button
+        class="p-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors"
+        onclick={`document.getElementById('modal-${id}').classList.add('hidden'); document.body.style.overflow = '';`}
+        aria-label="Close"
+      >
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+      </button>
+    </div>
+
+    <div class="p-6 overflow-y-auto flex flex-col gap-6">
+      <div>
+        <h4 class="text-base font-semibold text-gray-900 mb-3">
+          説明
+        </h4>
+        <p class="text-gray-700 leading-relaxed whitespace-pre-line">
+          {work.description}
+        </p>
+      </div>
+
+      {work.achievements.length > 0 ? (
+        <div>
+          <h4 class="text-base font-semibold text-gray-900 mb-3">
+            受賞歴
+          </h4>
+          <div class="flex flex-col gap-2">
+            {work.achievements.map((achievement) => (
+              <div class="bg-blue-50 p-3 rounded-md border-l-4 border-blue-500">
+                <p class="text-sm text-blue-900 font-medium">
+                  {achievement}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      <div>
+        <h4 class="text-base font-semibold text-gray-900 mb-3">
+          使用技術
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {work.tags.map((tag) => (
+            <span class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-md font-medium">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-base font-semibold text-gray-900 mb-3">
+          リンク
+        </h4>
+        <div class="flex flex-wrap gap-4">
+          {work.githubLink ? (
+            <a
+              href={work.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-md text-gray-800 font-medium transition-all duration-200 hover:bg-gray-200 hover:-translate-y-px"
+            >
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+              <span>GitHub</span>
+            </a>
+          ) : null}
+          {work.liveLink ? (
+            <a
+              href={work.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-md text-blue-800 font-medium transition-all duration-200 hover:bg-blue-200 hover:-translate-y-px"
+            >
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg>
+              <span>サイトへ</span>
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Add global escape key listener to close modals
+  if (!window.hasModalEscapeListener) {
+    window.hasModalEscapeListener = true;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const openModals = document.querySelectorAll('div[id^="modal-"]:not(.hidden)');
+        openModals.forEach(modal => {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+  }
+</script>

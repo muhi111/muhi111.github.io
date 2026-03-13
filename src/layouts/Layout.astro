@@ -1,0 +1,174 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+const routes = [
+	{ path: "/", label: "Home" },
+	{ path: "/articles", label: "Articles" },
+	{ path: "/works", label: "Works" },
+	{ path: "/skills", label: "Skills" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-gray-50 text-gray-900 font-sans min-h-[100dvh]">
+    <div id="layout-container" class="relative">
+
+      <!-- Sidebar Overlay for Mobile -->
+      <div
+        id="sidebar-overlay"
+        class="fixed inset-0 bg-black/50 z-20 hidden opacity-0 transition-opacity duration-300 md:hidden"
+        role="button"
+        aria-label="Close navigation sidebar"
+        tabindex="0"
+      ></div>
+
+      <!-- Hamburger Menu Button -->
+      <button
+        id="sidebar-toggle"
+        class="fixed top-4 left-4 z-30 p-3 rounded-full shadow-md transition-all duration-300 bg-white text-gray-800 hover:bg-gray-100"
+        aria-label="Toggle Sidebar"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="fixed top-0 left-0 z-20 w-64 h-[100dvh] bg-gray-800 shadow-2xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out invisible md:visible flex flex-col pt-20 pb-4 px-4 overflow-y-auto pointer-events-none md:pointer-events-auto"
+      >
+        <nav class="flex flex-col gap-3">
+          {routes.map((route) => (
+            <a
+              href={route.path}
+              class={`w-full text-left px-6 py-4 text-gray-100 text-xl font-bold rounded-lg transition-all duration-200 bg-transparent hover:bg-gray-600 ${
+                currentPath === route.path || (currentPath !== '/' && route.path !== '/' && currentPath.startsWith(route.path))
+                  ? 'bg-gray-600'
+                  : ''
+              }`}
+            >
+              {route.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main
+        id="main-content"
+        class="transition-all duration-300 ml-0 md:ml-64 w-full md:w-[calc(100%-16rem)]"
+      >
+        <div class="max-w-4xl mx-auto px-4 py-3">
+          <slot />
+        </div>
+      </main>
+
+    </div>
+
+    <script>
+      // Vanilla JS to handle Sidebar Toggle Logic
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebar = document.getElementById('sidebar');
+      const sidebarOverlay = document.getElementById('sidebar-overlay');
+      const mainContent = document.getElementById('main-content');
+
+      let isSidebarOpen = window.innerWidth >= 768; // Open by default on PC, closed on Mobile
+
+      function updateSidebarUI() {
+        const isMobile = window.innerWidth < 768;
+
+        if (isSidebarOpen) {
+          // Open Sidebar UI
+          sidebar?.classList.remove('-translate-x-full', 'invisible', '!-translate-x-full', '!invisible', 'pointer-events-none');
+          sidebar?.classList.add('translate-x-0', 'visible', 'pointer-events-auto');
+
+          sidebarToggle?.classList.remove('bg-white', 'text-gray-800', 'hover:bg-gray-100');
+          sidebarToggle?.classList.add('bg-gray-700', 'text-white', 'hover:bg-gray-600');
+
+          if (isMobile) {
+            sidebarOverlay?.classList.remove('hidden');
+            setTimeout(() => sidebarOverlay?.classList.remove('opacity-0'), 10);
+
+            mainContent?.classList.remove('!ml-64', '!w-[calc(100%-16rem)]');
+            mainContent?.classList.add('ml-0', 'w-full');
+          } else {
+            sidebarOverlay?.classList.add('hidden', 'opacity-0');
+
+            mainContent?.classList.remove('!ml-0', '!w-full');
+            mainContent?.classList.add('!ml-64', '!w-[calc(100%-16rem)]');
+          }
+        } else {
+          // Closed Sidebar UI
+          sidebar?.classList.remove('translate-x-0', 'visible', 'pointer-events-auto');
+          // Use !important modifiers to override md: utilities
+          sidebar?.classList.add('!-translate-x-full', 'pointer-events-none');
+          setTimeout(() => {
+             if(!isSidebarOpen) sidebar?.classList.add('!invisible');
+          }, 300);
+
+          sidebarToggle?.classList.remove('bg-gray-700', 'text-white', 'hover:bg-gray-600');
+          sidebarToggle?.classList.add('bg-white', 'text-gray-800', 'hover:bg-gray-100');
+
+          sidebarOverlay?.classList.add('opacity-0');
+          setTimeout(() => {
+             if(!isSidebarOpen) sidebarOverlay?.classList.add('hidden');
+          }, 300);
+
+          mainContent?.classList.remove('!ml-64', '!w-[calc(100%-16rem)]');
+          mainContent?.classList.add('!ml-0', '!w-full');
+        }
+      }
+
+      // Initial Setup
+      updateSidebarUI();
+
+      // Toggle Button Click Event
+      sidebarToggle?.addEventListener('click', () => {
+        isSidebarOpen = !isSidebarOpen;
+        updateSidebarUI();
+      });
+
+      // Overlay Click Event (Close Sidebar on Mobile)
+      sidebarOverlay?.addEventListener('click', () => {
+        isSidebarOpen = false;
+        updateSidebarUI();
+      });
+
+      // Handle Resize Event to adjust layout
+      window.addEventListener('resize', () => {
+        const isCurrentlyMobile = window.innerWidth < 768;
+
+        // Reset state based on breakpoint change if needed
+        // For simplicity, we just trigger UI update on resize
+        // You could also add logic to automatically close sidebar when resizing to mobile
+        if(isCurrentlyMobile && isSidebarOpen) {
+           // If we resize from PC to Mobile and sidebar is open, we might want to close it to avoid sudden overlay
+           // isSidebarOpen = false;
+        } else if (!isCurrentlyMobile && !isSidebarOpen) {
+           // If resize from Mobile to PC, maybe auto-open
+           // isSidebarOpen = true;
+        }
+
+        updateSidebarUI();
+      });
+
+    </script>
+	</body>
+</html>
