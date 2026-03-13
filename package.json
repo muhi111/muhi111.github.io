@@ -10,7 +10,7 @@
 		"astro": "astro",
 		"lint": "biome lint .",
 		"fmt": "biome format --write .",
-		"check": "biome check --write .",
+		"check": "biome check .",
 		"knip": "knip --fix",
 		"test": "playwright test"
 	},

@@ -7,7 +7,7 @@ interface Props {
 	skills: SkillCategory["skills"];
 }
 
-const { category, skills } = Astro.props;
+const { category, skills } = Astro.props as Props;
 ---
 
 <div class="bg-white rounded-xl shadow-sm p-6">

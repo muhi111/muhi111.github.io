@@ -1,12 +1,12 @@
 ---
 import type { Work } from "../../data/worksData";
 
-interface Props {
+export interface Props {
 	work: Work;
 	id: string;
 }
 
-const { work, id } = Astro.props;
+const { work, id } = Astro.props as Props;
 ---
 
 <div
