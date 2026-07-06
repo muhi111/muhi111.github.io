@@ -1,0 +1,23 @@
+name: Playwright Tests
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  test:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    # https://playwright.dev/docs/docker#recommended-docker-configuration
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1
+      options: --init --ipc=host
+    env:
+      # Fix Firefox crash in GitHub Actions
+      # Details: https://github.com/microsoft/playwright/issues/6500#issuecomment-838515115
+      HOME: /root
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-pnpm-workspace
+      - run: pnpm test

@@ -1,0 +1,19 @@
+name: On PR
+on:
+  pull_request:
+permissions: {}
+jobs:
+  code-check:
+    uses: ./.github/workflows/_code-check.yml
+    permissions:
+      contents: read
+  lighthouse:
+    needs: code-check
+    uses: ./.github/workflows/_lighthouse.yml
+    permissions:
+      contents: read
+  playwright:
+    needs: code-check
+    uses: ./.github/workflows/_playwright.yml
+    permissions:
+      contents: read

@@ -1,0 +1,39 @@
+---
+import type { SocialLink } from "../lib/content";
+
+type Props = {
+  links: SocialLink[];
+};
+
+const { links } = Astro.props;
+---
+
+<ul class="flex flex-wrap gap-3" aria-label="外部リンク">
+  {links.map((link) => (
+      <li>
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${link.label}を開く`}
+          class="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-sm font-medium text-ink shadow-sm transition hover:border-accent hover:text-accent-dark"
+        >
+          <span>{link.label}</span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            class="h-4 w-4 shrink-0 text-accent-dark"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          </svg>
+        </a>
+      </li>
+    ))}
+</ul>

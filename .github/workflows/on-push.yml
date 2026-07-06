@@ -1,0 +1,11 @@
+name: On Push
+on:
+  push:
+    branches-ignore:
+      - main
+permissions: {}
+jobs:
+  code-check:
+    uses: ./.github/workflows/_code-check.yml
+    permissions:
+      contents: read

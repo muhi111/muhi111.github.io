@@ -4,13 +4,16 @@
 
 # 使用技術
 
-- React
+- Astro
 - TypeScript
-- ChakraUI
-- Vite
-- oxlint/oxfmt
-- knip
-- lefthook
-- act
+- Biome
+- Knip
+- Lefthook
+- Act
+- Yamlfmt
+- Playwright
+- Lighthouse
+- pnpm
+- asdf
 - GitHub Actions
 - GitHub Pages

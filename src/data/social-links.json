@@ -1,0 +1,17 @@
+[
+  {
+    "id": "github",
+    "label": "GitHub",
+    "url": "https://github.com/muhi111"
+  },
+  {
+    "id": "qiita",
+    "label": "Qiita",
+    "url": "https://qiita.com/muhi111"
+  },
+  {
+    "id": "hatena",
+    "label": "はてなブログ",
+    "url": "https://muhi111.hatenablog.com/"
+  }
+]
