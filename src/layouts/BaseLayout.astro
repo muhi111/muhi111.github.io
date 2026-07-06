@@ -1,0 +1,47 @@
+---
+import { getImage } from "astro:assets";
+
+import ogImage from "../assets/ogimage.png";
+import "../styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title = "muhi111", description = "muhi111のポートフォリオです。" } =
+  Astro.props;
+const canonicalUrl = new URL(
+  Astro.url.pathname,
+  Astro.site ?? "https://muhi111.com",
+);
+const optimizedOgImage = await getImage({ src: ogImage, format: "png" });
+const ogImageUrl = new URL(
+  optimizedOgImage.src,
+  Astro.site ?? "https://muhi111.com",
+);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content={description}>
+    <meta name="author" content="muhi111">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:image" content={ogImageUrl}>
+    <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-paper text-ink antialiased">
+    <main
+      class="mx-auto flex w-full max-w-5xl flex-col gap-12 px-5 py-8 sm:px-8 sm:py-12 lg:py-16"
+    >
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import { qualifications } from "../lib/content";
+import Section from "./Section.astro";
+---
+
+<Section title="保有資格">
+  <ul class="grid gap-3">
+    {qualifications.map((item) => (
+        <li class="flex flex-col gap-2 rounded-md border border-line bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 class="font-semibold text-ink">{item.name}</h3>
+            <p class="mt-1 text-sm text-muted">{item.issuer}</p>
+          </div>
+          <p class="text-sm text-muted">{item.acquiredAt}</p>
+        </li>
+      ))}
+  </ul>
+</Section>

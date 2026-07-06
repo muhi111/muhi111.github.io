@@ -1,0 +1,22 @@
+[
+  {
+    "startDate": "2025年9月",
+    "endDate": "2025年11月",
+    "organization": "クックパッド株式会社",
+    "description": "SRE として開発・運用の改善や自動化に携わり、ECS の不要イメージ削除、Terraform による開発者体験向上、Grafana ダッシュボード改善などを実施。",
+    "current": false
+  },
+  {
+    "startDate": "2025年8月",
+    "organization": "株式会社はてな",
+    "description": "3 週間のインターンシップで、共通認証基盤の開発、特にパスキーの改善に携わる。",
+    "current": false
+  },
+  {
+    "startDate": "2025年6月",
+    "endDate": "2025年12月",
+    "organization": "株式会社アクティブコア",
+    "description": "アプリケーションのバックエンド開発に携わり、API やバッチ処理などの新規機能作成と既存機能改善を実施。",
+    "current": false
+  }
+]

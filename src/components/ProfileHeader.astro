@@ -1,0 +1,37 @@
+---
+import { Image } from "astro:assets";
+
+import profileIcon from "../assets/profile-icon.avif";
+import { profileLinks, profileName } from "../lib/content";
+import ExternalLink from "./ExternalLink.astro";
+---
+
+<header
+  class="grid min-h-[55svh] content-center gap-8 py-6 sm:min-h-[48svh] md:grid-cols-[auto_1fr] md:items-center md:gap-10"
+>
+  <div
+    class="mx-auto grid h-36 w-36 place-items-center rounded-full border border-line bg-white p-5 shadow-sm sm:h-40 sm:w-40 md:mx-0"
+  >
+    <Image
+      src={profileIcon}
+      alt={`${profileName}のプロフィールアイコン`}
+      width={112}
+      height={112}
+      format="avif"
+      class="h-full w-full object-contain"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <div class="text-center md:text-left">
+    <h1
+      class="text-balance text-4xl font-semibold tracking-normal text-ink sm:text-5xl"
+    >
+      {profileName}
+    </h1>
+    <div class="mt-6 flex justify-center md:justify-start">
+      <ExternalLink links={profileLinks} />
+    </div>
+  </div>
+</header>
