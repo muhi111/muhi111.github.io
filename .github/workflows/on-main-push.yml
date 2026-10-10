@@ -1,0 +1,31 @@
+name: Deploy main
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+permissions: {}
+jobs:
+  code-check:
+    # push.branches does not restrict workflow_dispatch; deploy only main.
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/_code-check.yml
+    permissions:
+      contents: read
+  lighthouse:
+    needs: code-check
+    uses: ./.github/workflows/_lighthouse.yml
+    permissions:
+      contents: read
+  playwright:
+    needs: code-check
+    uses: ./.github/workflows/_playwright.yml
+    permissions:
+      contents: read
+  deploy:
+    needs: [lighthouse, playwright]
+    uses: ./.github/workflows/_deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

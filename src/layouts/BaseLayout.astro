@@ -1,0 +1,35 @@
+---
+import iconUrl from "../assets/icon.svg?url";
+import ogImage from "../assets/ogimage.webp";
+import { profile } from "../data/profile";
+import "../styles/global.css";
+
+const { name: title, description } = profile;
+const canonicalUrl = new URL(
+  Astro.url.pathname,
+  Astro.site ?? "https://muhi111.com",
+);
+const ogImageUrl = new URL(ogImage.src, Astro.site ?? "https://muhi111.com");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content={description}>
+    <meta name="author" content={profile.name}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:image" content={ogImageUrl}>
+    <link rel="icon" type="image/svg+xml" href={iconUrl}>
+    <title>{title}</title>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
