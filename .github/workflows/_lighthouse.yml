@@ -1,0 +1,19 @@
+name: Lighthouse CI
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-pnpm-workspace
+      - uses: actions/download-artifact@v8
+        with:
+          name: site
+          path: dist
+      - run: pnpm exec lhci autorun

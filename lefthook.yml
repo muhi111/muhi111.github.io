@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: pnpm build
+    - run: pnpm check:astro
+    - run: pnpm fix:biome
+      stage_fixed: true
+    - run: pnpm fix:yaml
+      stage_fixed: true
+    - run: pnpm fix:knip
+      stage_fixed: true

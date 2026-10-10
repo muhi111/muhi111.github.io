@@ -1,0 +1,25 @@
+# General
+.agents/
+.vscode/
+.codex/
+node_modules/
+dist/
+.astro/
+build/
+*.log
+.env*
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.idea/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Lighthouse CI
+/.lighthouseci/
