@@ -1,11 +1,11 @@
 pre-commit:
   parallel: true
   jobs:
-    - name: oxlint
-      run: pnpm lint
-    - name: oxfmt
-      run: pnpm fmt
-    - name: knip
-      run: pnpm knip
-    - name: build check
-      run: pnpm build
+    - run: pnpm build
+    - run: pnpm check:astro
+    - run: pnpm fix:biome
+      stage_fixed: true
+    - run: pnpm fix:yaml
+      stage_fixed: true
+    - run: pnpm fix:knip
+      stage_fixed: true

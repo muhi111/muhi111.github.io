@@ -1,0 +1,6 @@
+@import "./vendor/water.css/water.css";
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

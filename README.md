@@ -1,16 +1,12 @@
-# 概要
+# Overview
 
-このレポジトリは[muhi111](https://github.com/muhi111)のポートフォリオのためのレポジトリです。デプロイ先は[こちら](https://muhi111.com)。
+This repository contains [muhi111](https://github.com/muhi111)'s personal website,
+published at [muhi111.com](https://muhi111.com).
 
-# 使用技術
+# Technologies
 
-- React
-- TypeScript
-- ChakraUI
-- Vite
-- oxlint/oxfmt
-- knip
-- lefthook
-- act
-- GitHub Actions
-- GitHub Pages
+- Site: Astro, TypeScript, Water.css, Zod
+- Development: Node.js, pnpm, asdf
+- Code quality: Biome, Knip, yamlfmt, Lefthook
+- Testing: Playwright, Lighthouse CI
+- CI/CD: GitHub Actions, act, GitHub Pages
