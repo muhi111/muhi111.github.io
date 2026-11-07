@@ -33,6 +33,14 @@ test.describe("home page", () => {
     }
   });
 
+  test("decodes the profile icon", async ({ page }) => {
+    const icon = page.getByRole("img", {
+      name: `${profileName}'s profile icon`,
+    });
+
+    await icon.evaluate((image: HTMLImageElement) => image.decode());
+  });
+
   test("sets document metadata", async ({ page }) => {
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
