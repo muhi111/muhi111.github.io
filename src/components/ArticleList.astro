@@ -4,28 +4,18 @@ import { fetchQiitaArticles } from "../lib/qiita";
 const articles = await fetchQiitaArticles();
 ---
 
-<section aria-labelledby="writing-heading">
-  <h2 id="writing-heading">Writing</h2>
-  <p>These articles are written in Japanese.</p>
-  <ul id="qiita-articles">
-    {articles.map((item) => (
-      <li>
-        <p>
-          <a
-            lang="ja"
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {item.title}
-          </a>
-          <br />
-          <small>
-            <time datetime={item.publishedAt}>{item.publishedAt}</time> · Qiita
-            · In Japanese
-          </small>
-        </p>
-      </li>
-    ))}
-  </ul>
-</section>
+<ul id="qiita-articles">
+  {articles.map((item) => (
+    <li>
+      <p>
+        <a lang="ja" href={item.url} target="_blank" rel="noopener noreferrer">
+          {item.title}
+        </a>
+        <br />
+        <small>
+          <time datetime={item.publishedAt}>{item.publishedAt}</time>
+        </small>
+      </p>
+    </li>
+  ))}
+</ul>

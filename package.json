@@ -37,10 +37,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
+    "@fullhuman/postcss-purgecss": "^9.0.0",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.65.0",
     "@types/node": "^26.6.4",
     "knip": "^6.40.0",
-    "lefthook": "^2.2.1"
+    "lefthook": "^2.2.1",
+    "postcss": "^8.5.32"
   }
 }

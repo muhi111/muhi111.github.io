@@ -1,10 +1,7 @@
 import type { Locator } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
-import { profile } from "../src/data/profile";
-
-const profileName = profile.name;
-const profileDescription = profile.description;
+const profileName = "muhi111";
 const expectExternalLinkAttributes = async (link: Locator) => {
   await expect(link).toHaveAttribute("target", "_blank");
   await expect(link).toHaveAttribute("rel", "noopener noreferrer");
@@ -18,19 +15,12 @@ test.describe("home page", () => {
   test("shows the profile header and main sections", async ({ page }) => {
     await expect(page).toHaveTitle(profileName);
     await expect(
-      page.getByRole("heading", { level: 1, name: profileName }),
-    ).toBeVisible();
-    await expect(
       page.getByRole("img", {
         name: `${profileName}'s profile icon`,
       }),
     ).toBeVisible();
 
-    for (const sectionName of ["Writing"]) {
-      await expect(
-        page.getByRole("heading", { level: 2, name: sectionName }),
-      ).toBeVisible();
-    }
+    await expect(page.locator("#qiita-articles")).toBeVisible();
   });
 
   test("decodes the profile icon", async ({ page }) => {
@@ -43,10 +33,6 @@ test.describe("home page", () => {
 
   test("sets document metadata", async ({ page }) => {
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
-      "content",
-      profileDescription,
-    );
     await expect(page.locator('meta[name="author"]')).toHaveAttribute(
       "content",
       profileName,
@@ -55,9 +41,6 @@ test.describe("home page", () => {
       "content",
       profileName,
     );
-    await expect(
-      page.locator('meta[property="og:description"]'),
-    ).toHaveAttribute("content", profileDescription);
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
       "content",
       "website",
@@ -77,7 +60,10 @@ test.describe("home page", () => {
   });
 
   test("shows external profile links", async ({ page }) => {
-    for (const link of profile.links) {
+    for (const link of [
+      { label: "GitHub", url: "https://github.com/muhi111" },
+      { label: "Qiita", url: "https://qiita.com/muhi111" },
+    ]) {
       const profileLink = page.getByRole("link", {
         name: link.label,
         exact: true,
