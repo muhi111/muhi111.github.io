@@ -23,12 +23,15 @@ test.describe("home page", () => {
     await expect(page.locator("#qiita-articles")).toBeVisible();
   });
 
-  test("decodes the profile icon", async ({ page }) => {
+  test("decodes the profile icon and preserves pixel art rendering", async ({
+    page,
+  }) => {
     const icon = page.getByRole("img", {
       name: `${profileName}'s profile icon`,
     });
 
     await icon.evaluate((image: HTMLImageElement) => image.decode());
+    await expect(icon).toHaveCSS("image-rendering", "pixelated");
   });
 
   test("sets document metadata", async ({ page }) => {
@@ -71,6 +74,8 @@ test.describe("home page", () => {
 
       await expect(profileLink).toHaveAttribute("href", link.url);
       await expectExternalLinkAttributes(profileLink);
+      const bounds = await profileLink.boundingBox();
+      expect(bounds?.height).toBeGreaterThanOrEqual(24);
     }
   });
 
