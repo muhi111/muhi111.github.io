@@ -1,10 +1,9 @@
 ---
 import iconUrl from "../assets/icon.svg?url";
 import ogImage from "../assets/ogimage.webp";
-import { profile } from "../data/profile";
-import "../styles/global.css";
+import "../styles/vendor/water.css/water.css";
 
-const { name: title, description } = profile;
+const title = "muhi111";
 const canonicalUrl = new URL(
   Astro.url.pathname,
   Astro.site ?? "https://muhi111.com",
@@ -17,10 +16,9 @@ const ogImageUrl = new URL(ogImage.src, Astro.site ?? "https://muhi111.com");
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content={description}>
-    <meta name="author" content={profile.name}>
+    <meta name="description" content="Articles and links by muhi111.">
+    <meta name="author" content={title}>
     <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
     <meta property="og:type" content="website">
     <meta property="og:url" content={canonicalUrl}>
     <meta property="og:image" content={ogImageUrl}>

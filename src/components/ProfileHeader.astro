@@ -1,35 +1,52 @@
 ---
 import profileIcon from "../assets/profile-icon.jxl?url";
-import { profile } from "../data/profile";
 ---
 
 <header>
   <img
     src={profileIcon}
-    alt={`${profile.name}'s profile icon`}
+    alt="muhi111's profile icon"
     width={64}
     height={64}
     loading="eager"
     decoding="async"
   >
-  <h1>{profile.name}</h1>
-  <p>{profile.bio}</p>
   <nav aria-label="Profile links">
     <ul>
-      {profile.links.map((link) => (
-        <li>
-          <a href={link.url} target="_blank" rel="noopener noreferrer">
-            {link.label}
-          </a>
-        </li>
-      ))}
+      <li>
+        <a
+          href="https://github.com/muhi111"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://qiita.com/muhi111"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Qiita
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
 
 <style>
+header {
+  display: flex;
+  align-items: center;
+}
+
 img {
   image-rendering: pixelated;
+}
+
+nav ul {
+  list-style: none;
 }
 
 nav a {
